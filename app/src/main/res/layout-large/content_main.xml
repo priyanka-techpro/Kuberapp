@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:focusable="false"
+    android:focusableInTouchMode="true"
+    android:background="@color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/app_bar_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/ll_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rela_head"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@drawable/dashboardbg">
+
+                <RelativeLayout
+                    android:id="@+id/ll_topbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/drawer_open"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/menu" />
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/back"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:id="@+id/titlebar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@+id/drawer_open"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="center"
+                        android:text="Dashboard"
+                        android:textColor="@color/white"
+                        android:textSize="22dp" />
+
+                    <ImageView
+                        android:id="@+id/img_notify"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_toLeftOf="@+id/img_cart"
+                        android:padding="2dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/heartwhiteicon" />
+                    <ImageView
+                        android:id="@+id/img_cart"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:padding="2dp"
+                        android:src="@drawable/carticonwhite" />
+
+                    <RelativeLayout
+                        android:id="@+id/cart_count"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/cart_count_drawable"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/tv_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="1"
+                            android:textColor="@color/black" />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rela_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_topbar"
+                    android:visibility="visible"
+                    android:layout_marginTop="10dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:id="@+id/search_ll"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/searchbg"
+                        >
+                        <ImageView
+                            android:id="@+id/search_icon"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/searchicon" />
+
+                        <EditText
+                            android:id="@+id/search"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_toRightOf="@+id/search_icon"
+                            android:background="@null"
+                            android:fontFamily="@font/worksansregular"
+                            android:hint="Search"
+                            android:singleLine="true"
+                            android:textSize="18dp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_below="@+id/ll_head"
+            android:id="@+id/scrollTop"
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mainlayout"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:paddingEnd="30dp"
+                    android:layout_marginTop="15dp"
+                    android:paddingStart="30dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/categorylist"
+                    android:layout_below="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:overScrollMode="never" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/categorylist"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/curve"
+                    android:background="@drawable/bluewrap">
+
+                    <TextView
+                        android:id="@+id/newarrival"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="20dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/worksansregular"
+                        android:textColor="@color/black"
+                        android:text="New Arrivals" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/newarrivallist"
+                        android:layout_below="@+id/newarrival"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:overScrollMode="never" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/mobile_navigation" />
+</LinearLayout>

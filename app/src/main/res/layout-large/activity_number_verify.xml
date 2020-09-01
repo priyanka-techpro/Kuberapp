@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="false"
+    tools:context=".Activity.NumberVerifyActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/toplayer"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/signbg">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:text="Verify number"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:fontFamily="@font/worksansmedium"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/med_layer"
+            android:layout_below="@+id/toplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:src="@drawable/verifyphone"
+                android:id="@+id/img_verify"/>
+            <TextView
+                android:id="@+id/password_txt"
+                android:layout_below="@+id/img_verify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="22dp"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/ash"
+                android:textAlignment="center"
+                android:text="Enter the mobile number associated with your account"
+                android:gravity="center_horizontal" />
+
+               <TextView
+                android:id="@+id/access_txt"
+                android:layout_below="@+id/password_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="18dp"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/mediumgrey"
+                android:textAlignment="center"
+                android:text="We have sent you an access code via SMS for mobile number verification."
+                android:gravity="center_horizontal" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/phone_ll"
+            android:layout_below="@+id/med_layer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+
+            <EditText
+                android:id="@+id/ed_phone_verify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="number"
+                android:maxLength="10"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="18dp"
+                android:textColorHint="@color/mediumgrey"
+                android:textColor="@color/ash"
+                android:fontFamily="@font/worksansregular"
+                android:hint="Enter your phone number"/>
+            <View
+                android:layout_below="@+id/ed_phone_verify"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/mediumgrey"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+
+
+            <RelativeLayout
+                android:id="@+id/gotophoneverify"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/signinbtn">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Send"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/worksansregular"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

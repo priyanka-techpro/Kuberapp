@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="false"
+    android:focusableInTouchMode="true"
+    tools:context=".Activity.SignupActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/toplayer"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:background="@drawable/signbg">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:text="Sign up"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:fontFamily="@font/worksansmedium"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/username_ll"
+            android:layout_below="@+id/toplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+            <TextView
+                android:id="@+id/username_txt_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="24dp"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/ash"
+                android:text="User name" />
+
+            <EditText
+                android:layout_below="@+id/username_txt_signup"
+                android:id="@+id/ed_username_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="24dp"
+                android:textColorHint="@color/mediumgrey"
+                android:textColor="@color/ash"
+                android:fontFamily="@font/worksansregular"
+                android:hint="Enter your name"/>
+            <View
+                android:layout_below="@+id/ed_username_signup"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/mediumgrey"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/email_ll"
+            android:layout_below="@+id/username_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/email_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="24dp"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/ash"
+                android:text="Email address" />
+
+            <EditText
+                android:layout_below="@+id/email_txt"
+                android:id="@+id/ed_email_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="24dp"
+                android:inputType="textEmailAddress"
+                android:maxLength="10"
+                android:textColorHint="@color/mediumgrey"
+                android:textColor="@color/ash"
+                android:fontFamily="@font/worksansregular"
+                android:hint="Enter your email"/>
+            <View
+                android:layout_below="@+id/ed_email_signup"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/mediumgrey"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/address_ll"
+            android:layout_below="@+id/email_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/address_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="24dp"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/ash"
+                android:text="Address" />
+
+            <EditText
+                android:layout_below="@+id/address_txt"
+                android:id="@+id/ed_address_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="24dp"
+                android:maxLength="10"
+                android:textColorHint="@color/mediumgrey"
+                android:textColor="@color/ash"
+                android:fontFamily="@font/worksansregular"
+                android:hint="Enter your address"/>
+            <View
+                android:layout_below="@+id/ed_address_signup"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/mediumgrey"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <RelativeLayout
+                android:id="@+id/gotoconfmpassword"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/signinbtn">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Next"
+                    android:textSize="24dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/worksansregular"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

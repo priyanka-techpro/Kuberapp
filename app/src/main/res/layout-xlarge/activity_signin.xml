@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="false"
+    android:focusableInTouchMode="true"
+    tools:context=".Activity.SigninActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/toplayer"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:background="@drawable/signbg">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:text="Sign in"
+                android:textColor="@color/white"
+                android:textSize="26dp"
+                android:fontFamily="@font/worksansmedium"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/username_ll"
+            android:layout_below="@+id/toplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+        <TextView
+            android:id="@+id/username_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="24dp"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/ash"
+            android:text="User name" />
+
+            <EditText
+                android:layout_below="@+id/username_txt"
+                android:id="@+id/ed_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="24dp"
+                android:textColorHint="@color/mediumgrey"
+                android:textColor="@color/ash"
+
+                android:fontFamily="@font/worksansregular"
+                android:hint="Enter your email/phone number"/>
+            <View
+                android:layout_below="@+id/ed_username"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/mediumgrey"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/password_ll"
+            android:layout_below="@+id/username_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/password_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="24dp"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/ash"
+                android:text="Password" />
+
+            <EditText
+                android:layout_below="@+id/password_txt"
+                android:id="@+id/ed_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="24dp"
+                android:inputType="textPassword"
+                android:textColorHint="@color/mediumgrey"
+                android:textColor="@color/ash"
+                android:fontFamily="@font/worksansregular"
+                android:hint="Enter your password"/>
+            <View
+                android:layout_below="@+id/ed_password"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/mediumgrey"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_below="@+id/password_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/forgotpassword_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="24dp"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/ash"
+                android:text="Forgot your password?" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+
+
+            <RelativeLayout
+                android:id="@+id/gotophoneverify"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/signinbtn">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Sign in"
+                    android:textSize="24dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/worksansregular"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@+id/gotophoneverify"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/referals"
+                    android:textColor="@color/ash"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/worksansregular"
+                    android:text="Don't have an account?"/>
+
+                <TextView
+                    android:id="@+id/gotosignup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blue"
+                    android:textSize="24dp"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="@font/worksansregular"
+                    android:layout_toRightOf="@+id/referals"
+                    android:text="Sign up"/>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

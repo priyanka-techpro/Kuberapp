@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    tools:context=".Activity.SingledetailsActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/rela_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@drawable/dashboardbg">
+
+                    <RelativeLayout
+                        android:id="@+id/ll_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+
+
+                        <ImageView
+                            android:id="@+id/back"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/back"
+                            android:visibility="visible" />
+
+
+                        <TextView
+                            android:id="@+id/title_single"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_toRightOf="@+id/back"
+                            android:fontFamily="@font/worksansmedium"
+                            android:gravity="center"
+                            android:text="Hospital Bed"
+                            android:textColor="@color/white"
+                            android:textSize="22dp" />
+
+                        <ImageView
+                            android:id="@+id/img_notify"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_toLeftOf="@+id/img_cart"
+                            android:padding="2dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/heartwhiteicon" />
+                        <ImageView
+                            android:id="@+id/img_cart"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:padding="2dp"
+                            android:src="@drawable/carticonwhite" />
+
+                        <RelativeLayout
+                            android:id="@+id/cart_count"
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/cart_count_drawable"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:id="@+id/tv_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:text="1"
+                                android:textColor="@color/black" />
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/med_ll"
+                    android:layout_below="@+id/rela_head">
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="155dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/image_top"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/singleproduct"
+                            />
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:src="@drawable/heartdashboard"
+                            android:id="@+id/heartsingle"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"/>
+
+                        <TextView
+                            android:id="@+id/discount_single"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:fontFamily="@font/worksansmedium"
+                            android:layout_below="@+id/heartsingle"
+                            android:text="(20% off)"
+                            android:textSize="16dp"
+                            android:textColor="@color/red"/>
+                    </RelativeLayout>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pro_details_ll"
+                    android:layout_below="@+id/med_ll">
+                    <TextView
+                        android:id="@+id/product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hospital Bed Linen, Size:36''x80''"
+                        android:textSize="20dp"
+                        android:singleLine="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:fontFamily="@font/worksansregular"
+                        android:textColor="@color/ash" />
+                    <TextView
+                        android:layout_below="@+id/product_name"
+                        android:id="@+id/mrp_single"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/worksansmedium"
+                        android:text="Rs. 240/ "
+                        android:textSize="18dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/blue"/>
+
+                    <TextView
+                        android:id="@+id/quantity_single"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/worksansmedium"
+                        android:text="Piece"
+                        android:layout_below="@+id/product_name"
+                        android:layout_toRightOf="@+id/mrp_single"
+                        android:textSize="18dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/grey"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/mrp_single"
+                        android:id="@+id/variation"
+                        />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/qty_layer"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/imgback"
+                    android:layout_below="@+id/pro_details_ll">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/addicon"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue"
+                        android:text="1"
+                        android:fontFamily="@font/worksansregular"
+                        android:textSize="20dp"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_horizontal" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/minus"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/qty_layer">
+
+                    <TextView
+                        android:id="@+id/description_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textSize="20dp"
+                        android:singleLine="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:fontFamily="@font/worksansmedium"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:layout_below="@+id/description_top"
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Linen is comfortable to wear in hot weather and is valued for use in garments."
+                        android:textSize="18dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:fontFamily="@font/worksansregular"
+                        android:textColor="@color/ash" />
+                    <TextView
+                        android:layout_below="@+id/description"
+                        android:id="@+id/usage_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Usage"
+                        android:textSize="20dp"
+                        android:singleLine="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:fontFamily="@font/worksansmedium"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:layout_below="@+id/usage_top"
+                        android:id="@+id/usage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Linen is comfortable to wear in hot weather and is valued for use in garments."
+                        android:textSize="18dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:fontFamily="@font/worksansregular"
+                        android:textColor="@color/ash" />
+                   <TextView
+                        android:layout_below="@+id/usage"
+                        android:id="@+id/details_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Details"
+                        android:textSize="20dp"
+                        android:singleLine="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:fontFamily="@font/worksansmedium"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:layout_below="@+id/details_top"
+                        android:id="@+id/details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Linen is comfortable to wear in hot weather and is valued for use in garments."
+                        android:textSize="18dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:fontFamily="@font/worksansregular"
+                        android:textColor="@color/ash" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

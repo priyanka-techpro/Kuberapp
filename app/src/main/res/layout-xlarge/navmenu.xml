@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <LinearLayout
+        android:id="@+id/ll_line"
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:background="@color/white"
+        android:orientation="horizontal" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_below="@+id/ll_line"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/ll_dashboard"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/home"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="30dp"
+                        android:padding="2dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/dashboardicon"/>
+
+                    <TextView
+                        android:id="@+id/tv_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/home"
+                        android:fontFamily="@font/worksansregular"
+                        android:gravity="center_vertical"
+                        android:text="Dashboard"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_profile"
+                    android:layout_below="@+id/ll_dashboard"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/ho"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="30dp"
+                        android:padding="2dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/profileicon"/>
+
+                    <TextView
+                        android:id="@+id/tv_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/ho"
+                        android:fontFamily="@font/worksansregular"
+                        android:gravity="center_vertical"
+                        android:text="Profile"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
+                    android:id="@+id/ll_product"
+                    android:layout_below="@+id/ll_profile"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/subs"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="30dp"
+                        android:padding="2dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/productsicon"/>
+
+                    <TextView
+                        android:id="@+id/tv_subs"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/subs"
+                        android:fontFamily="@font/worksansregular"
+                        android:gravity="center_vertical"
+                        android:text="Products"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                    <ImageView
+                        android:id="@+id/drop_down"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/addicon"
+                      />
+<!--                    <ImageView-->
+<!--                        android:id="@+id/drop_up"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:layout_marginRight="15dp"-->
+<!--                        android:visibility="gone"-->
+<!--                        android:src="@drawable/dropup"-->
+<!--                        />-->
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/subproduct"
+                    android:visibility="gone"
+                    android:background="@color/white"
+                    android:layout_below="@+id/ll_product">
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_offer"
+                    android:layout_below="@+id/subproduct"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/offer"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="30dp"
+                        android:padding="2dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/offersicon"/>
+
+                    <TextView
+                        android:id="@+id/tv_offer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/offer"
+                        android:fontFamily="@font/worksansregular"
+                        android:gravity="center_vertical"
+                        android:text="Offers"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_cart"
+                    android:layout_below="@+id/ll_offer"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/cart"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="30dp"
+                        android:padding="2dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/carticon"/>
+
+                    <TextView
+                        android:id="@+id/tv_cart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/cart"
+                        android:fontFamily="@font/worksansregular"
+                        android:gravity="center_vertical"
+                        android:text="Cart"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_ordrhistory"
+                    android:layout_below="@+id/ll_cart"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/history"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="30dp"
+                        android:padding="2dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/orderhistoryicon"/>
+
+                    <TextView
+                        android:id="@+id/tv_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/history"
+                        android:fontFamily="@font/worksansregular"
+                        android:gravity="center_vertical"
+                        android:text="Order History"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/ll_helpfaq"
+                    android:layout_below="@+id/ll_ordrhistory"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/help"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="30dp"
+                        android:padding="2dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/helpfaqicon"/>
+
+                    <TextView
+                        android:id="@+id/tv_faq"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/help"
+                        android:fontFamily="@font/worksansregular"
+                        android:gravity="center_vertical"
+                        android:text="@string/faq"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/ll_helpfaq"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/log"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/logouticon" />
+
+                    <TextView
+
+                        android:id="@+id/text_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/log"
+                        android:fontFamily="@font/worksansregular"
+                        android:gravity="center_vertical"
+                        android:text="Logout"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+
+
+        </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
