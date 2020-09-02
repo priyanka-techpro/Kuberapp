@@ -1,5 +1,6 @@
 package com.techprostudio.kuberinternational.Activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -46,7 +47,7 @@ public class DashboardActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     ViewPager2 myViewPager2;
    public static TextView titlebar;
-   public static ImageView drawer_open,back;
+   public static ImageView drawer_open,back,img_cart;
    public static LinearLayout mainlayout;
 
     private Handler sliderHandler = new Handler();
@@ -80,7 +81,15 @@ public class DashboardActivity extends AppCompatActivity {
         drawer_open=findViewById(R.id.drawer_open);
         back=findViewById(R.id.back);
         mainlayout=findViewById(R.id.mainlayout);
+        img_cart=findViewById(R.id.img_cart);
 
+        img_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, CartActivity.class));
+
+            }
+        });
         List<SliderItem> sliderItems = new ArrayList<>();
         sliderItems.add(new SliderItem(R.drawable.bannerone));
         sliderItems.add(new SliderItem(R.drawable.bannerone));

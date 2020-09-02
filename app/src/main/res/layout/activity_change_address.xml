@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    tools:context=".Activity.ChangeAddressActivity">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/rela_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@drawable/dashboardbg">
+
+                    <RelativeLayout
+                        android:id="@+id/ll_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+
+
+                        <ImageView
+                            android:id="@+id/back"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/back"
+                            android:visibility="visible" />
+
+
+                        <TextView
+                            android:id="@+id/title_single"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_toRightOf="@+id/back"
+                            android:fontFamily="@font/worksansmedium"
+                            android:gravity="center"
+                            android:text="Select Address"
+                            android:textColor="@color/white"
+                            android:textSize="22dp" />
+
+                        <ImageView
+                            android:id="@+id/img_notify"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_toLeftOf="@+id/img_cart"
+                            android:padding="2dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/heartwhiteicon" />
+                        <ImageView
+                            android:id="@+id/img_cart"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"
+                            android:padding="2dp"
+                            android:src="@drawable/carticonwhite" />
+
+                        <RelativeLayout
+                            android:id="@+id/cart_count"
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/cart_count_drawable"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:id="@+id/tv_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:text="1"
+                                android:textColor="@color/black" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_below="@+id/rela_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"
+                        android:id="@+id/addresslist"/>
+                    <RelativeLayout
+                        android:layout_below="@+id/addresslist"
+                        android:id="@+id/gotoaddaddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bluebtn">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="ADD NEW ADDRESS"
+                            android:textSize="16dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/worksansregular"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

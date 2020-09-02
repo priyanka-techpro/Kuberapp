@@ -70,10 +70,11 @@
                         android:id="@+id/img_notify"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/img_cart"
                         android:padding="2dp"
-                        android:layout_marginRight="10dp"
                         android:src="@drawable/heartwhiteicon" />
+
                     <ImageView
                         android:id="@+id/img_cart"
                         android:layout_width="40dp"
@@ -108,16 +109,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ll_topbar"
-                    android:visibility="visible"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:visibility="visible">
+
                     <RelativeLayout
+                        android:id="@+id/search_ll"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:id="@+id/search_ll"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/searchbg"
-                        >
+                        android:background="@drawable/searchbg">
+
                         <ImageView
                             android:id="@+id/search_icon"
                             android:layout_width="30dp"
@@ -178,6 +180,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     android:overScrollMode="never" />
 
