@@ -39,6 +39,8 @@
 
                         <ImageView
                             android:id="@+id/back"
+                            android:padding="5dp"
+
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_alignParentLeft="true"
@@ -64,7 +66,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_toLeftOf="@+id/img_cart"
-                            android:padding="2dp"
+                            android:padding="5dp"
                             android:layout_marginRight="10dp"
                             android:src="@drawable/heartwhiteicon" />
                         <ImageView
@@ -72,7 +74,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_alignParentRight="true"
-                            android:padding="2dp"
+                            android:padding="5dp"
                             android:src="@drawable/carticonwhite" />
 
                         <RelativeLayout
@@ -315,6 +317,32 @@
                         android:layout_marginRight="5dp"
                         android:fontFamily="@font/worksansregular"
                         android:textColor="@color/ash" />
+
+                    <RelativeLayout
+                        android:id="@+id/ll_bag"
+                        android:layout_below="@+id/details"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_alignParentBottom="true"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/signinbtn"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:layout_marginBottom="20dp">
+
+                        <TextView
+                            android:id="@+id/price"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="GO TO BAG"
+                            android:textSize="20dp"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/worksansmedium"
+                            android:gravity="center" />
+
+
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
             </RelativeLayout>

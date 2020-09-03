@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/faqques"
+        android:background="@drawable/imgback"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Shipping Rates And Times"
+            android:textSize="16dp"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/worksansregular"
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp">
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/re_add"
+                android:visibility="visible"
+                android:background="@drawable/arrowright"
+                >
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="20dp"
+                android:layout_height="10dp"
+                android:id="@+id/re_minus"
+                android:visibility="gone"
+
+                android:background="@drawable/arrowdown"
+                >
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/faqques"
+        android:id="@+id/faqans"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Water is an inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance."
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/worksansregular"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
+
+</LinearLayout>

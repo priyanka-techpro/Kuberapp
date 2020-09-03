@@ -59,17 +59,7 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
         holder.main_product_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                mainlayout.setVisibility(View.GONE);
-//                drawer_open.setVisibility(View.GONE);
-//                back.setVisibility(View.VISIBLE);
-//                titlebar.setText("Furnishing");
-//                CategoryFragment optionsFrag = new CategoryFragment();
-//                ((CategoryMasterActivity)context).getSupportFragmentManager().beginTransaction().add(R.id.nav_host_fragment, optionsFrag,"OptionsFragment").addToBackStack(null).commit();
-//
-//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//                Fragment myFragment = new CategoryFragment();
-//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, myFragment).addToBackStack(null).commit();
-                context.startActivity(new Intent(context, SubProductActivity.class));
+           context.startActivity(new Intent(context, SubProductActivity.class));
 
             }
         });

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,8 @@ public class CartActivity extends AppCompatActivity {
     ArrayList<CartListModel> cartListModelArrayList;
     CartListModel cartModel;
     CartAdapter cartAdapter;
+    ImageView back,img_cart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,22 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(CartActivity.this, AddressActivity.class));
 
+            }
+        });
+
+        img_cart=findViewById(R.id.img_cart);
+        back=findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        img_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CartActivity.this, CartActivity.class));
             }
         });
         String text = "<font color=#0b539d>Your order is eligible for rewards. </font> <font color=#555555>You can also choose to redeem at checkout</font>";

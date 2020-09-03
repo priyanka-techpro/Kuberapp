@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.techprostudio.kuberinternational.Adapter.AddressListAdapter;
@@ -27,12 +28,30 @@ public class ChangeAddressActivity extends AppCompatActivity {
     ArrayList<AddressListModel> addressListModelArrayList;
     AddressListModel addressListModel;
     AddressListAdapter addressListAdapter;
+    ImageView back,img_cart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_address);
         gotoaddaddress=findViewById(R.id.gotoaddaddress);
         addresslist=findViewById(R.id.addresslist);
+        img_cart=findViewById(R.id.img_cart);
+        back=findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        img_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ChangeAddressActivity.this, CartActivity.class));
+            }
+        });
+
         addressListModelArrayList=new ArrayList<>();
         addressListAdapter=new AddressListAdapter(this,addressListModelArrayList);
         addressitems();

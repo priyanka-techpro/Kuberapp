@@ -5,11 +5,14 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -43,13 +47,14 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 public class DashboardActivity extends AppCompatActivity {
-
+    boolean doubleBackToExitPressedOnce= false;
     private AppBarConfiguration mAppBarConfiguration;
     ViewPager2 myViewPager2;
    public static TextView titlebar;
    public static ImageView drawer_open,back,img_cart;
    public static LinearLayout mainlayout;
-
+    public static RelativeLayout ll_dashboard,ll_profile,ll_product,ll_offer,ll_cart,ll_ordrhistory,ll_helpfaq,logout;
+    DrawerLayout drawer;
     private Handler sliderHandler = new Handler();
     RecyclerView categorylist,newarrivallist;
     private List<CategoryModel> categoryModelList;
@@ -72,8 +77,9 @@ public class DashboardActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
         myViewPager2=findViewById(R.id.viewpager);
         categorylist=findViewById(R.id.categorylist);
         newarrivallist=findViewById(R.id.newarrivallist);
@@ -82,6 +88,169 @@ public class DashboardActivity extends AppCompatActivity {
         back=findViewById(R.id.back);
         mainlayout=findViewById(R.id.mainlayout);
         img_cart=findViewById(R.id.img_cart);
+        ll_dashboard=findViewById(R.id.ll_dashboard);
+        ll_profile=findViewById(R.id.ll_profile);
+        ll_product=findViewById(R.id.ll_product);
+        ll_offer=findViewById(R.id.ll_offer);
+        ll_cart=findViewById(R.id.ll_cart);
+        ll_ordrhistory=findViewById(R.id.ll_ordrhistory);
+        ll_helpfaq=findViewById(R.id.ll_helpfaq);
+        logout=findViewById(R.id.logout);
+
+        drawer_open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawer.openDrawer(Gravity.LEFT);
+            }
+
+        });
+
+        ll_dashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDrawer();
+
+                ll_dashboard.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+                ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_product.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_offer.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_cart.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
+                logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+                Intent i = new Intent(DashboardActivity.this,DashboardActivity.class);
+                startActivity(i);
+            }
+        });
+
+        ll_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDrawer();
+
+                ll_dashboard.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_profile.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+                ll_product.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_offer.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_cart.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
+                logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+                Intent i = new Intent(DashboardActivity.this,ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+
+        ll_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDrawer();
+
+                ll_dashboard.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_product.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+                ll_offer.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_cart.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
+                logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+                Intent i = new Intent(DashboardActivity.this,CategoryMasterActivity.class);
+                startActivity(i);
+            }
+        });
+
+
+        ll_offer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDrawer();
+
+                ll_dashboard.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_product.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_offer.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+                ll_cart.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
+                logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+                Intent i = new Intent(DashboardActivity.this,OfferActivity.class);
+                startActivity(i);
+            }
+        });
+
+
+        ll_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDrawer();
+
+                ll_dashboard.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_product.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_offer.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_cart.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+                ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
+                logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+                Intent i = new Intent(DashboardActivity.this,CartActivity.class);
+                startActivity(i);
+            }
+        });
+        ll_ordrhistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDrawer();
+
+                ll_dashboard.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_product.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_offer.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_cart.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+                ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
+                logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+                Intent i = new Intent(DashboardActivity.this,OrderHistoryActivity.class);
+                startActivity(i);
+            }
+        });
+        ll_helpfaq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDrawer();
+
+                ll_dashboard.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_product.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_offer.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_cart.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+                logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+                Intent i = new Intent(DashboardActivity.this,HelpandfaqActivity.class);
+                startActivity(i);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeDrawer();
+                ll_dashboard.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_product.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_offer.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_cart.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
+                ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
+                logout.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+                Intent i = new Intent(DashboardActivity.this,NumberVerifyActivity.class);
+                startActivity(i);
+            }
+        });
+
+
+
+
 
         img_cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -232,5 +401,52 @@ public class DashboardActivity extends AppCompatActivity {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+    private void closeDrawer() {
+
+        drawer.closeDrawer(Gravity.LEFT);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ll_dashboard.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+        ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
+        ll_product.setBackgroundColor(getResources().getColor(R.color.transparent));
+        ll_offer.setBackgroundColor(getResources().getColor(R.color.transparent));
+        ll_cart.setBackgroundColor(getResources().getColor(R.color.transparent));
+        ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
+        ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
+        logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+        FragmentManager fm = getSupportFragmentManager();
+        Log.e("back stack entry", fm.getBackStackEntryCount() + "");
+
+        if (fm.getBackStackEntryCount() >1) {
+            fm.popBackStack();
+            //super.onBackPressed();
+            //  return;
+        }
+        else if (fm.getBackStackEntryCount() == 1) {
+            fm.popBackStack();
+            closeDrawer();
+
+
+        }
+
+
+        else {
+            if (doubleBackToExitPressedOnce) {
+                fm.popBackStack();
+                //  super.onBackPressed();
+                return;
+            }
+
+        }
     }
 }

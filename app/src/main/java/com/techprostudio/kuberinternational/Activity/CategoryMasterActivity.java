@@ -10,12 +10,14 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.techprostudio.kuberinternational.Adapter.MainCategoryAdapter;
 import com.techprostudio.kuberinternational.Adapter.SliderAdapter;
@@ -34,6 +36,7 @@ public class CategoryMasterActivity extends AppCompatActivity {
     CategoryMainModel categoryModel;
     ViewPager2 viewpagerone;
     private Handler sliderHandler = new Handler();
+    ImageView back,img_cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,22 @@ public class CategoryMasterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_master);
         categorymainlist=findViewById(R.id.categorymainlist);
         viewpagerone=findViewById(R.id.viewpagerone);
+        img_cart=findViewById(R.id.img_cart);
+        back=findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        img_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CategoryMasterActivity.this, CartActivity.class));
+            }
+        });
+
         List<SliderItem> sliderItems = new ArrayList<>();
         sliderItems.add(new SliderItem(R.drawable.bannerone));
         sliderItems.add(new SliderItem(R.drawable.bannerone));

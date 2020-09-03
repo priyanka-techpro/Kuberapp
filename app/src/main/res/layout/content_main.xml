@@ -38,6 +38,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:padding="5dp"
                         android:id="@+id/drawer_open"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -67,12 +68,12 @@
                         android:textSize="22dp" />
 
                     <ImageView
+                        android:padding="5dp"
                         android:id="@+id/img_notify"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/img_cart"
-                        android:padding="2dp"
                         android:src="@drawable/heartwhiteicon" />
 
                     <ImageView
@@ -80,7 +81,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:src="@drawable/carticonwhite" />
 
                     <RelativeLayout

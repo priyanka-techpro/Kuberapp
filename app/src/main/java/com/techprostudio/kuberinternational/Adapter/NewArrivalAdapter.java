@@ -1,10 +1,14 @@
 package com.techprostudio.kuberinternational.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.techprostudio.kuberinternational.Activity.SingledetailsActivity;
+import com.techprostudio.kuberinternational.Activity.SubProductActivity;
 import com.techprostudio.kuberinternational.Model.NewArrivalModel;
 import com.techprostudio.kuberinternational.R;
 
@@ -19,10 +23,10 @@ public class NewArrivalAdapter extends RecyclerView.Adapter<NewArrivalAdapter.My
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-
+        ImageView image_top;
         public MyViewHolder( View view) {
             super(view);
-
+            image_top=view.findViewById(R.id.image_top);
 
         }
     }
@@ -41,7 +45,13 @@ public class NewArrivalAdapter extends RecyclerView.Adapter<NewArrivalAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull final NewArrivalAdapter.MyViewHolder holder, int position) {
+        holder.image_top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, SingledetailsActivity.class));
 
+            }
+        });
     }
 
     @Override

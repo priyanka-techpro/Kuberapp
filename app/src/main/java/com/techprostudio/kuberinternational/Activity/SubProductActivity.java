@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.techprostudio.kuberinternational.Adapter.FilterAdapter;
 import com.techprostudio.kuberinternational.Adapter.SubcategoryAdapter;
@@ -34,14 +36,28 @@ public class SubProductActivity extends AppCompatActivity {
     private SubcategoryAdapter subcategoryAdapter;
     FilterModel filterModel;
     SubcategoryModel subcategoryModel;
+    ImageView back,img_cart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_product);
-        drawer_open.setVisibility(View.GONE);
-        back.setVisibility(View.VISIBLE);
-        titlebar.setText("Furnishing");
         filterlist=findViewById(R.id.filterlist);
+        img_cart=findViewById(R.id.img_cart);
+        back=findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        img_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SubProductActivity.this, CartActivity.class));
+            }
+        });
         subcategorylist=findViewById(R.id.subcategorylist);
         filterModelList=new ArrayList<>();
         filterAdapter = new FilterAdapter(this,filterModelList);
