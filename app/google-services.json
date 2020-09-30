@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "624865089318",
+    "firebase_url": "https://kuber-international.firebaseio.com",
+    "project_id": "kuber-international",
+    "storage_bucket": "kuber-international.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624865089318:android:82e3be7f0071deeea913e7",
+        "android_client_info": {
+          "package_name": "com.techprostudio.kuberinternational"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624865089318-b3k8cnqacv8h41met1nv5muq21senciq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techprostudio.kuberinternational",
+            "certificate_hash": "a4b729fa5b06a97af232bfb940e1b89241051068"
+          }
+        },
+        {
+          "client_id": "624865089318-5de9uvg61kcpnu6ua3mobj40aqlm7o50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu6cUcn2psgotYPwW6jowP3O0VuMlceyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624865089318-5de9uvg61kcpnu6ua3mobj40aqlm7o50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
