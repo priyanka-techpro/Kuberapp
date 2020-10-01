@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -18,26 +20,38 @@ import android.os.Handler;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.techprostudio.kuberinternational.Adapter.MainCategoryAdapter;
 import com.techprostudio.kuberinternational.Adapter.SliderAdapter;
-import com.techprostudio.kuberinternational.Model.CategoryMainModel;
-import com.techprostudio.kuberinternational.Model.CategoryModel;
+import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryList;
+import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryMainModel;
 import com.techprostudio.kuberinternational.Model.SliderItem;
+import com.techprostudio.kuberinternational.Network.ApiClient;
+import com.techprostudio.kuberinternational.Network.ApiInterface;
+import com.techprostudio.kuberinternational.Network.Config;
+import com.techprostudio.kuberinternational.Network.InternetAccess;
 import com.techprostudio.kuberinternational.R;
+import com.techprostudio.kuberinternational.Utils.AppPreference;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryMasterActivity extends AppCompatActivity {
     RecyclerView categorymainlist;
-    private List<CategoryMainModel> categoryModelList;
+    private List<CategoryList> categoryModelList;
     private MainCategoryAdapter categoryAdapter;
-    CategoryMainModel categoryModel;
     ViewPager2 viewpagerone;
     private Handler sliderHandler = new Handler();
     ImageView back,img_cart;
-
+    RelativeLayout main,cart_count;
+    TextView tv_count;
+    Snackbar mSnackbar;
+    ApiInterface apiInterface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +60,12 @@ public class CategoryMasterActivity extends AppCompatActivity {
         viewpagerone=findViewById(R.id.viewpagerone);
         img_cart=findViewById(R.id.img_cart);
         back=findViewById(R.id.back);
+        main=findViewById(R.id.main);
+        tv_count=findViewById(R.id.tv_count);
+        cart_count=findViewById(R.id.cart_count);
+        apiInterface= ApiClient.getRetrofitClient().create(ApiInterface.class);
+        String customerid=new AppPreference(CategoryMasterActivity.this).getUserId();
+        categoryModelList=new ArrayList<>();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,28 +108,63 @@ public class CategoryMasterActivity extends AppCompatActivity {
                 sliderHandler.postDelayed(sliderRunnable,3000);
             }
         });
+        if (InternetAccess.isConnected(CategoryMasterActivity.this)) {
+            categorydata(customerid);
+        } else {
+            mSnackbar = Snackbar
+                    .make(main, "No Internet Connection", Snackbar.LENGTH_INDEFINITE).
+                            setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
 
-        categoryModelList=new ArrayList<>();
-        categoryAdapter = new MainCategoryAdapter(this,categoryModelList);
-        categorydata();
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(CategoryMasterActivity.this,4);
-        categorymainlist.setLayoutManager(mLayoutManager);
-        categorymainlist.addItemDecoration(new GridSpacingItemDecoration(4, dpToPx(0), true));
-        categorymainlist.setItemAnimator(new DefaultItemAnimator());
-        categorymainlist.setAdapter(categoryAdapter);
-    }
+                                    mSnackbar.dismiss();
 
-    private void categorydata() {
-        for(int i=0;i<8;i++){
-
-            categoryModel=new CategoryMainModel();
-            categoryModel.setProductname("");
-            categoryModel.setPrice("");
-            categoryModel.setDiscount("");
-            categoryModelList.add(categoryModel);
+                                }
+                            });
+            mSnackbar.show();
         }
 
-        categoryAdapter.notifyDataSetChanged();
+
+
+    }
+
+    private void categorydata(String customerid) {
+
+        Call<CategoryMainModel> call=apiInterface.getParentCategory(Config.header,customerid);
+        call.enqueue(new Callback<CategoryMainModel>() {
+            @Override
+            public void onResponse(Call<CategoryMainModel> call, Response<CategoryMainModel> response) {
+                if(response.body().getStatus()==true){
+                    String cartCount = String.valueOf(response.body().getCartCount());
+                    Config.cart = cartCount;
+                    if (cartCount.equals("0")) {
+                        cart_count.setVisibility(View.GONE);
+                        tv_count.setVisibility(View.GONE);
+                    } else {
+                        cart_count.setVisibility(View.VISIBLE);
+                        tv_count.setVisibility(View.VISIBLE);
+                        tv_count.setText(Config.cart);
+                    }
+                    categoryModelList=response.body().getCategoryList();
+                    categoryAdapter = new MainCategoryAdapter(CategoryMasterActivity.this,categoryModelList);
+                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(CategoryMasterActivity.this,4);
+                    categorymainlist.setLayoutManager(mLayoutManager);
+                    categorymainlist.addItemDecoration(new GridSpacingItemDecoration(4, dpToPx(0), true));
+                    categorymainlist.setItemAnimator(new DefaultItemAnimator());
+                    categorymainlist.setAdapter(categoryAdapter);
+                    categoryAdapter.notifyDataSetChanged();
+                }
+                else{
+                    Toast.makeText(CategoryMasterActivity.this, "no data found.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CategoryMainModel> call, Throwable t) {
+
+            }
+        });
+
     }
     public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 

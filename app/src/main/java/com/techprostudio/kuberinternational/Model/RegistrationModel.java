@@ -3,25 +3,19 @@ package com.techprostudio.kuberinternational.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginModel {
+public class RegistrationModel {
     @SerializedName("status")
     @Expose
     private Boolean status;
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("customer_type")
+    @SerializedName("customer_id")
     @Expose
-    private String customerType;
-    @SerializedName("phone_number")
-    @Expose
-    private String phoneNumber;
+    private Integer customerId;
     @SerializedName("otp")
     @Expose
     private String otp;
-    @SerializedName("customer_id")
-    @Expose
-    private String customerId;
 
     public Boolean getStatus() {
         return status;
@@ -39,20 +33,12 @@ public class LoginModel {
         this.message = message;
     }
 
-    public String getCustomerType() {
-        return customerType;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerType(String customerType) {
-        this.customerType = customerType;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public String getOtp() {
@@ -63,11 +49,4 @@ public class LoginModel {
         this.otp = otp;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
 }

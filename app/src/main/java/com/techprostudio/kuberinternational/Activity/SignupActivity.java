@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.techprostudio.kuberinternational.Model.RegistrationModel;
 import com.techprostudio.kuberinternational.Network.ApiClient;
 import com.techprostudio.kuberinternational.Network.ApiInterface;
 import com.techprostudio.kuberinternational.Network.Config;
@@ -30,7 +31,7 @@ import org.json.JSONObject;
 public class SignupActivity extends AppCompatActivity {
     RelativeLayout gotoconfmpassword,ll_main;
     EditText ed_username_signup,ed_email_signup,ed_address_signup;
-    String phonenumber,devicetoken;
+    String phonenumber,devicetoken,usertype;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
     @Override
@@ -44,6 +45,7 @@ public class SignupActivity extends AppCompatActivity {
         ll_main=findViewById(R.id.ll_main);
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         phonenumber=getIntent().getExtras().getString("phone");
+        usertype=getIntent().getExtras().getString("customertype");
         devicetoken = new AppPreference(SignupActivity.this).getDeviceToken();
 
         gotoconfmpassword.setOnClickListener(new View.OnClickListener() {
@@ -101,39 +103,38 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
 
-              //  startActivity(new Intent(SignupActivity.this, DashboardActivity.class));
             }
         });
     }
 
     private void RegisterUser(String usernm, String email_id, String phonenumber, String adress, String devicetoken)
     {
-        Call<JsonObject> call=apiInterface.UserRegistration(Config.header,usernm,email_id,phonenumber,adress,devicetoken);
-        call.enqueue(new Callback<JsonObject>() {
+        Call<RegistrationModel> call=apiInterface.UserRegistration(Config.header,usernm,email_id,phonenumber,adress,devicetoken);
+        call.enqueue(new Callback<RegistrationModel>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                try {
-                    JsonObject object = response.body();
-                    JsonElement jsonObject = object;
-                    JSONObject converintoJsonObject = new JSONObject(String.valueOf(jsonObject));
-                    if (converintoJsonObject.getString("status").equals(true))
-                    {
-                        startActivity(new Intent(SignupActivity.this, OtpVerifyActivity.class));
-                    }
-                    else {
-
-                    }
+            public void onResponse(Call<RegistrationModel> call, Response<RegistrationModel> response) {
+                if(response.body().getStatus() == true)
+                {
+                    String otp=response.body().getOtp();
+                    Toast.makeText(SignupActivity.this,"Your login otp is "+otp,Toast.LENGTH_SHORT).show();
+                    String customerid= String.valueOf(response.body().getCustomerId());
+                    Intent i =new Intent(SignupActivity.this,OtpVerifyActivity.class);
+                    i.putExtra("custid",customerid);
+                    i.putExtra("customertype",usertype);
+                    startActivity(i);
                 }
-                    catch(Exception e){
-
-                    }
+                else {
+                    String msg=response.body().getMessage();
+                    Toast.makeText(SignupActivity.this,msg,Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<RegistrationModel> call, Throwable t) {
 
             }
         });
+
     }
 
 

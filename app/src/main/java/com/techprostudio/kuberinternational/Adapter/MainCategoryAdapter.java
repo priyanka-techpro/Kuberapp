@@ -5,44 +5,39 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.techprostudio.kuberinternational.Activity.CategoryMasterActivity;
-import com.techprostudio.kuberinternational.Activity.DashboardActivity;
+import com.squareup.picasso.Picasso;
 import com.techprostudio.kuberinternational.Activity.SubProductActivity;
-import com.techprostudio.kuberinternational.Fragment.CategoryFragment;
-import com.techprostudio.kuberinternational.Model.CategoryMainModel;
-import com.techprostudio.kuberinternational.Model.FilterModel;
+import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryList;
+import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryMainModel;
 import com.techprostudio.kuberinternational.R;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
-import static com.techprostudio.kuberinternational.Activity.DashboardActivity.back;
-import static com.techprostudio.kuberinternational.Activity.DashboardActivity.drawer_open;
-import static com.techprostudio.kuberinternational.Activity.DashboardActivity.mainlayout;
-import static com.techprostudio.kuberinternational.Activity.DashboardActivity.titlebar;
 
 public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapter.MyViewHolder>{
     private Context context;
-    private List<CategoryMainModel> modelList;
+    private List<CategoryList> modelList;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         RelativeLayout main_product_ll;
-
+        ImageView image_top;
+        TextView product_name_main;
         public MyViewHolder( View view) {
             super(view);
-
             main_product_ll= view.findViewById(R.id.main_product_ll);
+            image_top= view.findViewById(R.id.image_top);
+            product_name_main= view.findViewById(R.id.product_name_main);
         }
     }
 
-    public MainCategoryAdapter(Context context,List<CategoryMainModel> modelList){
+    public MainCategoryAdapter(Context context,List<CategoryList> modelList){
         this.context = context;
         this.modelList = modelList;
     }
@@ -56,10 +51,15 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final MainCategoryAdapter.MyViewHolder holder, int position) {
+        Picasso.with(context).load(modelList.get(position).getCategoryIcon()).into(holder.image_top);
+        holder.product_name_main.setText(modelList.get(position).getCategoryName());
         holder.main_product_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-           context.startActivity(new Intent(context, SubProductActivity.class));
+                Intent i=new Intent(context, SubProductActivity.class);
+                i.putExtra("categoryname",modelList.get(position).getCategoryName());
+                i.putExtra("categoryid",modelList.get(position).getCategoryId());
+                context.startActivity(i);
 
             }
         });

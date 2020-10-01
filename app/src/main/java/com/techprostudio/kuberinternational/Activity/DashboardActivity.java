@@ -14,17 +14,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.techprostudio.kuberinternational.Adapter.CategoryAdapter;
 import com.techprostudio.kuberinternational.Adapter.NewArrivalAdapter;
 import com.techprostudio.kuberinternational.Adapter.SliderAdapter;
 import com.techprostudio.kuberinternational.Model.CategoryModel;
 import com.techprostudio.kuberinternational.Model.NewArrivalModel;
 import com.techprostudio.kuberinternational.Model.SliderItem;
+import com.techprostudio.kuberinternational.Network.ApiClient;
+import com.techprostudio.kuberinternational.Network.ApiInterface;
+import com.techprostudio.kuberinternational.Network.Config;
+import com.techprostudio.kuberinternational.Network.InternetAccess;
 import com.techprostudio.kuberinternational.R;
+import com.techprostudio.kuberinternational.Utils.AppPreference;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +55,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce= false;
     private AppBarConfiguration mAppBarConfiguration;
     ViewPager2 myViewPager2;
-   public static TextView titlebar;
+   public static TextView titlebar,proname,tv_count;
    public static ImageView drawer_open,back,img_cart;
    public static LinearLayout mainlayout;
-    public static RelativeLayout ll_dashboard,ll_profile,ll_product,ll_offer,ll_cart,ll_ordrhistory,ll_helpfaq,logout;
+    public static RelativeLayout cart_count,ll_dashboard,ll_profile,ll_product,ll_offer,ll_cart,ll_ordrhistory,ll_helpfaq,logout;
     DrawerLayout drawer;
     private Handler sliderHandler = new Handler();
     RecyclerView categorylist,newarrivallist;
@@ -63,6 +76,11 @@ public class DashboardActivity extends AppCompatActivity {
     private NewArrivalAdapter newArrivalAdapter;
     CategoryModel categoryModel;
     NewArrivalModel newArrivalModel;
+    LinearLayout main;
+    Snackbar mSnackbar;
+    ApiInterface apiInterface;
+
+    String device_token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +97,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-
+        View header = navigationView.getHeaderView(0);
         myViewPager2=findViewById(R.id.viewpager);
         categorylist=findViewById(R.id.categorylist);
         newarrivallist=findViewById(R.id.newarrivallist);
@@ -96,7 +114,15 @@ public class DashboardActivity extends AppCompatActivity {
         ll_ordrhistory=findViewById(R.id.ll_ordrhistory);
         ll_helpfaq=findViewById(R.id.ll_helpfaq);
         logout=findViewById(R.id.logout);
+        main=findViewById(R.id.main);
+        cart_count=findViewById(R.id.cart_count);
+        tv_count=findViewById(R.id.tv_count);
+        proname=header.findViewById(R.id.proname);
+        apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
 
+        String username=new AppPreference(DashboardActivity.this).getUserName();
+        String customerid=new AppPreference(DashboardActivity.this).getUserId();
+        proname.setText("Hi "+username);
         drawer_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,6 +218,8 @@ public class DashboardActivity extends AppCompatActivity {
                 ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
                 ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
                 logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+
                 Intent i = new Intent(DashboardActivity.this,CartActivity.class);
                 startActivity(i);
             }
@@ -243,8 +271,23 @@ public class DashboardActivity extends AppCompatActivity {
                 ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
                 ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
                 logout.setBackgroundColor(getResources().getColor(R.color.lightgrey));
-                Intent i = new Intent(DashboardActivity.this,NumberVerifyActivity.class);
-                startActivity(i);
+
+                if (InternetAccess.isConnected(DashboardActivity.this)) {
+                    funLogout(customerid);
+                } else {
+                    mSnackbar = Snackbar
+                            .make(main, "No Internet Connection", Snackbar.LENGTH_INDEFINITE).
+                                    setAction("Ok", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            mSnackbar.dismiss();
+
+                                        }
+                                    });
+                    mSnackbar.show();
+                }
+
             }
         });
 
@@ -315,6 +358,55 @@ public class DashboardActivity extends AppCompatActivity {
         newarrivallist.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(0), true));
         newarrivallist.setItemAnimator(new DefaultItemAnimator());
         newarrivallist.setAdapter(newArrivalAdapter);
+    }
+
+    private void funLogout(String customerid)
+    {
+        Call<JsonObject> call=apiInterface.logoutFun(Config.header,customerid);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                try {
+
+                    JsonObject object = response.body();
+                    Log.e("Logout",""+object);
+
+                    JsonElement jsonObject = object;
+
+                    JSONObject converintoJsonObject = new JSONObject(String.valueOf(jsonObject));
+
+                    if(converintoJsonObject.getString("status").equals("true"))
+                    {
+                        Toast.makeText(DashboardActivity.this, converintoJsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                        device_token = new AppPreference(DashboardActivity.this).getDeviceToken();
+                        new AppPreference(DashboardActivity.this).clearUserId();
+                        new AppPreference(DashboardActivity.this).clearPreference();
+                        new AppPreference(DashboardActivity.this).saveDeviceToken(device_token);
+
+
+
+                        Intent intent = new Intent(DashboardActivity.this, NumberVerifyActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Toast.makeText(DashboardActivity.this,converintoJsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
     }
 
     private void newArrivaldata() {

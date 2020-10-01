@@ -1,14 +1,11 @@
 package com.techprostudio.kuberinternational.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.techprostudio.kuberinternational.Activity.SingledetailsActivity;
-import com.techprostudio.kuberinternational.Model.SubcategoryModel;
 import com.techprostudio.kuberinternational.Model.VariationModel;
 import com.techprostudio.kuberinternational.R;
 

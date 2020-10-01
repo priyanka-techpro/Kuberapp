@@ -74,8 +74,6 @@ public class NumberVerifyActivity extends AppCompatActivity {
                         mSnackbar.show();
                     }
                 }
-                //startActivity(new Intent(NumberVerifyActivity.this,OtpVerifyActivity.class));
-
             }
         });
     }
@@ -88,20 +86,26 @@ public class NumberVerifyActivity extends AppCompatActivity {
             public void onResponse(Call<LoginModel> call, Response<LoginModel> response)
             {
                 if(response.body().getStatus() == true) {
-                    String msg=response.body().getMessage();
-                    Toast.makeText(NumberVerifyActivity.this, msg, Toast.LENGTH_SHORT).show();
                     String usertype = response.body().getCustomerType();
                     if (usertype.equals("new_customer"))
                     {
-                        //startActivity(new Intent(NumberVerifyActivity.this,SignupActivity.class));
+                        String msg=response.body().getMessage();
+                        Toast.makeText(NumberVerifyActivity.this, msg, Toast.LENGTH_SHORT).show();
                         String phonenumber=response.body().getPhoneNumber();
                         Intent i =new Intent(NumberVerifyActivity.this,SignupActivity.class);
                         i.putExtra("phone",phonenumber);
+                        i.putExtra("customertype",usertype);
                         startActivity(i);
                     }
                     else
                         {
-                            startActivity(new Intent(NumberVerifyActivity.this,OtpVerifyActivity.class));
+                            String otp= response.body().getOtp();
+                            Toast.makeText(NumberVerifyActivity.this, otp, Toast.LENGTH_SHORT).show();
+                            String customerid = response.body().getCustomerId();
+                            Intent i =new Intent(NumberVerifyActivity.this,OtpVerifyActivity.class);
+                            i.putExtra("custid",customerid);
+                            i.putExtra("customertype",usertype);
+                            startActivity(i);
 
                     }
                 }

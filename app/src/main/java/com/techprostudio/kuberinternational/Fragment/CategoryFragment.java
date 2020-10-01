@@ -5,29 +5,17 @@ import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.techprostudio.kuberinternational.Activity.DashboardActivity;
-import com.techprostudio.kuberinternational.Adapter.CategoryAdapter;
 import com.techprostudio.kuberinternational.Adapter.FilterAdapter;
-import com.techprostudio.kuberinternational.Adapter.NewArrivalAdapter;
 import com.techprostudio.kuberinternational.Adapter.SubcategoryAdapter;
-import com.techprostudio.kuberinternational.Model.CategoryModel;
-import com.techprostudio.kuberinternational.Model.FilterModel;
-import com.techprostudio.kuberinternational.Model.NewArrivalModel;
-import com.techprostudio.kuberinternational.Model.SubcategoryModel;
 import com.techprostudio.kuberinternational.R;
 
 import java.util.ArrayList;
@@ -45,12 +33,11 @@ public class CategoryFragment extends Fragment {
     }
 
   RecyclerView filterlist,subcategorylist;
-    private List<FilterModel> filterModelList;
-    private List<SubcategoryModel> subcategoryModelList;
+
+
     private FilterAdapter filterAdapter;
     private SubcategoryAdapter subcategoryAdapter;
-    FilterModel filterModel;
-    SubcategoryModel subcategoryModel;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,48 +49,13 @@ public class CategoryFragment extends Fragment {
         titlebar.setText("Furnishing");
         filterlist=v.findViewById(R.id.filterlist);
         subcategorylist=v.findViewById(R.id.subcategorylist);
-        filterModelList=new ArrayList<>();
-        filterAdapter = new FilterAdapter(getActivity(),filterModelList);
-        filterdata();
-        LinearLayoutManager horizontaLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        filterlist.setLayoutManager(horizontaLayoutManagaer);
-        filterlist.setAdapter(filterAdapter);
 
-        subcategoryModelList=new ArrayList<>();
-        subcategoryAdapter = new SubcategoryAdapter(getActivity(),subcategoryModelList);
-        subcategorydata();
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),2);
-        subcategorylist.setLayoutManager(mLayoutManager);
-        subcategorylist.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(0), true));
-        subcategorylist.setItemAnimator(new DefaultItemAnimator());
-        subcategorylist.setAdapter(subcategoryAdapter);
+
+
         return v;
     }
-    private void subcategorydata() {
-        for(int i=0;i<12;i++){
 
-            subcategoryModel=new SubcategoryModel();
-            subcategoryModel.setProductname("");
-            subcategoryModel.setPrice("");
-            subcategoryModel.setDiscount("");
-            subcategoryModelList.add(subcategoryModel);
-        }
 
-        subcategoryAdapter.notifyDataSetChanged();
-    }
-
-    private void filterdata() {
-        for(int i=0;i<11;i++){
-
-            filterModel=new FilterModel();
-            filterModel.setProductname("");
-            filterModel.setPrice("");
-            filterModel.setDiscount("");
-            filterModelList.add(filterModel);
-        }
-
-        filterAdapter.notifyDataSetChanged();
-    }
 
 
     public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
