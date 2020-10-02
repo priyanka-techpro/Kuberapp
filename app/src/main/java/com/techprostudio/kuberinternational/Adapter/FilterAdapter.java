@@ -111,16 +111,21 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.MyViewHold
             public void onResponse(Call<SubProductMainModel> call, Response<SubProductMainModel> response) {
                 if(response.body().getStatus()==true)
                 {
+                    if(response.body().getProductList().size() == 0)
+                    {
+                        Toast.makeText(context, "Category list not found.", Toast.LENGTH_SHORT).show();
 
-                    subcategoryModelList=response.body().getProductList().get(0).getProductList();
-                    subcategoryAdapter = new SubcategoryAdapter(context,subcategoryModelList);
-                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context,2);
-                    subcategorylist.setLayoutManager(mLayoutManager);
-                    subcategorylist.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(0), true));
-                    subcategorylist.setItemAnimator(new DefaultItemAnimator());
-                    subcategorylist.setAdapter(subcategoryAdapter);
-                    subcategoryAdapter.notifyDataSetChanged();
-
+                    }
+                    else {
+                        subcategoryModelList = response.body().getProductList().get(0).getProductList();
+                        subcategoryAdapter = new SubcategoryAdapter(context, subcategoryModelList);
+                        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);
+                        subcategorylist.setLayoutManager(mLayoutManager);
+                        subcategorylist.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(0), true));
+                        subcategorylist.setItemAnimator(new DefaultItemAnimator());
+                        subcategorylist.setAdapter(subcategoryAdapter);
+                        subcategoryAdapter.notifyDataSetChanged();
+                    }
                 }
                 else{
                     Toast.makeText(context, "no data found.", Toast.LENGTH_SHORT).show();

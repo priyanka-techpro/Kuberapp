@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -15,22 +19,34 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.techprostudio.kuberinternational.Adapter.CartAdapter;
-import com.techprostudio.kuberinternational.Model.CartListModel;
+import com.techprostudio.kuberinternational.Model.CartPackage.CartList;
+import com.techprostudio.kuberinternational.Model.CartPackage.CartListMainModel;
+import com.techprostudio.kuberinternational.Network.ApiClient;
+import com.techprostudio.kuberinternational.Network.ApiInterface;
+import com.techprostudio.kuberinternational.Network.Config;
+import com.techprostudio.kuberinternational.Network.InternetAccess;
 import com.techprostudio.kuberinternational.R;
+import com.techprostudio.kuberinternational.Utils.AppPreference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
-    TextView textredeem;
-    RelativeLayout proceedtocheckout;
+    public static TextView textredeem,tv_count;
+    public static TextView sub_total_amt,discount_amt,shippingchrge,rndoff,ttl_amnt;
+    public static RelativeLayout proceedtocheckout,subtotal_ll,cart_count;
     RecyclerView cartlist;
-    ArrayList<CartListModel> cartListModelArrayList;
-    CartListModel cartModel;
+    List<CartList> cartListModelArrayList;
+    ProgressDialog progressDialog;
     CartAdapter cartAdapter;
-    ImageView back,img_cart;
-
+    public static ImageView back,img_cart;
+    Snackbar mSnackbar;
+    ApiInterface apiInterface;
+    RelativeLayout main;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +54,19 @@ public class CartActivity extends AppCompatActivity {
         textredeem=findViewById(R.id.textredeem);
         proceedtocheckout=findViewById(R.id.proceedtocheckout);
         cartlist=findViewById(R.id.cartlist);
+        main=findViewById(R.id.main);
+        sub_total_amt=findViewById(R.id.sub_total_amt);
+        discount_amt=findViewById(R.id.discount_amt);
+        shippingchrge=findViewById(R.id.shippingchrge);
+        rndoff=findViewById(R.id.rndoff);
+        ttl_amnt=findViewById(R.id.ttl_amnt);
+        subtotal_ll=findViewById(R.id.subtotal_ll);
+        cart_count=findViewById(R.id.cart_count);
+        tv_count=findViewById(R.id.tv_count);
+
+        apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
+        String customerid=new AppPreference(CartActivity.this).getUserId();
+
         proceedtocheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,25 +94,86 @@ public class CartActivity extends AppCompatActivity {
         textredeem.setText(Html.fromHtml(text));
         textredeem.setTextSize(16);
         cartListModelArrayList=new ArrayList<>();
-        cartAdapter=new CartAdapter(this,cartListModelArrayList);
-        cartitems();
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
-        cartlist.setLayoutManager(mLayoutManager);
-        cartlist.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(4), true));
-        cartlist.setItemAnimator(new DefaultItemAnimator());
-        cartlist.setAdapter(cartAdapter);
+        if (InternetAccess.isConnected(CartActivity.this)) {
+
+            cartitems(customerid);
+        }
+        else {
+            mSnackbar = Snackbar
+                    .make(main, "No Internet Connection", Snackbar.LENGTH_INDEFINITE).
+                            setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    mSnackbar.dismiss();
+
+                                }
+                            });
+            mSnackbar.show();
+        }
+
+
     }
 
-    private void cartitems() {
-        for(int i=0;i<2;i++){
+    private void cartitems(String customerid) {
+        Call<CartListMainModel> call=apiInterface.CartList(Config.header,customerid);
+        progressDialog = new ProgressDialog(CartActivity.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+        call.enqueue(new Callback<CartListMainModel>() {
+            @Override
+            public void onResponse(Call<CartListMainModel> call, Response<CartListMainModel> response) {
+                progressDialog.dismiss();
+                if(response.body().getStatus()==true)
+                {
+                    if(response.body().getCartCount().equals(0)){
+                        String msg=response.body().getMessage();
+                        Toast.makeText(CartActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        subtotal_ll.setVisibility(View.GONE);
+                        proceedtocheckout.setVisibility(View.GONE);
+                    }
+                    else {
+                        subtotal_ll.setVisibility(View.VISIBLE);
+                        proceedtocheckout.setVisibility(View.VISIBLE);
+                        String cartCount = String.valueOf(response.body().getCartCount());
+                        Config.cart = cartCount;
+                        if (cartCount.equals("0")) {
+                            cart_count.setVisibility(View.GONE);
+                            tv_count.setVisibility(View.GONE);
+                        } else {
+                            cart_count.setVisibility(View.VISIBLE);
+                            tv_count.setVisibility(View.VISIBLE);
+                            tv_count.setText(Config.cart);
+                        }
+                        sub_total_amt.setText("Rs " + response.body().getCartPriceData().getTotalPayablePrice());
+                        discount_amt.setText("Rs " + response.body().getCartPriceData().getTotalSavePrice());
+                        shippingchrge.setText("Rs " + response.body().getCartPriceData().getDeliveryCharge());
+                        rndoff.setText("Rs " + response.body().getCartPriceData().getTotalGstPrice());
+                        ttl_amnt.setText("Rs " + response.body().getCartPriceData().getFinalPayablePrice());
+                        cartListModelArrayList = response.body().getCartList();
+                        cartAdapter = new CartAdapter(CartActivity.this, cartListModelArrayList);
+                        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(CartActivity.this, 1);
+                        cartlist.setLayoutManager(mLayoutManager);
+                        cartlist.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(4), true));
+                        cartlist.setItemAnimator(new DefaultItemAnimator());
+                        cartlist.setAdapter(cartAdapter);
+                        cartAdapter.notifyDataSetChanged();
+                    }
+                }
+                else
+                {
+                String msg=response.body().getMessage();
+                Toast.makeText(CartActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    subtotal_ll.setVisibility(View.GONE);
+                    proceedtocheckout.setVisibility(View.GONE);
+                }
+            }
 
-            cartModel=new CartListModel();
-            cartModel.setProductname("");
-            cartModel.setPrice("");
-            cartModel.setDiscount("");
-            cartListModelArrayList.add(cartModel);
-        }
-        cartAdapter.notifyDataSetChanged();
+            @Override
+            public void onFailure(Call<CartListMainModel> call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
 
     }
     public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {

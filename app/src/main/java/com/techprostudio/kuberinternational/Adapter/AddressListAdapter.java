@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.techprostudio.kuberinternational.Model.AddressListModel;
-import com.techprostudio.kuberinternational.Model.CartListModel;
 import com.techprostudio.kuberinternational.R;
 
 import java.util.List;

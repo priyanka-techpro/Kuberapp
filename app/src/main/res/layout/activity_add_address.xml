@@ -7,6 +7,7 @@
     android:focusable="false"
     android:focusableInTouchMode="true"
     android:background="@color/white"
+    android:id="@+id/main_ll"
     tools:context=".Activity.AddAddressActivity">
     <RelativeLayout
         android:id="@+id/rela_head"
@@ -50,6 +51,7 @@
                 android:textSize="22dp" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/img_notify"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -58,6 +60,7 @@
                 android:layout_marginRight="10dp"
                 android:src="@drawable/heartwhiteicon" />
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/img_cart"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -66,12 +69,13 @@
                 android:src="@drawable/carticonwhite" />
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/cart_count"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/cart_count_drawable"
-                android:visibility="visible">
+                >
 
                 <TextView
                     android:id="@+id/tv_count"
@@ -241,6 +245,7 @@
                             android:layout_marginRight="20dp"
                             android:textSize="18dp"
                             android:inputType="number"
+                            android:maxLength="6"
                             android:textColorHint="@color/mediumgrey"
                             android:textColor="@color/ash"
                             android:fontFamily="@font/worksansregular"
@@ -326,7 +331,7 @@
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="20dp"
                             android:textSize="18dp"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:textColorHint="@color/mediumgrey"
                             android:textColor="@color/ash"
                             android:fontFamily="@font/worksansregular"
@@ -341,9 +346,52 @@
                             android:background="@color/mediumgrey"
                             />
                     </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/land_ll"
+                        android:layout_below="@+id/loc_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/land_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:fontFamily="@font/worksansregular"
+                            android:textColor="@color/ash"
+                            android:text="Landmark" />
+
+                        <EditText
+                            android:layout_below="@+id/land_txt"
+                            android:id="@+id/ed_land"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:inputType="text"
+                            android:textColorHint="@color/mediumgrey"
+                            android:textColor="@color/ash"
+                            android:fontFamily="@font/worksansregular"
+                            android:hint="Enter your area location"/>
+                        <View
+                            android:layout_below="@+id/ed_land"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/mediumgrey"
+                            />
+                    </RelativeLayout>
+
                     <LinearLayout
                         android:id="@+id/main"
-                        android:layout_below="@+id/loc_ll"
+                        android:layout_below="@+id/land_ll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -404,7 +452,7 @@
                                 android:background="@null"
                                 android:layout_marginTop="5dp"
                                 android:textSize="18dp"
-                                android:inputType="number"
+                                android:inputType="text"
                                 android:textColorHint="@color/mediumgrey"
                                 android:textColor="@color/ash"
                                 android:fontFamily="@font/worksansregular"
@@ -434,7 +482,7 @@
                                 android:background="@null"
                                 android:layout_marginTop="5dp"
                                 android:textSize="18dp"
-                                android:inputType="number"
+                                android:inputType="text"
                                 android:textColorHint="@color/mediumgrey"
                                 android:textColor="@color/ash"
                                 android:fontFamily="@font/worksansregular"

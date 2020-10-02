@@ -15,9 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.techprostudio.kuberinternational.Adapter.AddressListAdapter;
-import com.techprostudio.kuberinternational.Adapter.CartAdapter;
 import com.techprostudio.kuberinternational.Model.AddressListModel;
-import com.techprostudio.kuberinternational.Model.CartListModel;
 import com.techprostudio.kuberinternational.R;
 
 import java.util.ArrayList;

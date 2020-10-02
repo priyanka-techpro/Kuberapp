@@ -15,9 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.techprostudio.kuberinternational.Adapter.CartAdapter;
 import com.techprostudio.kuberinternational.Adapter.PaymentAdapter;
-import com.techprostudio.kuberinternational.Model.CartListModel;
 import com.techprostudio.kuberinternational.Model.PaymentModel;
 import com.techprostudio.kuberinternational.R;
 

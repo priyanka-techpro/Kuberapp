@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="10dp"
+    android:id="@+id/main"
     tools:context=".Activity.CartActivity">
     <RelativeLayout
         android:id="@+id/rela_head"
@@ -152,6 +153,7 @@
                                 />
 
                             <TextView
+                                android:id="@+id/sub_total_amt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -180,6 +182,7 @@
                                 />
 
                             <TextView
+                                android:id="@+id/discount_amt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -206,15 +209,16 @@
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/worksansregular"
                                 />
+
                             <TextView
+                                android:id="@+id/shippingchrge"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:text="Rs 50"
-                                android:textSize="16dp"
-                                android:textColor="@color/black"
                                 android:fontFamily="@font/worksansregular"
-                                />
+                                android:text="Rs 50"
+                                android:textColor="@color/black"
+                                android:textSize="16dp" />
                         </RelativeLayout>
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -229,12 +233,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Round Off"
+                                android:text="Gst"
                                 android:textSize="16dp"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/worksansregular"
                                 />
                             <TextView
+                                android:id="@+id/rndoff"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -275,6 +280,7 @@
                                 android:fontFamily="@font/worksansmedium"
                                 />
                             <TextView
+                                android:id="@+id/ttl_amnt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"

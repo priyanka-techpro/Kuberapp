@@ -88,7 +88,8 @@ public class SubProductActivity extends AppCompatActivity {
 
         if (InternetAccess.isConnected(SubProductActivity.this)) {
             filterdata(categoryid,customerid);
-        } else {
+        }
+        else {
             mSnackbar = Snackbar
                     .make(main, "No Internet Connection", Snackbar.LENGTH_INDEFINITE).
                             setAction("Ok", new View.OnClickListener() {
@@ -155,22 +156,30 @@ public class SubProductActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<FilterMainModel> call, Response<FilterMainModel> response) {
                 if(response.body().getStatus()==true){
-                    String cartCount = String.valueOf(response.body().getCartCount());
-                    Config.cart = cartCount;
-                    if (cartCount.equals("0")) {
-                        cart_count.setVisibility(View.GONE);
-                        tv_count.setVisibility(View.GONE);
-                    } else {
-                        cart_count.setVisibility(View.VISIBLE);
-                        tv_count.setVisibility(View.VISIBLE);
-                        tv_count.setText(Config.cart);
+                    if(response.body().getCategoryList().size() == 0)
+                    {
+                        Toast.makeText(SubProductActivity.this, "Category list not found.", Toast.LENGTH_SHORT).show();
+
                     }
-                    filterModelList=response.body().getCategoryList();
-                    filterAdapter = new FilterAdapter(SubProductActivity.this,filterModelList);
-                    LinearLayoutManager horizontaLayoutManagaer = new LinearLayoutManager(SubProductActivity.this, LinearLayoutManager.HORIZONTAL, false);
-                    filterlist.setLayoutManager(horizontaLayoutManagaer);
-                    filterlist.setAdapter(filterAdapter);
-                    filterAdapter.notifyDataSetChanged();
+                    else{
+                        String cartCount = String.valueOf(response.body().getCartCount());
+                        Config.cart = cartCount;
+                        if (cartCount.equals("0")) {
+                            cart_count.setVisibility(View.GONE);
+                            tv_count.setVisibility(View.GONE);
+                        } else {
+                            cart_count.setVisibility(View.VISIBLE);
+                            tv_count.setVisibility(View.VISIBLE);
+                            tv_count.setText(Config.cart);
+                        }
+                        filterModelList=response.body().getCategoryList();
+                        filterAdapter = new FilterAdapter(SubProductActivity.this,filterModelList);
+                        LinearLayoutManager horizontaLayoutManagaer = new LinearLayoutManager(SubProductActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                        filterlist.setLayoutManager(horizontaLayoutManagaer);
+                        filterlist.setAdapter(filterAdapter);
+                        filterAdapter.notifyDataSetChanged();
+                    }
+
                  //   subcategorydata(subproductcategoryid,customerid);
                 }
                 else {
