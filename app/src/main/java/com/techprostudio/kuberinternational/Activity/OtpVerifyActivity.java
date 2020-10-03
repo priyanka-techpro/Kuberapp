@@ -173,7 +173,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
                     String user_email=response.body().getUserDetails().getUserEmail();
                     new AppPreference(OtpVerifyActivity.this).saveUserEmail(user_email);
                     String user_phone=response.body().getUserDetails().getUserPhone();
-                    new AppPreference(OtpVerifyActivity.this).saveUserEmail(user_phone);
+                    new AppPreference(OtpVerifyActivity.this).saveUserPhone(user_phone);
                     String user_image=response.body().getUserDetails().getUserImage();
                     new AppPreference(OtpVerifyActivity.this).setUserImageUrl(user_image);
                     startActivity(new Intent(OtpVerifyActivity.this,DashboardActivity.class));

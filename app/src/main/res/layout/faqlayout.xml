@@ -15,10 +15,10 @@ android:layout_height="wrap_content">
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp">
         <TextView
+            android:id="@+id/question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Shipping Rates And Times"
             android:textSize="16dp"
             android:layout_marginLeft="15dp"
             android:textColor="@color/black"
@@ -73,9 +73,9 @@ android:layout_height="wrap_content">
 
         >
         <TextView
+            android:id="@+id/answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Water is an inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance."
             android:textSize="16dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"

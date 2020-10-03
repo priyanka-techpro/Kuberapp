@@ -28,16 +28,16 @@
             android:textColor="@color/black"
             android:fontFamily="@font/worksansmedium"
             android:text="Your Delivery Location"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textSize="16dp"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/blue"
-            android:fontFamily="@font/worksansregular"
-            android:text="OFFICE"
-            />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:textSize="16dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:textColor="@color/blue"-->
+<!--            android:fontFamily="@font/worksansregular"-->
+<!--            android:text="OFFICE"-->
+<!--            />-->
         <TextView
             android:id="@+id/text_address"
             android:layout_below="@+id/del_place"
@@ -50,6 +50,59 @@
             android:textColor="@color/black"
             android:fontFamily="@font/worksansregular"
             android:text="Merlin Infinity,Kolkata,Saltlake,Sec-2,near Techno India, West Bengal"/>
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/edit_ll"
+            android:layout_below="@+id/text_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/delete_address"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/redbtn">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="REMOVE"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/worksansregular"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/edit_address"
+                android:layout_toRightOf="@+id/delete_address"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bluebtn">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="EDIT"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/worksansregular"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
 
     </RelativeLayout>
 

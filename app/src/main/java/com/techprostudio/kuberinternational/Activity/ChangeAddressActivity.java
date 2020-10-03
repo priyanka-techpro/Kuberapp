@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -13,21 +17,32 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.techprostudio.kuberinternational.Adapter.AddressListAdapter;
-import com.techprostudio.kuberinternational.Model.AddressListModel;
+import com.techprostudio.kuberinternational.Adapter.CartAdapter;
+import com.techprostudio.kuberinternational.Model.AddressListPakage.AddressList;
+import com.techprostudio.kuberinternational.Model.AddressListPakage.AddressMainModel;
+import com.techprostudio.kuberinternational.Network.ApiClient;
+import com.techprostudio.kuberinternational.Network.ApiInterface;
+import com.techprostudio.kuberinternational.Network.Config;
+import com.techprostudio.kuberinternational.Network.InternetAccess;
 import com.techprostudio.kuberinternational.R;
+import com.techprostudio.kuberinternational.Utils.AppPreference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChangeAddressActivity extends AppCompatActivity {
-    RelativeLayout gotoaddaddress;
+    RelativeLayout gotoaddaddress,main;
     RecyclerView addresslist;
-    ArrayList<AddressListModel> addressListModelArrayList;
-    AddressListModel addressListModel;
+    List<AddressList> addressListModelArrayList;
     AddressListAdapter addressListAdapter;
     ImageView back,img_cart;
-
+    Snackbar mSnackbar;
+    ApiInterface apiInterface;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +51,9 @@ public class ChangeAddressActivity extends AppCompatActivity {
         addresslist=findViewById(R.id.addresslist);
         img_cart=findViewById(R.id.img_cart);
         back=findViewById(R.id.back);
-
+        main=findViewById(R.id.main);
+        apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
+        String customerid=new AppPreference(ChangeAddressActivity.this).getUserId();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,15 +66,25 @@ public class ChangeAddressActivity extends AppCompatActivity {
                 startActivity(new Intent(ChangeAddressActivity.this, CartActivity.class));
             }
         });
-
         addressListModelArrayList=new ArrayList<>();
-        addressListAdapter=new AddressListAdapter(this,addressListModelArrayList);
-        addressitems();
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
-        addresslist.setLayoutManager(mLayoutManager);
-        addresslist.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(4), true));
-        addresslist.setItemAnimator(new DefaultItemAnimator());
-        addresslist.setAdapter(addressListAdapter);
+        if (InternetAccess.isConnected(ChangeAddressActivity.this)) {
+
+            addressitems(customerid);
+        }
+        else {
+            mSnackbar = Snackbar
+                    .make(main, "No Internet Connection", Snackbar.LENGTH_INDEFINITE).
+                            setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    mSnackbar.dismiss();
+
+                                }
+                            });
+            mSnackbar.show();
+        }
+
         gotoaddaddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,16 +94,40 @@ public class ChangeAddressActivity extends AppCompatActivity {
         });
     }
 
-    private void addressitems() {
-        for(int i=0;i<2;i++){
+    private void addressitems(String customerid) {
+        Call<AddressMainModel> call=apiInterface.getAddressList(Config.header,customerid);
+        progressDialog = new ProgressDialog(ChangeAddressActivity.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+        call.enqueue(new Callback<AddressMainModel>() {
+            @Override
+            public void onResponse(Call<AddressMainModel> call, Response<AddressMainModel> response) {
+                progressDialog.dismiss();
+                if (response.body().getStatus() == true) {
+                    if(response.body().getAddressList().size() == 0)
+                    {
+                        Toast.makeText(ChangeAddressActivity.this, "No addresslist found.", Toast.LENGTH_SHORT).show();
+                    }
+                else
+                    {
+                        addressListModelArrayList=response.body().getAddressList();
+                        addressListAdapter=new AddressListAdapter(ChangeAddressActivity.this,addressListModelArrayList);
+                        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(ChangeAddressActivity.this,1);
+                        addresslist.setLayoutManager(mLayoutManager);
+                        addresslist.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(4), true));
+                        addresslist.setItemAnimator(new DefaultItemAnimator());
+                        addresslist.setAdapter(addressListAdapter);
+                        addressListAdapter.notifyDataSetChanged();
+                    }
 
-            addressListModel=new AddressListModel();
-            addressListModel.setProductname("");
-            addressListModel.setPrice("");
-            addressListModel.setDiscount("");
-            addressListModelArrayList.add(addressListModel);
-        }
-        addressListAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddressMainModel> call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
     }
     public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 

@@ -3,22 +3,31 @@ package com.techprostudio.kuberinternational.Network;
 
 import com.google.gson.JsonObject;
 import com.techprostudio.kuberinternational.Model.AddAddressModel.AddaddressMainModel;
+import com.techprostudio.kuberinternational.Model.AddressListPakage.AddressMainModel;
 import com.techprostudio.kuberinternational.Model.AddtoCartModel;
 import com.techprostudio.kuberinternational.Model.CartPackage.CartListMainModel;
+import com.techprostudio.kuberinternational.Model.FaqMainModel;
+import com.techprostudio.kuberinternational.Model.FaqModelPackage.FaqMainSubModel;
 import com.techprostudio.kuberinternational.Model.FilterSection.FilterMainModel;
 import com.techprostudio.kuberinternational.Model.LoginModel;
 import com.techprostudio.kuberinternational.Model.OtpSection.OtpModel;
 import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryMainModel;
+import com.techprostudio.kuberinternational.Model.ProfileDetails.ProfileDetailsMain;
+import com.techprostudio.kuberinternational.Model.ProfileUpdatePackage.ProfileUpdateMain;
 import com.techprostudio.kuberinternational.Model.RegistrationModel;
 import com.techprostudio.kuberinternational.Model.SingleProductPackage.SingleProductMainModel;
 import com.techprostudio.kuberinternational.Model.SubProductMain.SubProductMainModel;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -117,7 +126,30 @@ public interface ApiInterface {
                                              @Field("pin") String pin,
                                              @Field("state") String state);
 
+    @FormUrlEncoded
+    @POST("user/customar_address_list")
+    Call<AddressMainModel> getAddressList(@Header("X-API-KEY") String header,
+                                          @Field("customer_id") String customer_id);
 
+    @GET("user/company_help_content")
+    Call<FaqMainModel> GetFaqContents(@Header("X-API-KEY") String header);
 
+    @GET("user/company_faq_content")
+    Call<FaqMainSubModel> GetFaqContentsSub(@Header("X-API-KEY") String header);
+
+    @FormUrlEncoded
+    @POST("user/user_profile_data")
+    Call<ProfileDetailsMain> getProfileDetails(@Header("X-API-KEY") String header,
+                                               @Field("customer_id") String customer_id);
+
+    @Multipart
+    @POST("user/profile_update")
+    Call<ProfileUpdateMain> UpdateProfile(@Header("X-API-KEY") String header,
+                                          @Part("customer_id") RequestBody customer_id,
+                                          @Part("email") RequestBody email,
+                                          @Part("full_name") RequestBody full_name,
+                                          @Part MultipartBody.Part pic_url,
+                                          @Part("second_phone") RequestBody second_phone,
+                                          @Part("phone") RequestBody phone);
 
 }
