@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,7 +30,9 @@ public class PaymentActivity extends AppCompatActivity {
     PaymentAdapter paymentAdapter;
     RelativeLayout proceedtopay;
     ImageView back,img_cart;
-
+    RelativeLayout net_ll,cash_ll;
+    RadioButton choose_net,choose_cash;
+    String paymentMode="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,10 @@ public class PaymentActivity extends AppCompatActivity {
         gotoofferpage=findViewById(R.id.gotoofferpage);
         img_cart=findViewById(R.id.img_cart);
         back=findViewById(R.id.back);
+        net_ll=findViewById(R.id.net_ll);
+        cash_ll=findViewById(R.id.cash_ll);
+        choose_net=findViewById(R.id.choose_net);
+        choose_cash=findViewById(R.id.choose_cash);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,68 +70,34 @@ public class PaymentActivity extends AppCompatActivity {
         proceedtopay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //confirm
                 startActivity(new Intent(PaymentActivity.this, OrderConfirmationActivity.class));
 
             }
         });
-        paymentModelArrayList=new ArrayList<>();
-        paymentAdapter=new PaymentAdapter(this,paymentModelArrayList);
-        paymentitems();
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
-        paymentlist.setLayoutManager(mLayoutManager);
-        paymentlist.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(4), true));
-        paymentlist.setItemAnimator(new DefaultItemAnimator());
-        paymentlist.setAdapter(paymentAdapter);
-    }
-
-    private void paymentitems() {
-        for(int i=0;i<2;i++){
-
-            paymentModel=new PaymentModel();
-            paymentModel.setProductname("");
-            paymentModel.setPrice("");
-            paymentModel.setDiscount("");
-            paymentModelArrayList.add(paymentModel);
-        }
-        paymentAdapter.notifyDataSetChanged();
-    }
-    public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-            this.spanCount = spanCount;
-            this.spacing = spacing;
-            this.includeEdge = includeEdge;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % spanCount; // item column
-
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing;
-                }
-                outRect.bottom = spacing; // item bottom
-            } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= spanCount) {
-                    outRect.top = spacing; // item top
+        net_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (choose_cash.isChecked())
+                {
+                    choose_cash.setSelected(false);
+                    choose_net.setSelected(true);
+                    choose_net.setBackgroundDrawable(getResources().getDrawable(R.drawable.checkedradio));
+                    choose_cash.setBackgroundDrawable(getResources().getDrawable(R.drawable.uncheckedradio));
+                    paymentMode="COD";
                 }
             }
-        }
+        });
+        cash_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                choose_cash.setSelected(true);
+                choose_net.setSelected(false);
+                choose_net.setBackgroundDrawable(getResources().getDrawable(R.drawable.uncheckedradio));
+                choose_cash.setBackgroundDrawable(getResources().getDrawable(R.drawable.checkedradio));
+                paymentMode="COD";
+            }
+        });
     }
 
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
 }

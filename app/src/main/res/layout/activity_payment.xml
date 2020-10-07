@@ -150,12 +150,78 @@ tools:context=".Activity.PaymentActivity">
                         android:id="@+id/line1"
                         />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/paymentlist"
+                    <RelativeLayout
                         android:layout_below="@+id/line1"
+                        android:id="@+id/paymentlist"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:overScrollMode="never"/>
+                        android:layout_height="wrap_content">
+                        <RelativeLayout
+                            android:id="@+id/net_ll"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="15dp">
+
+                            <RadioButton
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="20dp"
+                                android:background="@drawable/radiogroup"
+                                android:button="@null"
+                                android:id="@+id/choose_net" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/choose_net"
+                                android:layout_centerVertical="true"
+                                android:text="Net Banking"
+                                android:textColor="@color/black"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/worksansregular" />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/cash_ll"
+                            android:layout_below="@+id/net_ll"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="15dp">
+
+                            <RadioButton
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="20dp"
+                                android:background="@drawable/radiogroup"
+                                android:button="@null"
+                                android:id="@+id/choose_cash" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/choose_cash"
+                                android:layout_centerVertical="true"
+                                android:text="Cash On Delivery"
+                                android:textColor="@color/black"
+                                android:layout_marginLeft="10dp"
+                                android:textSize="18dp" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/paymentlist"-->
+<!--                        android:layout_below="@+id/line1"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:overScrollMode="never"/>-->
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

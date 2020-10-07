@@ -141,6 +141,12 @@ public interface ApiInterface {
     @POST("user/user_profile_data")
     Call<ProfileDetailsMain> getProfileDetails(@Header("X-API-KEY") String header,
                                                @Field("customer_id") String customer_id);
+    @FormUrlEncoded
+    @POST("user/address_delete")
+    Call<AddressMainModel> deleteAddress(@Header("X-API-KEY") String header,
+                                               @Field("customer_id") String customer_id,
+                                               @Field("address_id") String address_id
+                                         );
 
     @Multipart
     @POST("user/profile_update")
@@ -151,5 +157,13 @@ public interface ApiInterface {
                                           @Part MultipartBody.Part pic_url,
                                           @Part("second_phone") RequestBody second_phone,
                                           @Part("phone") RequestBody phone);
+
+//    @FormUrlEncoded
+//    @POST("user/customer_address")
+//    Call<AddressMainModel> deleteAddress(@Header("X-API-KEY") String header,
+//                                         @Field("customer_id") String customer_id,
+//                                         @Field("address_id") String address_id
+//    );
+
 
 }

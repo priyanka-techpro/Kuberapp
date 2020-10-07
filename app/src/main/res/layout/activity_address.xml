@@ -108,96 +108,45 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp">
 
-                    <ImageView
-                        android:id="@+id/location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_alignParentLeft="true"
-                        android:src="@drawable/map"/>
-                <TextView
-                    android:id="@+id/del_place"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/location"
-                    android:textSize="16dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/worksansmedium"
-                    android:text="Your Delivery Location"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:textSize="16dp"
-                        android:layout_marginRight="10dp"
-                        android:textColor="@color/blue"
-                        android:fontFamily="@font/worksansregular"
-                        android:text="OFFICE"
-                        />
-                    <TextView
-                        android:id="@+id/text_address"
-                        android:layout_below="@+id/del_place"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/location"
-                        android:textSize="16dp"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/worksansregular"
-                        android:text="Merlin Infinity,Kolkata,Saltlake,Sec-2"/>
-
-                     <TextView
-                         android:id="@+id/mbl"
-                        android:layout_below="@+id/text_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/location"
-                        android:textSize="16dp"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/worksansregular"
-                        android:text="Mobile:"/>
-                    <TextView
-                        android:id="@+id/ph_no"
-                         android:layout_toRightOf="@+id/mbl"
-                        android:layout_below="@+id/text_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:textSize="16dp"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/blue"
-                        android:fontFamily="@font/worksansregular"
-                        android:text="985142630"/>
-
-
                     <RelativeLayout
-                        android:layout_below="@+id/ph_no"
-                        android:id="@+id/gotochangeaddress"
+                        android:id="@+id/recycl"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/bluebtn">
-
-
-                        <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="CHANGE ADDRESS"
-                            android:textSize="16dp"
-                            android:gravity="center"
-                            android:textColor="@color/white"
-                            android:fontFamily="@font/worksansregular"/>
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never"
+                            android:id="@+id/addresslist"/>
+                        <RelativeLayout
+                            android:layout_below="@+id/addresslist"
+                            android:id="@+id/gotoaddaddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/bluebtn">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="ADD NEW ADDRESS"
+                                android:textSize="16dp"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/worksansregular"/>
+
+                        </RelativeLayout>
 
                     </RelativeLayout>
+
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/please_note"
-                        android:layout_below="@+id/gotochangeaddress"
+                        android:layout_below="@+id/recycl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14dp"
@@ -207,8 +156,9 @@
                         android:text="Please note:"/>
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/delivery_time"
-                        android:layout_below="@+id/gotochangeaddress"
+                        android:layout_below="@+id/recycl"
                         android:layout_toRightOf="@+id/please_note"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
