@@ -7,11 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.techprostudio.kuberinternational.Activity.OrderConfirmationActivity;
 import com.techprostudio.kuberinternational.Activity.OrderDetailsActivity;
-import com.techprostudio.kuberinternational.Activity.OrderHistoryActivity;
 import com.techprostudio.kuberinternational.Model.OrderHistoryModel;
-import com.techprostudio.kuberinternational.Model.PaymentModel;
 import com.techprostudio.kuberinternational.R;
 
 import java.util.List;

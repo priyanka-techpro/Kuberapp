@@ -3,6 +3,7 @@ package com.techprostudio.kuberinternational.Network;
 
 import com.google.gson.JsonObject;
 import com.techprostudio.kuberinternational.Model.AddAddressModel.AddaddressMainModel;
+import com.techprostudio.kuberinternational.Model.AddressDetails.AddressDetailsModel;
 import com.techprostudio.kuberinternational.Model.AddressListPakage.AddressMainModel;
 import com.techprostudio.kuberinternational.Model.AddtoCartModel;
 import com.techprostudio.kuberinternational.Model.CartPackage.CartListMainModel;
@@ -10,6 +11,7 @@ import com.techprostudio.kuberinternational.Model.FaqMainModel;
 import com.techprostudio.kuberinternational.Model.FaqModelPackage.FaqMainSubModel;
 import com.techprostudio.kuberinternational.Model.FilterSection.FilterMainModel;
 import com.techprostudio.kuberinternational.Model.LoginModel;
+import com.techprostudio.kuberinternational.Model.OrderConfirmPackage.OrderConfirmModel;
 import com.techprostudio.kuberinternational.Model.OtpSection.OtpModel;
 import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryMainModel;
 import com.techprostudio.kuberinternational.Model.ProfileDetails.ProfileDetailsMain;
@@ -158,12 +160,32 @@ public interface ApiInterface {
                                           @Part("second_phone") RequestBody second_phone,
                                           @Part("phone") RequestBody phone);
 
-//    @FormUrlEncoded
-//    @POST("user/customer_address")
-//    Call<AddressMainModel> deleteAddress(@Header("X-API-KEY") String header,
-//                                         @Field("customer_id") String customer_id,
-//                                         @Field("address_id") String address_id
-//    );
+    @FormUrlEncoded
+    @POST("user/customer_address")
+    Call<AddressDetailsModel> editAddress(@Header("X-API-KEY") String header,
+                                            @Field("customer_id") String customer_id,
+                                            @Field("address_id") String address_id
+    );
+    @FormUrlEncoded
+    @POST("user/address_update")
+    Call<AddaddressMainModel> UpdateAddress(@Header("X-API-KEY") String header,
+                                         @Field("customer_id") String customer_id,
+                                         @Field("address_id") String address_id,
+                                         @Field("name") String name,
+                                         @Field("phone") String phone,
+                                         @Field("address_1") String address_1,
+                                         @Field("city") String city,
+                                         @Field("state") String state,
+                                         @Field("pin_code") String pin_code,
+                                         @Field("landmark") String landmark,
+                                         @Field("address_2") String address_2
+    );
 
-
+    @FormUrlEncoded
+    @POST("order/cart_checkout")
+    Call<OrderConfirmModel> placeOrder(@Header("X-API-KEY") String header,
+                                        @Field("customer_id") String customer_id,
+                                        @Field("address_id") String address_id,
+                                        @Field("payment_type") String payment_type
+    );
 }

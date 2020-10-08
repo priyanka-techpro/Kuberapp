@@ -43,7 +43,7 @@ public class AddressListAdapter  extends RecyclerView.Adapter<AddressListAdapter
     ProgressDialog progressDialog,progressDialog1;
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView del_place,text_address;
+        TextView del_place,text_address,phone_number;
         RadioButton location;
         RelativeLayout edit_ll,delete_address,edit_address;
         public MyViewHolder( View view) {
@@ -54,6 +54,7 @@ public class AddressListAdapter  extends RecyclerView.Adapter<AddressListAdapter
             edit_ll=view.findViewById(R.id.edit_ll);
             edit_address=view.findViewById(R.id.edit_address);
             delete_address=view.findViewById(R.id.delete_address);
+            phone_number=view.findViewById(R.id.phone_number);
         }
     }
 
@@ -73,6 +74,7 @@ public class AddressListAdapter  extends RecyclerView.Adapter<AddressListAdapter
     @Override
     public void onBindViewHolder(@NonNull final AddressListAdapter.MyViewHolder holder, int position) {
     holder.del_place.setText(modelList.get(position).getFullName());
+    holder.phone_number.setText(modelList.get(position).getMobileNumber());
     holder.text_address.setText(modelList.get(position).getAddressLineOne()+","+modelList.get(position).getAddressLineTwo()+","+modelList.get(position).getLandMark()+","+modelList.get(position).getCity()+","+modelList.get(position).getState()+","+modelList.get(position).getPin());
         String customerid=new AppPreference(context).getUserId();
         if (row_index == position)
