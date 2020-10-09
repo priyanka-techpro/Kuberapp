@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -12,20 +16,32 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.techprostudio.kuberinternational.Adapter.OrderHistoryAdapter;
-import com.techprostudio.kuberinternational.Model.OrderHistoryModel;
+import com.techprostudio.kuberinternational.Model.OrderHistoryPackage.OrderHistoryMain;
+import com.techprostudio.kuberinternational.Model.OrderHistoryPackage.OrderHistoryModel;
+import com.techprostudio.kuberinternational.Network.ApiClient;
+import com.techprostudio.kuberinternational.Network.ApiInterface;
+import com.techprostudio.kuberinternational.Network.Config;
+import com.techprostudio.kuberinternational.Network.InternetAccess;
 import com.techprostudio.kuberinternational.R;
+import com.techprostudio.kuberinternational.Utils.AppPreference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderHistoryActivity extends AppCompatActivity {
     RecyclerView orderlist;
-    ArrayList<OrderHistoryModel> orderHistoryModelArrayList;
-    OrderHistoryModel orderHistoryModel;
+    List<OrderHistoryMain> orderHistoryModelArrayList;
     OrderHistoryAdapter orderHistoryAdapter;
     ImageView back,img_cart;
-
+    RelativeLayout main;
+    Snackbar mSnackbar;
+    ApiInterface apiInterface;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +49,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
         orderlist=findViewById(R.id.orderlist);
         img_cart=findViewById(R.id.img_cart);
         back=findViewById(R.id.back);
+        main=findViewById(R.id.main);
+        apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
+        String customerid=new AppPreference(OrderHistoryActivity.this).getUserId();
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,27 +65,64 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 startActivity(new Intent(OrderHistoryActivity.this, CartActivity.class));
             }
         });
-        orderHistoryModelArrayList=new ArrayList<>();
-        orderHistoryAdapter=new OrderHistoryAdapter(this,orderHistoryModelArrayList);
-        orderhistoryitems();
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
-        orderlist.setLayoutManager(mLayoutManager);
-        orderlist.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(4), true));
-        orderlist.setItemAnimator(new DefaultItemAnimator());
-        orderlist.setAdapter(orderHistoryAdapter);
-
-    }
-    private void orderhistoryitems() {
-        for(int i=0;i<10;i++){
-
-            orderHistoryModel=new OrderHistoryModel();
-            orderHistoryModel.setProductname("");
-            orderHistoryModel.setPrice("");
-            orderHistoryModel.setDiscount("");
-            orderHistoryModelArrayList.add(orderHistoryModel);
+        if (InternetAccess.isConnected(OrderHistoryActivity.this))
+        {
+            getOrderHistory(customerid);
         }
-        orderHistoryAdapter.notifyDataSetChanged();
+        else {
+            mSnackbar = Snackbar
+                    .make(main, "No Internet Connection", Snackbar.LENGTH_INDEFINITE).
+                            setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    mSnackbar.dismiss();
+
+                                }
+                            });
+            mSnackbar.show();
+        }
+        orderHistoryModelArrayList=new ArrayList<>();
+
+
     }
+
+    private void getOrderHistory(String customerid) {
+        Call<OrderHistoryModel> call=apiInterface.getOrderHistory(Config.header,customerid);
+        progressDialog = new ProgressDialog(OrderHistoryActivity.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+        call.enqueue(new Callback<OrderHistoryModel>() {
+            @Override
+            public void onResponse(Call<OrderHistoryModel> call, Response<OrderHistoryModel> response) {
+                progressDialog.dismiss();
+                if(response.body().getStatus()==true)
+                {
+                    orderHistoryModelArrayList=response.body().getOrderHistory();
+                    orderHistoryAdapter=new OrderHistoryAdapter(OrderHistoryActivity.this,orderHistoryModelArrayList);
+                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(OrderHistoryActivity.this,1);
+                    orderlist.setLayoutManager(mLayoutManager);
+                    orderlist.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(4), true));
+                    orderlist.setItemAnimator(new DefaultItemAnimator());
+                    orderlist.setAdapter(orderHistoryAdapter);
+                    orderHistoryAdapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    String msg=response.body().getMessage();
+                    Toast.makeText(OrderHistoryActivity.this, msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrderHistoryModel> call, Throwable t) {
+                progressDialog.dismiss();
+
+            }
+        });
+    }
+
+
     public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         private int spanCount;

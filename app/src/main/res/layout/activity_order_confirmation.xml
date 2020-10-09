@@ -20,6 +20,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/ordermsg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -33,6 +34,7 @@
         android:fontFamily="@font/worksansmedium"/>
 
     <TextView
+        android:id="@+id/orderid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"

@@ -69,10 +69,9 @@
     <ImageView
         android:id="@+id/mbl"
         android:layout_below="@+id/deliveryon"
-        android:layout_width="wrap_content"
+        android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/delivered"
         android:layout_marginTop="8dp"/>
     <TextView
         android:id="@+id/ph_no"
@@ -85,7 +84,7 @@
         android:layout_marginTop="3dp"
         android:textColor="@color/green"
         android:fontFamily="@font/worksansregular"
-        android:text="Delivered"/>
+        />
     <View
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"

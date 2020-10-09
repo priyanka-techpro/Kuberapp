@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     android:layout_marginBottom="10dp"
     tools:context=".Activity.OrderHistoryActivity">
     <RelativeLayout
@@ -48,6 +49,7 @@
                 android:textSize="22dp" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/img_notify"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -56,6 +58,7 @@
                 android:layout_marginRight="10dp"
                 android:src="@drawable/heartwhiteicon" />
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/img_cart"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -64,12 +67,12 @@
                 android:src="@drawable/carticonwhite" />
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/cart_count"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/cart_count_drawable"
-                android:visibility="visible">
+                android:background="@drawable/cart_count_drawable">
 
                 <TextView
                     android:id="@+id/tv_count"

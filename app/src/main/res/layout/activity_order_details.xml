@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="10dp"
+    android:id="@+id/main"
     tools:context=".Activity.OrderDetailsActivity">
     <RelativeLayout
         android:id="@+id/rela_head"
@@ -44,11 +45,12 @@
                 android:layout_toRightOf="@+id/back"
                 android:fontFamily="@font/worksansmedium"
                 android:gravity="center"
-                android:text="Order History"
+                android:text="Order Details"
                 android:textColor="@color/white"
                 android:textSize="22dp" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/img_notify"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -57,6 +59,7 @@
                 android:layout_marginRight="10dp"
                 android:src="@drawable/heartwhiteicon" />
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/img_cart"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -70,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/cart_count_drawable"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_count"
@@ -121,8 +124,7 @@
                             android:layout_toRightOf="@+id/location"
                             android:textSize="18dp"
                             android:textColor="@color/blue"
-                            android:fontFamily="@font/worksansmedium"
-                            android:text="Order #007"/>
+                            android:fontFamily="@font/worksansmedium" />
 
                         <TextView
                             android:id="@+id/placedon"
@@ -135,7 +137,7 @@
                             android:layout_marginTop="5dp"
                             android:textColor="@color/ash"
                             android:fontFamily="@font/worksansregular"
-                            android:text="Placed on:14 June,2020"/>
+                            android:text=""/>
                         <TextView
                             android:id="@+id/deliveryon"
                             android:layout_below="@+id/placedon"
@@ -147,16 +149,15 @@
                             android:layout_marginTop="5dp"
                             android:textColor="@color/ash"
                             android:fontFamily="@font/worksansregular"
-                            android:text="Delivery on:27 June,2020"
+                            android:text=""
                             />
 
                         <ImageView
                             android:id="@+id/mbl"
                             android:layout_below="@+id/deliveryon"
-                            android:layout_width="wrap_content"
+                            android:layout_width="15dp"
                             android:layout_height="15dp"
                             android:layout_marginLeft="10dp"
-                            android:src="@drawable/processing"
                             android:layout_marginTop="8dp"/>
                         <TextView
                             android:id="@+id/ph_no"
@@ -169,7 +170,7 @@
                             android:layout_marginTop="3dp"
                             android:textColor="@color/yellow"
                             android:fontFamily="@font/worksansregular"
-                            android:text="Processing"/>
+                            android:text=""/>
                     </RelativeLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/order_detailslist"
@@ -182,8 +183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/subtotal_ll"
-                        android:layout_below="@+id/order_detailslist"
-                        android:layout_marginLeft="5dp"
+                        android:layout_below="@+id/order_detailslist"                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="15dp"
                         android:background="@drawable/otpbox">
@@ -218,11 +218,12 @@
                                 />
 
                             <TextView
+                                android:id="@+id/sub_total_amt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:fontFamily="@font/worksansregular"
-                                android:text="Rs.495"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="16dp" />
                         </RelativeLayout>
@@ -246,15 +247,16 @@
                                 />
 
                             <TextView
+                                android:id="@+id/discount_amt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:fontFamily="@font/worksansregular"
-                                android:text="Rs 0"
                                 android:textColor="@color/black"
                                 android:textSize="16dp" />
                         </RelativeLayout>
                         <RelativeLayout
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/floor"
@@ -272,15 +274,16 @@
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/worksansregular"
                                 />
+
                             <TextView
+                                android:id="@+id/shippingchrge"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:text="Rs 50"
-                                android:textSize="16dp"
-                                android:textColor="@color/black"
                                 android:fontFamily="@font/worksansregular"
-                                />
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="16dp" />
                         </RelativeLayout>
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -295,16 +298,16 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Round Off"
+                                android:text="Gst"
                                 android:textSize="16dp"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/worksansregular"
                                 />
                             <TextView
+                                android:id="@+id/rndoff"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:text="Rs 0"
                                 android:textSize="16dp"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/worksansregular"
@@ -341,10 +344,11 @@
                                 android:fontFamily="@font/worksansmedium"
                                 />
                             <TextView
+                                android:id="@+id/ttl_amnt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:text="Rs 495"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/worksansmedium"
                                 />
@@ -364,7 +368,7 @@
                         android:textSize="16dp"
                         android:textColor="@color/ash"
                         android:fontFamily="@font/worksansregular"
-                        android:text="Payment Method : Debit Card"/>
+                      />
 
                     <RelativeLayout
                         android:layout_below="@+id/payment_method"

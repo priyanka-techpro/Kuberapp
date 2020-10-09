@@ -77,7 +77,7 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //confirm
-                //startActivity(new Intent(PaymentActivity.this, OrderConfirmationActivity.class));
+
                if(paymentMode.equals(""))
                {
                    Toast.makeText(PaymentActivity.this, "Please select a payment mode.", Toast.LENGTH_SHORT).show();
@@ -102,10 +102,10 @@ public class PaymentActivity extends AppCompatActivity {
                }
             }
         });
-        net_ll.setOnClickListener(new View.OnClickListener() {
+        choose_net.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (choose_cash.isChecked())
+                if (choose_net.isChecked())
                 {
                     choose_cash.setSelected(false);
                     choose_net.setSelected(true);
@@ -115,14 +115,16 @@ public class PaymentActivity extends AppCompatActivity {
                 }
             }
         });
-        cash_ll.setOnClickListener(new View.OnClickListener() {
+        choose_cash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                choose_cash.setSelected(true);
-                choose_net.setSelected(false);
-                choose_net.setBackgroundDrawable(getResources().getDrawable(R.drawable.uncheckedradio));
-                choose_cash.setBackgroundDrawable(getResources().getDrawable(R.drawable.checkedradio));
-                paymentMode="COD";
+                if (choose_cash.isChecked()) {
+                    choose_cash.setSelected(true);
+                    choose_net.setSelected(false);
+                    choose_net.setBackgroundDrawable(getResources().getDrawable(R.drawable.uncheckedradio));
+                    choose_cash.setBackgroundDrawable(getResources().getDrawable(R.drawable.checkedradio));
+                    paymentMode = "COD";
+                }
             }
         });
     }
@@ -136,6 +138,20 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<OrderConfirmModel> call, Response<OrderConfirmModel> response) {
                 progressDialog.dismiss();
+                if(response.body().getStatus()==true) {
+                    String msges=response.body().getMessage();
+                    String orderid=response.body().getOrderHistory().getOrderNumber();
+                   // Toast.makeText(PaymentActivity.this, msges, Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(PaymentActivity.this, OrderConfirmationActivity.class);
+                    i.putExtra("msg",msges );
+                    i.putExtra("id",orderid );
+                    startActivity(i);
+                }
+                else
+                    {
+                        String msges=response.body().getMessage();
+                        Toast.makeText(PaymentActivity.this, msges, Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

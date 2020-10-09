@@ -11,7 +11,10 @@ import com.techprostudio.kuberinternational.Model.FaqMainModel;
 import com.techprostudio.kuberinternational.Model.FaqModelPackage.FaqMainSubModel;
 import com.techprostudio.kuberinternational.Model.FilterSection.FilterMainModel;
 import com.techprostudio.kuberinternational.Model.LoginModel;
+import com.techprostudio.kuberinternational.Model.OrderCancelledModel;
 import com.techprostudio.kuberinternational.Model.OrderConfirmPackage.OrderConfirmModel;
+import com.techprostudio.kuberinternational.Model.OrderDetailsPackage.OrderDetailsModel;
+import com.techprostudio.kuberinternational.Model.OrderHistoryPackage.OrderHistoryModel;
 import com.techprostudio.kuberinternational.Model.OtpSection.OtpModel;
 import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryMainModel;
 import com.techprostudio.kuberinternational.Model.ProfileDetails.ProfileDetailsMain;
@@ -188,4 +191,22 @@ public interface ApiInterface {
                                         @Field("address_id") String address_id,
                                         @Field("payment_type") String payment_type
     );
+
+     @FormUrlEncoded
+    @POST("order/order_history_list")
+    Call<OrderHistoryModel> getOrderHistory(@Header("X-API-KEY") String header,
+                                            @Field("customer_id") String customer_id);
+
+    @FormUrlEncoded
+    @POST("order/single_order_history")
+    Call<OrderDetailsModel> getOrderDetails(@Header("X-API-KEY") String header,
+                                            @Field("customer_id") String customer_id,
+                                            @Field("order_id") String order_id);
+    @FormUrlEncoded
+    @POST("order/order_cancel")
+    Call<OrderCancelledModel> CancelOrder(@Header("X-API-KEY") String header,
+                                          @Field("customer_id") String customer_id,
+                                          @Field("search_text") String search_text);
+
+
 }
