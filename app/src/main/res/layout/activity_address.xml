@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="10dp"
+    android:id="@+id/main"
     tools:context=".Activity.AddressActivity">
     <RelativeLayout
         android:id="@+id/rela_head"
@@ -169,11 +170,11 @@
                         android:text="Estimated delivery by 14 July 2020"/>
 
                     <RelativeLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/subtotal_ll"
-                        android:layout_below="@+id/please_note"
-                        android:layout_marginLeft="5dp"
+                        android:layout_below="@+id/please_note"                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="15dp"
                         android:background="@drawable/otpbox">
@@ -208,11 +209,12 @@
                                 />
 
                             <TextView
+                                android:id="@+id/sub_total_amt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:fontFamily="@font/worksansregular"
-                                android:text="Rs.495"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="16dp" />
                         </RelativeLayout>
@@ -236,6 +238,7 @@
                                 />
 
                             <TextView
+                                android:id="@+id/discount_amt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -262,15 +265,16 @@
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/worksansregular"
                                 />
+
                             <TextView
+                                android:id="@+id/shippingchrge"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:text="Rs 50"
-                                android:textSize="16dp"
-                                android:textColor="@color/black"
                                 android:fontFamily="@font/worksansregular"
-                                />
+                                android:text="Rs 50"
+                                android:textColor="@color/black"
+                                android:textSize="16dp" />
                         </RelativeLayout>
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -285,12 +289,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Round Off"
+                                android:text="Gst"
                                 android:textSize="16dp"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/worksansregular"
                                 />
                             <TextView
+                                android:id="@+id/rndoff"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -331,6 +336,7 @@
                                 android:fontFamily="@font/worksansmedium"
                                 />
                             <TextView
+                                android:id="@+id/ttl_amnt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
@@ -343,6 +349,7 @@
 
 
                     </RelativeLayout>
+
                     <LinearLayout
                         android:id="@+id/ll_uncheck"
                         android:layout_width="25dp"

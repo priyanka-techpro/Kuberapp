@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.techprostudio.kuberinternational.Model.CartPackage.CartListMainModel;
 import com.techprostudio.kuberinternational.Model.OrderConfirmPackage.OrderConfirmModel;
 import com.techprostudio.kuberinternational.Network.ApiClient;
 import com.techprostudio.kuberinternational.Network.ApiInterface;
@@ -30,13 +31,15 @@ public class PaymentActivity extends AppCompatActivity {
     TextView gotoofferpage;
     RelativeLayout proceedtopay,main_ll;
     ImageView back,img_cart;
-    RelativeLayout net_ll,cash_ll;
+    RelativeLayout net_ll,cash_ll,subtotal_ll,cart_count;
     RadioButton choose_net,choose_cash;
     String paymentMode="";
     String addressid;
     ApiInterface apiInterface;
     Snackbar mSnackbar;
-    ProgressDialog progressDialog;
+    ProgressDialog progressDialog,progressDialog1;
+    TextView sub_total_amt,discount_amt,shippingchrge,rndoff,ttl_amnt,tv_count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,14 @@ public class PaymentActivity extends AppCompatActivity {
         choose_net=findViewById(R.id.choose_net);
         choose_cash=findViewById(R.id.choose_cash);
         main_ll=findViewById(R.id.main_ll);
+        sub_total_amt=findViewById(R.id.sub_total_amt);
+        discount_amt=findViewById(R.id.discount_amt);
+        shippingchrge=findViewById(R.id.shippingchrge);
+        rndoff=findViewById(R.id.rndoff);
+        ttl_amnt=findViewById(R.id.ttl_amnt);
+        subtotal_ll=findViewById(R.id.subtotal_ll);
+        cart_count=findViewById(R.id.cart_count);
+        tv_count=findViewById(R.id.tv_count);
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         String customerid=new AppPreference(PaymentActivity.this).getUserId();
         addressid=AddressId;
@@ -73,6 +84,26 @@ public class PaymentActivity extends AppCompatActivity {
 
             }
         });
+
+        if (InternetAccess.isConnected(PaymentActivity.this)) {
+
+            cartitems(customerid);
+            subtotal_ll.setVisibility(View.VISIBLE);
+        }
+        else {
+            subtotal_ll.setVisibility(View.GONE);
+            mSnackbar = Snackbar
+                    .make(main_ll, "No Internet Connection", Snackbar.LENGTH_INDEFINITE).
+                            setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    mSnackbar.dismiss();
+
+                                }
+                            });
+            mSnackbar.show();
+        }
         proceedtopay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,6 +190,58 @@ public class PaymentActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+    }
+    private void cartitems(String customerid) {
+        Call<CartListMainModel> call=apiInterface.CartList(Config.header,customerid);
+        progressDialog1 = new ProgressDialog(PaymentActivity.this);
+        progressDialog1.setMessage("Please wait...");
+        progressDialog1.show();
+        call.enqueue(new Callback<CartListMainModel>() {
+            @Override
+            public void onResponse(Call<CartListMainModel> call, Response<CartListMainModel> response) {
+                progressDialog1.dismiss();
+                if(response.body().getStatus()==true)
+                {
+                    if(response.body().getCartCount().equals(0)){
+                        String msg=response.body().getMessage();
+                        Toast.makeText(PaymentActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        subtotal_ll.setVisibility(View.GONE);
+                    }
+                    else {
+                        subtotal_ll.setVisibility(View.VISIBLE);
+                        String cartCount = String.valueOf(response.body().getCartCount());
+                        Config.cart = cartCount;
+                        if (cartCount.equals("0")) {
+                            cart_count.setVisibility(View.GONE);
+                            tv_count.setVisibility(View.GONE);
+                        } else {
+                            cart_count.setVisibility(View.VISIBLE);
+                            tv_count.setVisibility(View.VISIBLE);
+                            tv_count.setText(Config.cart);
+                        }
+                        sub_total_amt.setText("Rs " + response.body().getCartPriceData().getTotalPayablePrice());
+                        discount_amt.setText("Rs " + response.body().getCartPriceData().getTotalSavePrice());
+                        shippingchrge.setText("Rs " + response.body().getCartPriceData().getDeliveryCharge());
+                        rndoff.setText("Rs " + response.body().getCartPriceData().getTotalGstPrice());
+                        ttl_amnt.setText("Rs " + response.body().getCartPriceData().getFinalPayablePrice());
+
+                    }
+                }
+                else
+                {
+                    String msg=response.body().getMessage();
+                    Toast.makeText(PaymentActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    subtotal_ll.setVisibility(View.GONE);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CartListMainModel> call, Throwable t) {
+                progressDialog1.dismiss();
+            }
+        });
+
     }
 
 }

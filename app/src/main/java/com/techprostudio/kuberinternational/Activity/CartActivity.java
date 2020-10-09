@@ -70,8 +70,12 @@ public class CartActivity extends AppCompatActivity {
         proceedtocheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CartActivity.this, AddressActivity.class));
-
+                if(sub_total_amt.getText().toString().equals("")){
+                    Toast.makeText(CartActivity.this, "Cart list is empty", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    startActivity(new Intent(CartActivity.this, AddressActivity.class));
+                }
             }
         });
 

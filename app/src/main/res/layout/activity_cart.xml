@@ -114,6 +114,7 @@
                         android:layout_height="wrap_content"/>
 
                     <RelativeLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/subtotal_ll"
@@ -304,6 +305,7 @@
                         android:layout_marginBottom="10dp"/>
 
                     <RelativeLayout
+                        android:visibility="gone"
                         android:layout_below="@+id/textredeem"
                         android:id="@+id/proceedtocheckout"
                         android:layout_width="match_parent"
