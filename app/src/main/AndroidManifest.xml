@@ -17,9 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.HelpandfaqActivity"
+        <activity android:name=".Activity.WishListActivity"></activity>
+        <activity
+            android:name=".Activity.HelpandfaqActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/loginStatusTheme" ></activity>
+            android:theme="@style/loginStatusTheme" />
         <activity
             android:name=".Activity.ProfileActivity"
             android:screenOrientation="portrait"
@@ -107,6 +109,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />

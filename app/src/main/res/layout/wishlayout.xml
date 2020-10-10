@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="5dp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/imglayer"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:background="@drawable/imgback"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="155dp"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:id="@+id/image_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_toRightOf="@+id/imglayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/product_nm"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            />
+         <TextView
+            android:layout_toRightOf="@+id/imglayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/qty"
+             android:layout_below="@+id/product_nm"
+            android:textColor="@color/green"
+            android:textSize="16dp"
+            />
+        <RelativeLayout
+            android:layout_toRightOf="@+id/imglayer"
+            android:layout_below="@+id/qty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/price"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                />
+            <ImageView
+                android:id="@+id/delete_cart"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/delete"/>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

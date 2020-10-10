@@ -4,64 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:id="@+id/main"
-    tools:context=".Activity.SubProductActivity">
+    tools:context=".Activity.WishListActivity">
+
     <RelativeLayout
         android:id="@+id/rela_head"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:background="@drawable/dashboardbg">
 
+
         <RelativeLayout
-            android:id="@+id/ll_top"
+            android:id="@+id/ll_topbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-
-
             <ImageView
-                android:padding="5dp"
                 android:id="@+id/back"
-                android:layout_width="35dp"
+                android:layout_width="30dp"
                 android:layout_height="35dp"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/back"
-                android:visibility="visible" />
-
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:src="@drawable/back" />
 
             <TextView
-                android:id="@+id/title_single"
+                android:id="@+id/header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/back"
                 android:fontFamily="@font/worksansmedium"
-                android:gravity="center"
-                android:text="Furnishing"
+                android:text="Wishlist"
                 android:textColor="@color/white"
-                android:textSize="22dp" />
+                android:textSize="25dp" />
 
             <ImageView
-                android:id="@+id/img_notify"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_toLeftOf="@+id/img_cart"
-                android:padding="5dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/heartwhiteicon" />
-            <ImageView
-                android:padding="5dp"
                 android:id="@+id/img_cart"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
+                android:padding="5dp"
                 android:src="@drawable/carticonwhite" />
 
             <RelativeLayout
@@ -70,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/cart_count_drawable"
-                android:visibility="visible">
+                >
 
                 <TextView
                     android:id="@+id/tv_count"
@@ -78,65 +65,48 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="1"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
             </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/img_share"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/img_cart"
+                android:padding="8dp"
+                android:src="@drawable/heartwhiteicon" />
 
 
         </RelativeLayout>
 
-
-
     </RelativeLayout>
+
     <androidx.core.widget.NestedScrollView
-        android:layout_below="@+id/rela_head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:overScrollMode="never">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rela_head"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/filterlist"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="10dp"
-                    android:overScrollMode="never" />
-                <RelativeLayout
+                    android:id="@+id/wishlist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/filterlist"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/curve"
-                    android:background="@drawable/bluewrap">
-
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/subcategorylist"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:overScrollMode="never" />
-
-                </RelativeLayout>
+                    android:overScrollMode="never" />
 
             </RelativeLayout>
-
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
-
 </RelativeLayout>

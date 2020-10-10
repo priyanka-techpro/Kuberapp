@@ -29,6 +29,7 @@ import com.techprostudio.kuberinternational.Adapter.Variationadapter;
 import com.techprostudio.kuberinternational.Model.AddtoCartModel;
 import com.techprostudio.kuberinternational.Model.SingleProductPackage.SingleProductMainModel;
 import com.techprostudio.kuberinternational.Model.SingleProductPackage.VariationProductSingle;
+import com.techprostudio.kuberinternational.Model.wishlistAdd.AddWishListMainModel;
 import com.techprostudio.kuberinternational.Network.ApiClient;
 import com.techprostudio.kuberinternational.Network.ApiInterface;
 import com.techprostudio.kuberinternational.Network.Config;
@@ -42,7 +43,7 @@ import java.util.List;
 import static com.techprostudio.kuberinternational.Adapter.Variationadapter.variationid;
 
 public class SingledetailsActivity extends AppCompatActivity {
-    ImageView back,img_cart,plus,minus;
+    ImageView back,img_cart,plus,minus,heartsingle;
     RelativeLayout ll_bag,main,cart_count;
     RecyclerView variation;
     private List<VariationProductSingle> variationarrlist;
@@ -54,7 +55,7 @@ public class SingledetailsActivity extends AppCompatActivity {
     public static ImageView image_top;
     public static String producname;
     public static TextView discount_single,title_single_product,product_name,mrp_single,quantity_single,description,usage,details,qty;
-    ProgressDialog progressDialog,progressDialog1;
+    ProgressDialog progressDialog,progressDialog1,progressDialog2;
     int productQty;
     public int count = 0;
     String productidresp;
@@ -81,6 +82,7 @@ public class SingledetailsActivity extends AppCompatActivity {
         qty=findViewById(R.id.qty);
         minus=findViewById(R.id.minus);
         plus=findViewById(R.id.plus);
+        heartsingle=findViewById(R.id.heartsingle);
         title_single=findViewById(R.id.title_single);
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         String customerid=new AppPreference(SingledetailsActivity.this).getUserId();
@@ -198,7 +200,57 @@ public class SingledetailsActivity extends AppCompatActivity {
                 }
             }
         });
+        heartsingle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (InternetAccess.isConnected(SingledetailsActivity.this)) {
 
+                    heartsingle.setImageDrawable(getResources().getDrawable(R.drawable.heartbluefill));
+                    addtoWishList(productidresp,variationid,customerid);
+                }
+                else {
+                    mSnackbar = Snackbar
+                            .make(main, "No Internet Connection", Snackbar.LENGTH_INDEFINITE).
+                                    setAction("Ok", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            mSnackbar.dismiss();
+
+                                        }
+                                    });
+                    mSnackbar.show();
+                }
+            }
+        });
+    }
+
+    private void addtoWishList(String productidresp, String variationid, String customerid) {
+        Call<AddWishListMainModel> call=apiInterface.addtoWishList(Config.header,productidresp,variationid,customerid);
+        progressDialog2 = new ProgressDialog(SingledetailsActivity.this);
+        progressDialog2.setMessage("Please wait...");
+        progressDialog2.show();
+        call.enqueue(new Callback<AddWishListMainModel>() {
+            @Override
+            public void onResponse(Call<AddWishListMainModel> call, Response<AddWishListMainModel> response) {
+                progressDialog2.dismiss();
+                if(response.body().isStatus() == true)
+                {
+                    String msg=response.body().getMessage();
+                    Toast.makeText(SingledetailsActivity.this,msg , Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    String msg=response.body().getMessage();
+                    Toast.makeText(SingledetailsActivity.this,msg , Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddWishListMainModel> call, Throwable t) {
+                progressDialog2.dismiss();
+            }
+        });
     }
 
     private void addtocart(String productidresp, String customerid, String variationid, String quantity)

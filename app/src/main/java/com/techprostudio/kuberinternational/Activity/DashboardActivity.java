@@ -5,11 +5,14 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,6 +27,7 @@ import com.google.gson.JsonObject;
 import com.techprostudio.kuberinternational.Adapter.CategoryAdapter;
 import com.techprostudio.kuberinternational.Adapter.NewArrivalAdapter;
 import com.techprostudio.kuberinternational.Adapter.SliderAdapter;
+import com.techprostudio.kuberinternational.Fragment.SearchFragment;
 import com.techprostudio.kuberinternational.Model.CategoryModel;
 import com.techprostudio.kuberinternational.Model.NewArrivalModel;
 import com.techprostudio.kuberinternational.Model.SliderItem;
@@ -41,6 +45,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -76,10 +81,11 @@ public class DashboardActivity extends AppCompatActivity {
     private NewArrivalAdapter newArrivalAdapter;
     CategoryModel categoryModel;
     NewArrivalModel newArrivalModel;
-    LinearLayout main;
+    public static LinearLayout main;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
-
+    public static EditText search;
+    public static  String product;
     String device_token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +109,7 @@ public class DashboardActivity extends AppCompatActivity {
         newarrivallist=findViewById(R.id.newarrivallist);
         titlebar=findViewById(R.id.titlebar);
         drawer_open=findViewById(R.id.drawer_open);
+        search = findViewById(R.id.search);
         back=findViewById(R.id.back);
         mainlayout=findViewById(R.id.mainlayout);
         img_cart=findViewById(R.id.img_cart);
@@ -129,6 +136,51 @@ public class DashboardActivity extends AppCompatActivity {
                 drawer.openDrawer(Gravity.LEFT);
             }
 
+        });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.e("edit111",""+s);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.e("edit222",""+s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.e("edit333",""+s);
+                product = String.valueOf(s);
+                if (product.length() !=0)
+                {
+
+                    mainlayout.setVisibility(View.GONE);
+                    drawer_open.setVisibility(View.VISIBLE);
+                    back.setVisibility(View.GONE);
+                    titlebar.setVisibility(View.GONE);
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.addToBackStack("top");
+                    transaction.add(R.id.nav_host_fragment, new SearchFragment()).commit();
+
+                }
+                else
+                {
+                    titlebar.setVisibility(View.VISIBLE);
+                    mainlayout.setVisibility(View.VISIBLE);
+                    ll_dashboard.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+                    ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    ll_product.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    ll_offer.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    ll_cart.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+                }
+
+            }
         });
 
         ll_dashboard.setOnClickListener(new View.OnClickListener() {

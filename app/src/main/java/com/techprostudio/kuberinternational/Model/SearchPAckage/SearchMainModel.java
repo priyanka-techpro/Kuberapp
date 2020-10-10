@@ -1,4 +1,4 @@
-package com.techprostudio.kuberinternational.Model.SearchPackage;
+package com.techprostudio.kuberinternational.Model.SearchPAckage;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -8,22 +8,22 @@ import java.util.List;
 public class SearchMainModel {
     @SerializedName("status")
     @Expose
-    private Boolean status;
+    private boolean status;
     @SerializedName("message")
     @Expose
     private String message;
     @SerializedName("cart_count")
     @Expose
-    private Integer cartCount;
+    private int cartCount;
     @SerializedName("product_list")
     @Expose
     private List<ProductList> productList = null;
 
-    public Boolean getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -35,11 +35,11 @@ public class SearchMainModel {
         this.message = message;
     }
 
-    public Integer getCartCount() {
+    public int getCartCount() {
         return cartCount;
     }
 
-    public void setCartCount(Integer cartCount) {
+    public void setCartCount(int cartCount) {
         this.cartCount = cartCount;
     }
 
@@ -50,5 +50,4 @@ public class SearchMainModel {
     public void setProductList(List<ProductList> productList) {
         this.productList = productList;
     }
-
 }

@@ -130,7 +130,7 @@ public class SubProductActivity extends AppCompatActivity {
                     subcategoryAdapter = new SubcategoryAdapter(SubProductActivity.this,subcategoryModelList);
                     RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(SubProductActivity.this,2);
                     subcategorylist.setLayoutManager(mLayoutManager);
-                    subcategorylist.addItemDecoration(new CategoryFragment.GridSpacingItemDecoration(2, dpToPx(0), true));
+                    subcategorylist.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(0), true));
                     subcategorylist.setItemAnimator(new DefaultItemAnimator());
                     subcategorylist.setAdapter(subcategoryAdapter);
                     subcategoryAdapter.notifyDataSetChanged();
@@ -152,6 +152,7 @@ public class SubProductActivity extends AppCompatActivity {
 
     private void filterdata(String categoryid, String customerid) {
         Call<FilterMainModel> call=apiInterface.getFilterCategory(Config.header,categoryid,customerid);
+
         call.enqueue(new Callback<FilterMainModel>() {
             @Override
             public void onResponse(Call<FilterMainModel> call, Response<FilterMainModel> response) {

@@ -20,8 +20,11 @@ import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryMainMod
 import com.techprostudio.kuberinternational.Model.ProfileDetails.ProfileDetailsMain;
 import com.techprostudio.kuberinternational.Model.ProfileUpdatePackage.ProfileUpdateMain;
 import com.techprostudio.kuberinternational.Model.RegistrationModel;
+import com.techprostudio.kuberinternational.Model.SearchPAckage.SearchMainModel;
+
 import com.techprostudio.kuberinternational.Model.SingleProductPackage.SingleProductMainModel;
 import com.techprostudio.kuberinternational.Model.SubProductMain.SubProductMainModel;
+import com.techprostudio.kuberinternational.Model.wishlistAdd.AddWishListMainModel;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -208,5 +211,18 @@ public interface ApiInterface {
                                           @Field("customer_id") String customer_id,
                                           @Field("search_text") String search_text);
 
+    @FormUrlEncoded
+    @POST("products/product_search")
+    Call<SearchMainModel> searchProduct(@Header("X-API-KEY") String header,
+                                        @Field("product_name") String product_name,
+                                        @Field("customer_id") String customer_id);
+
+    @FormUrlEncoded
+    @POST("products/add_wish_list")
+    Call<AddWishListMainModel> addtoWishList(@Header("X-API-KEY") String header,
+                                             @Field("product_id") String product_id,
+                                             @Field("veriation_id") String veriation_id,
+                                             @Field("customer_id") String customer_id
+    );
 
 }

@@ -66,7 +66,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
         else
         {
             holder.discount.setVisibility(View.VISIBLE);
-            holder.discount.setText(modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountTypeText());
+            holder.discount.setText("("+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountTypeText()+" off)");
 
         }
         holder.ll_layer.setOnClickListener(new View.OnClickListener() {

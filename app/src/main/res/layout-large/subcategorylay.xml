@@ -10,27 +10,24 @@
     android:background="@drawable/whiteback"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
 
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="155dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/imgback"
         >
-
-        <ImageView
-            android:id="@+id/image_top"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/productimg"
-            />
+            android:layout_height="155dp"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/image_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </RelativeLayout>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
