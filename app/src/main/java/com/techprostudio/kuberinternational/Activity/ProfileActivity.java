@@ -43,7 +43,7 @@ import com.techprostudio.kuberinternational.Utils.FileUtils;
 import java.io.File;
 
 public class ProfileActivity extends AppCompatActivity {
-    ImageView back,img_cart,upload;
+    ImageView back,img_cart,upload,img_share;
     RelativeLayout layout_main,ll_Update;
     ImageView edit_numberTwo,edit_email,edit_number;
     EditText name,email,number;
@@ -70,6 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         profile_image=findViewById(R.id.profile_image);
         upload=findViewById(R.id.upload);
         userName=findViewById(R.id.userName);
+        img_share=findViewById(R.id.img_share);
         String customerid=new AppPreference(ProfileActivity.this).getUserId();
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         name.setEnabled(false);
@@ -166,6 +167,13 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(new Intent(ProfileActivity.this, CartActivity.class));
             }
         });
+        img_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this, WishListActivity.class));
+            }
+        });
+
         if (InternetAccess.isConnected(ProfileActivity.this)) {
             getProfileData(customerid);
         }

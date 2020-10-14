@@ -69,7 +69,7 @@ public class DashboardActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     ViewPager2 myViewPager2;
    public static TextView titlebar,proname,tv_count;
-   public static ImageView drawer_open,back,img_cart;
+   public static ImageView drawer_open,back,img_cart,img_notify;
    public static LinearLayout mainlayout;
     public static RelativeLayout cart_count,ll_dashboard,ll_profile,ll_product,ll_offer,ll_cart,ll_ordrhistory,ll_helpfaq,logout;
     DrawerLayout drawer;
@@ -125,6 +125,7 @@ public class DashboardActivity extends AppCompatActivity {
         cart_count=findViewById(R.id.cart_count);
         tv_count=findViewById(R.id.tv_count);
         proname=header.findViewById(R.id.proname);
+        img_notify=findViewById(R.id.img_notify);
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
 
         String username=new AppPreference(DashboardActivity.this).getUserName();
@@ -354,6 +355,14 @@ public class DashboardActivity extends AppCompatActivity {
 
             }
         });
+        img_notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, WishListActivity.class));
+
+            }
+        });
+
         List<SliderItem> sliderItems = new ArrayList<>();
         sliderItems.add(new SliderItem(R.drawable.bannerone));
         sliderItems.add(new SliderItem(R.drawable.bannerone));

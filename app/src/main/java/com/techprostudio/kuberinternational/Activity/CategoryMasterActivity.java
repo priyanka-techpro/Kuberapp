@@ -47,7 +47,7 @@ public class CategoryMasterActivity extends AppCompatActivity {
     private MainCategoryAdapter categoryAdapter;
     ViewPager2 viewpagerone;
     private Handler sliderHandler = new Handler();
-    ImageView back,img_cart;
+    ImageView back,img_cart,img_notify;
     RelativeLayout main,cart_count;
     TextView tv_count;
     Snackbar mSnackbar;
@@ -63,6 +63,7 @@ public class CategoryMasterActivity extends AppCompatActivity {
         main=findViewById(R.id.main);
         tv_count=findViewById(R.id.tv_count);
         cart_count=findViewById(R.id.cart_count);
+        img_notify=findViewById(R.id.img_notify);
         apiInterface= ApiClient.getRetrofitClient().create(ApiInterface.class);
         String customerid=new AppPreference(CategoryMasterActivity.this).getUserId();
         categoryModelList=new ArrayList<>();
@@ -77,6 +78,12 @@ public class CategoryMasterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(CategoryMasterActivity.this, CartActivity.class));
+            }
+        });
+        img_notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CategoryMasterActivity.this, WishListActivity.class));
             }
         });
 

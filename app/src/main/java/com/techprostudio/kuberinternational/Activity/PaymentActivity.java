@@ -30,7 +30,7 @@ import static com.techprostudio.kuberinternational.Adapter.AddressListAdapter.Ad
 public class PaymentActivity extends AppCompatActivity {
     TextView gotoofferpage;
     RelativeLayout proceedtopay,main_ll;
-    ImageView back,img_cart;
+    ImageView back,img_cart,img_notify;
     RelativeLayout net_ll,cash_ll,subtotal_ll,cart_count;
     RadioButton choose_net,choose_cash;
     String paymentMode="";
@@ -61,6 +61,7 @@ public class PaymentActivity extends AppCompatActivity {
         subtotal_ll=findViewById(R.id.subtotal_ll);
         cart_count=findViewById(R.id.cart_count);
         tv_count=findViewById(R.id.tv_count);
+        img_notify=findViewById(R.id.img_notify);
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         String customerid=new AppPreference(PaymentActivity.this).getUserId();
         addressid=AddressId;
@@ -74,6 +75,12 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(PaymentActivity.this, CartActivity.class));
+            }
+        });
+        img_notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PaymentActivity.this, WishListActivity.class));
             }
         });
 

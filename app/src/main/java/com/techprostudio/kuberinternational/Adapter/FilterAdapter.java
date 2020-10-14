@@ -1,5 +1,6 @@
 package com.techprostudio.kuberinternational.Adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.techprostudio.kuberinternational.Activity.AddressActivity;
 import com.techprostudio.kuberinternational.Activity.SubProductActivity;
 import com.techprostudio.kuberinternational.Fragment.CategoryFragment;
 import com.techprostudio.kuberinternational.Model.FilterSection.CategoryListFilter;
@@ -44,6 +46,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.MyViewHold
     private SubcategoryAdapter subcategoryAdapter;
     private List<ProductList_product> subcategoryModelList;
     ApiInterface apiInterface;
+    ProgressDialog progressDialog1;
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         LinearLayout options_ll;
         TextView includes_one;
@@ -106,17 +109,21 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.MyViewHold
     private void subcategorydata(String subproductcategoryid, String customerid) {
         Log.e("catid",""+subproductcategoryid);
         Call<SubProductMainModel> call=apiInterface.getFilterProducts(Config.header,subproductcategoryid,customerid);
+        progressDialog1 = new ProgressDialog(context);
+        progressDialog1.setMessage("Please wait...");
+        progressDialog1.show();
         call.enqueue(new Callback<SubProductMainModel>() {
             @Override
             public void onResponse(Call<SubProductMainModel> call, Response<SubProductMainModel> response) {
+                progressDialog1.dismiss();
                 if(response.body().getStatus()==true)
                 {
                     if(response.body().getProductList().size() == 0)
                     {
                         Toast.makeText(context, "Category list not found.", Toast.LENGTH_SHORT).show();
-
                     }
-                    else {
+                    else
+                        {
                         subcategoryModelList = response.body().getProductList().get(0).getProductList();
                         subcategoryAdapter = new SubcategoryAdapter(context, subcategoryModelList);
                         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);
@@ -134,7 +141,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.MyViewHold
 
             @Override
             public void onFailure(Call<SubProductMainModel> call, Throwable t) {
-
+                progressDialog1.dismiss();
             }
         });
 

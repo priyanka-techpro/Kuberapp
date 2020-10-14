@@ -43,7 +43,7 @@ public class CartActivity extends AppCompatActivity {
     List<CartList> cartListModelArrayList;
     ProgressDialog progressDialog;
     CartAdapter cartAdapter;
-    public static ImageView back,img_cart;
+    public static ImageView back,img_cart,img_notify;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
     RelativeLayout main;
@@ -63,6 +63,7 @@ public class CartActivity extends AppCompatActivity {
         subtotal_ll=findViewById(R.id.subtotal_ll);
         cart_count=findViewById(R.id.cart_count);
         tv_count=findViewById(R.id.tv_count);
+        img_notify=findViewById(R.id.img_notify);
 
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         String customerid=new AppPreference(CartActivity.this).getUserId();
@@ -94,6 +95,13 @@ public class CartActivity extends AppCompatActivity {
                 startActivity(new Intent(CartActivity.this, CartActivity.class));
             }
         });
+        img_notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CartActivity.this, WishListActivity.class));
+            }
+        });
+
         String text = "<font color=#0b539d>Your order is eligible for rewards. </font> <font color=#555555>You can also choose to redeem at checkout</font>";
         textredeem.setText(Html.fromHtml(text));
         textredeem.setTextSize(16);

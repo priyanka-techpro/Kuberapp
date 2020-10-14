@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -47,14 +48,15 @@ public class SubProductActivity extends AppCompatActivity {
     private List<ProductList_product> subcategoryModelList;
     private FilterAdapter filterAdapter;
     private SubcategoryAdapter subcategoryAdapter;
-
-    ImageView back,img_cart;
+    ProgressDialog progressDialog;
+    ImageView back,img_cart,img_notify;
     String categoryid,categoryname;
     TextView title_single;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
     RelativeLayout main,cart_count;
     TextView tv_count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,7 @@ public class SubProductActivity extends AppCompatActivity {
         tv_count=findViewById(R.id.tv_count);
         cart_count=findViewById(R.id.cart_count);
         title_single=findViewById(R.id.title_single);
+        img_notify=findViewById(R.id.img_notify);
         categoryid=getIntent().getExtras().getString("categoryid");
         categoryname=getIntent().getExtras().getString("categoryname");
         String customerid=new AppPreference(SubProductActivity.this).getUserId();
@@ -83,6 +86,13 @@ public class SubProductActivity extends AppCompatActivity {
                 startActivity(new Intent(SubProductActivity.this, CartActivity.class));
             }
         });
+        img_notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SubProductActivity.this, WishListActivity.class));
+            }
+        });
+
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         subcategorylist=findViewById(R.id.subcategorylist);
 
@@ -108,59 +118,61 @@ public class SubProductActivity extends AppCompatActivity {
         subcategoryModelList=new ArrayList<>();
 
     }
-    private void subcategorydata(String subproductcategoryid, String customerid) {
-        Log.e("catid",""+subproductcategoryid);
-        Call<SubProductMainModel> call=apiInterface.getFilterProducts(Config.header,subproductcategoryid,customerid);
-        call.enqueue(new Callback<SubProductMainModel>() {
-            @Override
-            public void onResponse(Call<SubProductMainModel> call, Response<SubProductMainModel> response) {
-                if(response.body().getStatus()==true)
-                {
-                    String cartCount = String.valueOf(response.body().getCartCount());
-                    Config.cart = cartCount;
-                    if (cartCount.equals("0")) {
-                        cart_count.setVisibility(View.GONE);
-                        tv_count.setVisibility(View.GONE);
-                    } else {
-                        cart_count.setVisibility(View.VISIBLE);
-                        tv_count.setVisibility(View.VISIBLE);
-                        tv_count.setText(Config.cart);
-                    }
-                    subcategoryModelList=response.body().getProductList().get(0).getProductList();
-                    subcategoryAdapter = new SubcategoryAdapter(SubProductActivity.this,subcategoryModelList);
-                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(SubProductActivity.this,2);
-                    subcategorylist.setLayoutManager(mLayoutManager);
-                    subcategorylist.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(0), true));
-                    subcategorylist.setItemAnimator(new DefaultItemAnimator());
-                    subcategorylist.setAdapter(subcategoryAdapter);
-                    subcategoryAdapter.notifyDataSetChanged();
-
-                }
-                else{
-                    Toast.makeText(SubProductActivity.this, "no data found.", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SubProductMainModel> call, Throwable t) {
-
-            }
-        });
-
-
-    }
+//    private void subcategorydata(String subproductcategoryid, String customerid) {
+//        Log.e("catid",""+subproductcategoryid);
+//        Call<SubProductMainModel> call=apiInterface.getFilterProducts(Config.header,subproductcategoryid,customerid);
+//        call.enqueue(new Callback<SubProductMainModel>() {
+//            @Override
+//            public void onResponse(Call<SubProductMainModel> call, Response<SubProductMainModel> response) {
+//                if(response.body().getStatus()==true)
+//                {
+//                    String cartCount = String.valueOf(response.body().getCartCount());
+//                    Config.cart = cartCount;
+//                    if (cartCount.equals("0")) {
+//                        cart_count.setVisibility(View.GONE);
+//                        tv_count.setVisibility(View.GONE);
+//                    } else {
+//                        cart_count.setVisibility(View.VISIBLE);
+//                        tv_count.setVisibility(View.VISIBLE);
+//                        tv_count.setText(Config.cart);
+//                    }
+//                    subcategoryModelList=response.body().getProductList().get(0).getProductList();
+//                    subcategoryAdapter = new SubcategoryAdapter(SubProductActivity.this,subcategoryModelList);
+//                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(SubProductActivity.this,2);
+//                    subcategorylist.setLayoutManager(mLayoutManager);
+//                    subcategorylist.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(0), true));
+//                    subcategorylist.setItemAnimator(new DefaultItemAnimator());
+//                    subcategorylist.setAdapter(subcategoryAdapter);
+//                    subcategoryAdapter.notifyDataSetChanged();
+//
+//                }
+//                else{
+//                    Toast.makeText(SubProductActivity.this, "no data found.", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<SubProductMainModel> call, Throwable t) {
+//
+//            }
+//        });
+//
+//
+//    }
 
     private void filterdata(String categoryid, String customerid) {
         Call<FilterMainModel> call=apiInterface.getFilterCategory(Config.header,categoryid,customerid);
-
+        progressDialog = new ProgressDialog(SubProductActivity.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
         call.enqueue(new Callback<FilterMainModel>() {
             @Override
             public void onResponse(Call<FilterMainModel> call, Response<FilterMainModel> response) {
+                progressDialog.dismiss();
                 if(response.body().getStatus()==true){
                     if(response.body().getCategoryList().size() == 0)
                     {
                         Toast.makeText(SubProductActivity.this, "Category list not found.", Toast.LENGTH_SHORT).show();
-
                     }
                     else{
                         String cartCount = String.valueOf(response.body().getCartCount());
@@ -181,7 +193,6 @@ public class SubProductActivity extends AppCompatActivity {
                         filterAdapter.notifyDataSetChanged();
                     }
 
-                 //   subcategorydata(subproductcategoryid,customerid);
                 }
                 else {
                     Toast.makeText(SubProductActivity.this, "no data found.", Toast.LENGTH_SHORT).show();
@@ -190,7 +201,7 @@ public class SubProductActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<FilterMainModel> call, Throwable t) {
-
+                progressDialog.dismiss();
             }
         });
     }

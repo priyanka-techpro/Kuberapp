@@ -67,7 +67,7 @@ public class Variationadapter extends RecyclerView.Adapter<Variationadapter.MyVi
             holder.del_place.setText(modelList.get(position).getVariationProductData().getUnitData().getCompleteUnit());
             Picasso.with(context).load(modelList.get(position).getVariationProductImage()).into(SingledetailsActivity.image_top);
             product_name.setText(producname+","+modelList.get(position).getVariationProductData().getUnitData().getCompleteUnit());
-            price= String.valueOf(modelList.get(position).getVariationProductData().getPriceData().getAfterDiscountPrice());
+            price= String.valueOf(modelList.get(position).getVariationProductData().getGstData().getFinalPricePlusGst());
             mrp_single.setText("Rs."+price+"/");
             quantity_single.setText(modelList.get(position).getVariationProductData().getUnitData().getCompleteUnit());
             if(modelList.get(position).getVariationProductData().getDiscountData().getDiscountAmount().equals("0.00"))

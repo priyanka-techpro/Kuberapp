@@ -43,7 +43,7 @@ public class AddressActivity extends AppCompatActivity {
     LinearLayout ll_uncheck;
     boolean check = false;
     RelativeLayout gotochangeaddress,proceedtopayment;
-    ImageView back,img_cart;
+    ImageView back,img_cart,img_notify;
     RelativeLayout gotoaddaddress,main,subtotal_ll,cart_count;
     RecyclerView addresslist;
     List<AddressList> addressListModelArrayList;
@@ -69,6 +69,7 @@ public class AddressActivity extends AppCompatActivity {
         subtotal_ll=findViewById(R.id.subtotal_ll);
         cart_count=findViewById(R.id.cart_count);
         tv_count=findViewById(R.id.tv_count);
+        img_notify=findViewById(R.id.img_notify);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,6 +148,13 @@ public class AddressActivity extends AppCompatActivity {
                     check =false;
                 }
 
+
+            }
+        });
+        img_notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddressActivity.this, WishListActivity.class));
 
             }
         });

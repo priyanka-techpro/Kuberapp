@@ -24,6 +24,7 @@ import com.techprostudio.kuberinternational.Model.SearchPAckage.SearchMainModel;
 
 import com.techprostudio.kuberinternational.Model.SingleProductPackage.SingleProductMainModel;
 import com.techprostudio.kuberinternational.Model.SubProductMain.SubProductMainModel;
+import com.techprostudio.kuberinternational.Model.WishListModel.WishListMainModel;
 import com.techprostudio.kuberinternational.Model.wishlistAdd.AddWishListMainModel;
 
 import okhttp3.MultipartBody;
@@ -223,6 +224,19 @@ public interface ApiInterface {
                                              @Field("product_id") String product_id,
                                              @Field("veriation_id") String veriation_id,
                                              @Field("customer_id") String customer_id
+    );
+
+    @FormUrlEncoded
+    @POST("products/wish_list")
+    Call<WishListMainModel> getwishlist(@Header("X-API-KEY") String header,
+                                          @Field("customer_id") String customer_id
+    );
+
+    @FormUrlEncoded
+    @POST("products/delete_wish_product")
+    Call<WishListMainModel> deletefromWishlist(@Header("X-API-KEY") String header,
+                                        @Field("wish_id") String wish_id,
+                                          @Field("customer_id") String customer_id
     );
 
 }

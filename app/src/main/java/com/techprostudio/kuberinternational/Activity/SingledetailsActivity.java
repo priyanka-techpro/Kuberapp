@@ -43,7 +43,7 @@ import java.util.List;
 import static com.techprostudio.kuberinternational.Adapter.Variationadapter.variationid;
 
 public class SingledetailsActivity extends AppCompatActivity {
-    ImageView back,img_cart,plus,minus,heartsingle;
+    ImageView back,img_cart,plus,minus,heartsingle,img_notify;
     RelativeLayout ll_bag,main,cart_count;
     RecyclerView variation;
     private List<VariationProductSingle> variationarrlist;
@@ -84,6 +84,7 @@ public class SingledetailsActivity extends AppCompatActivity {
         plus=findViewById(R.id.plus);
         heartsingle=findViewById(R.id.heartsingle);
         title_single=findViewById(R.id.title_single);
+        img_notify=findViewById(R.id.img_notify);
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         String customerid=new AppPreference(SingledetailsActivity.this).getUserId();
         productid=getIntent().getExtras().getString("productid");
@@ -99,6 +100,12 @@ public class SingledetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SingledetailsActivity.this, CartActivity.class));
+            }
+        });
+        img_notify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SingledetailsActivity.this, WishListActivity.class));
             }
         });
         ll_bag.setOnClickListener(new View.OnClickListener() {
