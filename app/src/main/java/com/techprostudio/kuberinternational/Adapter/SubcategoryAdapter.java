@@ -57,7 +57,7 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
     public void onBindViewHolder(@NonNull final SubcategoryAdapter.MyViewHolder holder, int position) {
         Picasso.with(context).load(modelList.get(position).getImage()).into(holder.image_top);
         holder.product_top.setText(modelList.get(position).getName());
-        holder.mrp_top.setText("Rs."+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getGstData().getGstPrice()+"/");
+        holder.mrp_top.setText("Rs."+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getGstData().getFinalPricePlusGst()+"/");
         holder.quantity_top.setText(modelList.get(position).getVariationProducts().get(0).getVariationProductData().getUnitData().getCompleteUnit());
         if(modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountAmount().equals("0.00"))
         {

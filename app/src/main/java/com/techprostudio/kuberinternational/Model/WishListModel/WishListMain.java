@@ -4,6 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class WishListMain {
+    @SerializedName("product_id")
+    @Expose
+    private String productId;
     @SerializedName("wish_id")
     @Expose
     private String wishId;
@@ -17,6 +20,13 @@ public class WishListMain {
     @Expose
     private ProductDataWish productData;
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
     public String getWishId() {
         return wishId;
     }

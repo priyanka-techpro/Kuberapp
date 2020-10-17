@@ -102,9 +102,9 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
-        String text = "<font color=#0b539d>Your order is eligible for rewards. </font> <font color=#555555>You can also choose to redeem at checkout</font>";
-        textredeem.setText(Html.fromHtml(text));
-        textredeem.setTextSize(16);
+//        String text = "<font color=#0b539d>Your order is eligible for rewards. </font> <font color=#555555>You can also choose to redeem at checkout</font>";
+//        textredeem.setText(Html.fromHtml(text));
+//        textredeem.setTextSize(16);
         cartListModelArrayList=new ArrayList<>();
         if (InternetAccess.isConnected(CartActivity.this)) {
 

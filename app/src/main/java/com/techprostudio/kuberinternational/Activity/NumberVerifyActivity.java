@@ -5,6 +5,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,6 +28,8 @@ public class NumberVerifyActivity extends AppCompatActivity {
     EditText ed_phone_verify;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,10 +84,14 @@ public class NumberVerifyActivity extends AppCompatActivity {
     private void numberrVerify(String phone) {
 
         Call<LoginModel> call = apiInterface.CheckPhone("KUBERINT@321",phone);
+        progressDialog = new ProgressDialog(NumberVerifyActivity.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
         call.enqueue(new Callback<LoginModel>() {
             @Override
             public void onResponse(Call<LoginModel> call, Response<LoginModel> response)
             {
+                progressDialog.dismiss();
                 if(response.body().getStatus() == true) {
                     String usertype = response.body().getCustomerType();
                     if (usertype.equals("new_customer"))
@@ -99,8 +106,8 @@ public class NumberVerifyActivity extends AppCompatActivity {
                     }
                     else
                         {
-                            String otp= response.body().getOtp();
-                            Toast.makeText(NumberVerifyActivity.this, otp, Toast.LENGTH_SHORT).show();
+                            String otp=response.body().getOtp();
+                            Toast.makeText(NumberVerifyActivity.this,"Your login otp is "+otp,Toast.LENGTH_SHORT).show();
                             String customerid = response.body().getCustomerId();
                             Intent i =new Intent(NumberVerifyActivity.this,OtpVerifyActivity.class);
                             i.putExtra("custid",customerid);
@@ -110,13 +117,15 @@ public class NumberVerifyActivity extends AppCompatActivity {
                     }
                 }
                 else{
+                    String msg=response.body().getMessage();
+                    Toast.makeText(NumberVerifyActivity.this, msg, Toast.LENGTH_SHORT).show();
 
                 }
             }
 
             @Override
             public void onFailure(Call<LoginModel> call, Throwable t) {
-
+                progressDialog.dismiss();
             }
         });
 

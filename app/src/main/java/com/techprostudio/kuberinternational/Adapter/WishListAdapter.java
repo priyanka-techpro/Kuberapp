@@ -2,6 +2,7 @@ package com.techprostudio.kuberinternational.Adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.techprostudio.kuberinternational.Activity.SingledetailsActivity;
+import com.techprostudio.kuberinternational.Activity.SubProductActivity;
 import com.techprostudio.kuberinternational.Activity.WishListActivity;
 import com.techprostudio.kuberinternational.Model.SingleProductPackage.VariationProductSingle;
 import com.techprostudio.kuberinternational.Model.WishListModel.WishListMain;
@@ -77,6 +79,16 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.MyView
             deleteitms(wishid,customerid);
             }
         });
+        holder.image_top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(context, SingledetailsActivity.class);
+                i.putExtra("productid",modelList.get(position).getProductId());
+                i.putExtra("productname",modelList.get(position).getProductName());
+                context.startActivity(i);
+            }
+        });
+
     }
 
     private void deleteitms(String wishid, String customerid) {

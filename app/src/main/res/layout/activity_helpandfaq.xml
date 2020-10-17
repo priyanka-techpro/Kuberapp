@@ -34,6 +34,7 @@
                 android:src="@drawable/back" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,6 +44,12 @@
                 android:text="@string/faq"
                 android:textColor="@color/white"
                 android:textSize="25dp" />
+            <ImageView
+                android:layout_marginLeft="-10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@+id/back"
+                android:src="@drawable/logo" />
 
             <ImageView
                 android:visibility="gone"

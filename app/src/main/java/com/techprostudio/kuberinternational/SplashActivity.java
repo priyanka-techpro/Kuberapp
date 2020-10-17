@@ -175,7 +175,7 @@ RelativeLayout gotologin;
                     handler.postDelayed(r, progressDuration);
 
                 }
-            }, 2 * 1000);
+            }, 2 * 500);
         }
     }
 }

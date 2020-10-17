@@ -38,6 +38,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:padding="5dp"
                         android:id="@+id/drawer_open"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -52,8 +53,15 @@
                         android:src="@drawable/back"
                         android:visibility="gone" />
 
+                    <ImageView
+                        android:layout_marginLeft="-10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_toRightOf="@+id/drawer_open"
+                        android:src="@drawable/logo" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/titlebar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -67,19 +75,20 @@
                         android:textSize="22dp" />
 
                     <ImageView
+                        android:padding="5dp"
                         android:id="@+id/img_notify"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_toLeftOf="@+id/img_cart"
-                        android:padding="2dp"
                         android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/img_cart"
                         android:src="@drawable/heartwhiteicon" />
+
                     <ImageView
                         android:id="@+id/img_cart"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:src="@drawable/carticonwhite" />
 
                     <RelativeLayout
@@ -88,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/cart_count_drawable"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tv_count"
@@ -108,16 +117,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ll_topbar"
-                    android:visibility="visible"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:visibility="visible">
+
                     <RelativeLayout
+                        android:id="@+id/search_ll"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:id="@+id/search_ll"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/searchbg"
-                        >
+                        android:background="@drawable/searchbg">
+
                         <ImageView
                             android:id="@+id/search_icon"
                             android:layout_width="30dp"
@@ -155,66 +165,68 @@
             android:scrollbars="none"
             android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/mainlayout"
-            android:orientation="vertical">
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewpager"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:paddingEnd="30dp"
-                    android:layout_marginTop="15dp"
-                    android:paddingStart="30dp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/categorylist"
-                    android:layout_below="@+id/viewpager"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:overScrollMode="never" />
-
+                android:layout_height="match_parent"
+                android:id="@+id/mainlayout"
+                android:orientation="vertical">
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/categorylist"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/curve"
-                    android:background="@drawable/bluewrap">
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/newarrival"
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewpager"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="20dp"
-                        android:textSize="20dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/worksansregular"
-                        android:textColor="@color/black"
-                        android:text="New Arrivals" />
+                        android:layout_height="200dp"
+                        android:paddingEnd="30dp"
+                        android:layout_marginTop="15dp"
+                        android:paddingStart="30dp" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/newarrivallist"
-                        android:layout_below="@+id/newarrival"
+                        android:id="@+id/categorylist"
+                        android:layout_below="@+id/viewpager"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
                         android:overScrollMode="never" />
 
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/categorylist"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/curve"
+                        android:background="@drawable/bluewrap">
 
-            </RelativeLayout>
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/newarrival"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="20dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/worksansregular"
+                            android:textColor="@color/black"
+                            android:text="New Arrivals" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_marginLeft="5dp"
+                            android:id="@+id/newarrivallist"
+                            android:layout_below="@+id/newarrival"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="10dp"
+                            android:overScrollMode="never" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
     <fragment

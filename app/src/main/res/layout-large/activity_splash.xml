@@ -17,6 +17,7 @@
           android:scaleType="fitXY"/>
 
       <RelativeLayout
+          android:visibility="gone"
           android:id="@+id/gotologin"
           android:layout_alignParentBottom="true"
           android:layout_width="match_parent"

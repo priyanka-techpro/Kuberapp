@@ -62,6 +62,7 @@ public class Variationadapter extends RecyclerView.Adapter<Variationadapter.MyVi
         holder.del_place.setText(modelList.get(position).getVariationProductData().getUnitData().getCompleteUnit());
         if (row_index == position)
         {
+
             variationid =modelList.get(position).getVariationProductId();
             holder.choose.setChecked(true);
             holder.del_place.setText(modelList.get(position).getVariationProductData().getUnitData().getCompleteUnit());
@@ -79,6 +80,16 @@ public class Variationadapter extends RecyclerView.Adapter<Variationadapter.MyVi
                 discount_single.setVisibility(View.VISIBLE);
                 discount_single.setText(modelList.get(position).getVariationProductData().getDiscountData().getDiscountTypeText()+" off");
 
+            }
+            if(modelList.get(position).isIsInWish() == true)
+            {
+                SingledetailsActivity.heartdeep.setVisibility(View.VISIBLE);
+                SingledetailsActivity.heartsingle.setVisibility(View.GONE);
+            }
+            else
+            {
+                SingledetailsActivity.heartdeep.setVisibility(View.GONE);
+                SingledetailsActivity.heartsingle.setVisibility(View.VISIBLE);
             }
         }
         else

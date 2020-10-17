@@ -43,7 +43,8 @@ import java.util.List;
 import static com.techprostudio.kuberinternational.Adapter.Variationadapter.variationid;
 
 public class SingledetailsActivity extends AppCompatActivity {
-    ImageView back,img_cart,plus,minus,heartsingle,img_notify;
+    ImageView back,img_cart,plus,minus,img_notify;
+    public static ImageView heartdeep,heartsingle;
     RelativeLayout ll_bag,main,cart_count;
     RecyclerView variation;
     private List<VariationProductSingle> variationarrlist;
@@ -85,6 +86,9 @@ public class SingledetailsActivity extends AppCompatActivity {
         heartsingle=findViewById(R.id.heartsingle);
         title_single=findViewById(R.id.title_single);
         img_notify=findViewById(R.id.img_notify);
+        heartdeep=findViewById(R.id.heartdeep);
+
+
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         String customerid=new AppPreference(SingledetailsActivity.this).getUserId();
         productid=getIntent().getExtras().getString("productid");
@@ -320,6 +324,7 @@ public class SingledetailsActivity extends AppCompatActivity {
                         tv_count.setVisibility(View.VISIBLE);
                         tv_count.setText(Config.cart);
                     }
+//
                     producname=response.body().getProductData().get(0).getName();
                     description.setText(response.body().getProductData().get(0).getDescription());
                     usage.setText(response.body().getProductData().get(0).getUsages());

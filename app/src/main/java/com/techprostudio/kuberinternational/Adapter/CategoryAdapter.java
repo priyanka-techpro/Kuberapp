@@ -9,14 +9,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.techprostudio.kuberinternational.Activity.CategoryMasterActivity;
-import com.techprostudio.kuberinternational.Activity.ConfirmpasswordActivity;
-import com.techprostudio.kuberinternational.Activity.DashboardActivity;
-import com.techprostudio.kuberinternational.Activity.SigninActivity;
 import com.techprostudio.kuberinternational.Activity.SubProductActivity;
-import com.techprostudio.kuberinternational.Fragment.CategoryFragment;
-import com.techprostudio.kuberinternational.Model.CategoryModel;
-import com.techprostudio.kuberinternational.Model.NewArrivalModel;
+import com.techprostudio.kuberinternational.Model.DashboardModel.ParentCategory;
 import com.techprostudio.kuberinternational.R;
 
 import java.util.List;
@@ -24,30 +20,26 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.techprostudio.kuberinternational.Activity.DashboardActivity.back;
-import static com.techprostudio.kuberinternational.Activity.DashboardActivity.drawer_open;
-import static com.techprostudio.kuberinternational.Activity.DashboardActivity.mainlayout;
-import static com.techprostudio.kuberinternational.Activity.DashboardActivity.titlebar;
-
 public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder>{
     private Context context;
-    private List<CategoryModel> modelList;
+    private List<ParentCategory> modelList;
     int selected_position = 10;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         RelativeLayout seemore,main_ll;
         ImageView image_top;
-        TextView loadmore;
+        TextView loadmore,product_top;
         public MyViewHolder( View view) {
             super(view);
             image_top= view.findViewById(R.id.image_top);
             seemore= view.findViewById(R.id.seemore);
             main_ll= view.findViewById(R.id.main_ll);
+            product_top= view.findViewById(R.id.product_top);
 
         }
     }
 
-    public CategoryAdapter(Context context,List<CategoryModel> modelList){
+    public CategoryAdapter(Context context,List<ParentCategory> modelList){
         this.context = context;
         this.modelList = modelList;
     }
@@ -61,7 +53,11 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
 
     @Override
     public void onBindViewHolder(@NonNull final CategoryAdapter.MyViewHolder holder, int position) {
-        final CategoryModel mList=modelList.get(position);
+
+        final ParentCategory mList=modelList.get(position);
+        holder.product_top.setText(mList.getParentCategoryName());
+        Picasso.with(context).load(mList.getParentCategoryIcon()).into(holder.image_top);
+
         if(selected_position == position){
             holder.seemore.setVisibility(View.VISIBLE);
              holder.main_ll.setVisibility(View.GONE);
@@ -75,16 +71,12 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
         holder.image_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                mainlayout.setVisibility(View.GONE);
-//                drawer_open.setVisibility(View.GONE);
-//                back.setVisibility(View.VISIBLE);
-//                titlebar.setText("Furnishing");
-//                CategoryFragment optionsFrag = new CategoryFragment ();
-//
-//                ((DashboardActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, optionsFrag,"OptionsFragment").addToBackStack(null).commit();
 
                 context.startActivity(new Intent(context, SubProductActivity.class));
-
+                Intent i=new Intent(context, SubProductActivity.class);
+                i.putExtra("categoryname",mList.getParentCategoryName());
+                i.putExtra("categoryid",mList.getParentCategoryId());
+                context.startActivity(i);
             }
         });
         holder.seemore.setOnClickListener(new View.OnClickListener() {

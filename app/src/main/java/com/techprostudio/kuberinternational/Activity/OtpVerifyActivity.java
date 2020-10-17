@@ -5,6 +5,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -37,7 +38,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
     EditText ed_one,ed_two,ed_three,ed_four;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
-
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,10 +162,14 @@ public class OtpVerifyActivity extends AppCompatActivity {
 
     private void checkOtp(String otp, String customerid) {
         Call<OtpModel> call=apiInterface.VerifyOtp(Config.header,customerid,otp,customertype);
+        progressDialog = new ProgressDialog(OtpVerifyActivity.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
         call.enqueue(new Callback<OtpModel>() {
             @Override
             public void onResponse(Call<OtpModel> call, Response<OtpModel> response) {
-                if(response.body().getStatus() == true)
+                progressDialog.dismiss();
+                if(response.body().getStatus().equals(true))
                 {
                     String customerid=response.body().getUserDetails().getUserId();
                     new AppPreference(OtpVerifyActivity.this).saveUserID(customerid);
@@ -186,7 +191,7 @@ public class OtpVerifyActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<OtpModel> call, Throwable t) {
-
+                progressDialog.dismiss();
             }
         });
     }

@@ -7,6 +7,7 @@ import com.techprostudio.kuberinternational.Model.AddressDetails.AddressDetailsM
 import com.techprostudio.kuberinternational.Model.AddressListPakage.AddressMainModel;
 import com.techprostudio.kuberinternational.Model.AddtoCartModel;
 import com.techprostudio.kuberinternational.Model.CartPackage.CartListMainModel;
+import com.techprostudio.kuberinternational.Model.DashboardModel.DashboardMainModel;
 import com.techprostudio.kuberinternational.Model.FaqMainModel;
 import com.techprostudio.kuberinternational.Model.FaqModelPackage.FaqMainSubModel;
 import com.techprostudio.kuberinternational.Model.FilterSection.FilterMainModel;
@@ -239,4 +240,8 @@ public interface ApiInterface {
                                           @Field("customer_id") String customer_id
     );
 
+    @FormUrlEncoded
+    @POST("user/dashboard")
+    Call<DashboardMainModel> getDashboardProduct(@Header("X-API-KEY") String header,
+                                                 @Field("customer_id") String customer_id);
 }

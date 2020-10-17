@@ -1,6 +1,7 @@
 package com.techprostudio.kuberinternational.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import com.techprostudio.kuberinternational.Activity.SingledetailsActivity;
 import com.techprostudio.kuberinternational.Model.SearchPAckage.ProductList;
 import com.techprostudio.kuberinternational.Model.SearchPAckage.VariationProduct_search;
 import com.techprostudio.kuberinternational.R;
@@ -57,6 +59,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
        // holder.mrp_top.setText("Rs."+modelList.get(position).getVariationProductData().getGstData().getFinalPricePlusGst());
        // holder.discount.setText("("+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountTypeText()+" off)");
 //    Log.e("test",""+modelList.get(position).getName());
+        holder.ll_layer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(context, SingledetailsActivity.class);
+                i.putExtra("productid",modelList.get(position).getProductId());
+                i.putExtra("productname",modelList.get(position).getName());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

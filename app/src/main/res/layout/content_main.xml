@@ -53,8 +53,15 @@
                         android:src="@drawable/back"
                         android:visibility="gone" />
 
+                    <ImageView
+                        android:layout_marginLeft="-10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_toRightOf="@+id/drawer_open"
+                        android:src="@drawable/logo" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/titlebar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -90,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/cart_count_drawable"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tv_count"
@@ -206,13 +213,14 @@
                         android:text="New Arrivals" />
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:layout_marginLeft="5dp"
                         android:id="@+id/newarrivallist"
                         android:layout_below="@+id/newarrival"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:layout_marginLeft="5dp"
                         android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
                         android:overScrollMode="never" />
 
                 </RelativeLayout>

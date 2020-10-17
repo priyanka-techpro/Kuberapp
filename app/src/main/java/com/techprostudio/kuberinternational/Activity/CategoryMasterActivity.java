@@ -12,6 +12,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -28,6 +29,8 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.techprostudio.kuberinternational.Adapter.MainCategoryAdapter;
 import com.techprostudio.kuberinternational.Adapter.SliderAdapter;
+import com.techprostudio.kuberinternational.Model.DashboardModel.BannerList;
+import com.techprostudio.kuberinternational.Model.DashboardModel.DashboardMainModel;
 import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryList;
 import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryMainModel;
 import com.techprostudio.kuberinternational.Model.SliderItem;
@@ -45,19 +48,21 @@ public class CategoryMasterActivity extends AppCompatActivity {
     RecyclerView categorymainlist;
     private List<CategoryList> categoryModelList;
     private MainCategoryAdapter categoryAdapter;
-    ViewPager2 viewpagerone;
+    ViewPager2 myViewPager2;
     private Handler sliderHandler = new Handler();
     ImageView back,img_cart,img_notify;
     RelativeLayout main,cart_count;
     TextView tv_count;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
+    List<BannerList> sliderItems;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_master);
         categorymainlist=findViewById(R.id.categorymainlist);
-        viewpagerone=findViewById(R.id.viewpagerone);
+        myViewPager2=findViewById(R.id.viewpagerone);
         img_cart=findViewById(R.id.img_cart);
         back=findViewById(R.id.back);
         main=findViewById(R.id.main);
@@ -87,34 +92,39 @@ public class CategoryMasterActivity extends AppCompatActivity {
             }
         });
 
-        List<SliderItem> sliderItems = new ArrayList<>();
-        sliderItems.add(new SliderItem(R.drawable.bannerone));
-        sliderItems.add(new SliderItem(R.drawable.bannerone));
-        sliderItems.add(new SliderItem(R.drawable.bannerone));
-        viewpagerone.setAdapter(new SliderAdapter(sliderItems,viewpagerone));
-        viewpagerone.setClipToPadding(false);
-        viewpagerone.setClipChildren(false);
-        viewpagerone.setOffscreenPageLimit(3);
-        viewpagerone.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
-        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                float r = 1 - Math.abs(position);
-                page.setScaleY(0.85f + r * 0.15f);
-            }
-        });
-        viewpagerone.setPageTransformer(compositePageTransformer);
-
-        viewpagerone.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                sliderHandler.removeCallbacks(sliderRunnable);
-                sliderHandler.postDelayed(sliderRunnable,3000);
-            }
-        });
+//        List<SliderItem> sliderItems = new ArrayList<>();
+//        sliderItems.add(new SliderItem(R.drawable.bannerone));
+//        sliderItems.add(new SliderItem(R.drawable.bannerone));
+//        sliderItems.add(new SliderItem(R.drawable.bannerone));
+//        viewpagerone.setAdapter(new SliderAdapter(sliderItems,viewpagerone));
+//        viewpagerone.setClipToPadding(false);
+//        viewpagerone.setClipChildren(false);
+//        viewpagerone.setOffscreenPageLimit(3);
+//        viewpagerone.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+//        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+//        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
+//        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
+//            @Override
+//            public void transformPage(@NonNull View page, float position) {
+//                float r = 1 - Math.abs(position);
+//                page.setScaleY(0.85f + r * 0.15f);
+//            }
+//        });
+//        viewpagerone.setPageTransformer(compositePageTransformer);
+//
+//        viewpagerone.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                super.onPageSelected(position);
+//                sliderHandler.removeCallbacks(sliderRunnable);
+//                sliderHandler.postDelayed(sliderRunnable,3000);
+//            }
+//        });
+        sliderItems = new ArrayList<>();
+//        sliderItems.add(new SliderItem(R.drawable.bannerone));
+//        sliderItems.add(new SliderItem(R.drawable.bannerone));
+//        sliderItems.add(new SliderItem(R.drawable.bannerone));
+        getBanner(customerid);
         if (InternetAccess.isConnected(CategoryMasterActivity.this)) {
             categorydata(customerid);
         } else {
@@ -134,13 +144,66 @@ public class CategoryMasterActivity extends AppCompatActivity {
 
 
     }
+    private void getBanner(String customerid) {
+        Call<DashboardMainModel> call=apiInterface.getDashboardProduct(Config.header,customerid);
+
+        call.enqueue(new Callback<DashboardMainModel>() {
+            @Override
+            public void onResponse(Call<DashboardMainModel> call, Response<DashboardMainModel> response) {
+                if(response.body().isStatus() == true)
+                {
+                    sliderItems=response.body().getBannerList();
+                    myViewPager2.setAdapter(new SliderAdapter(sliderItems,myViewPager2,CategoryMasterActivity.this));
+                    myViewPager2.setClipToPadding(false);
+                    myViewPager2.setClipChildren(false);
+                    myViewPager2.setOffscreenPageLimit(3);
+                    myViewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+                    CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+                    compositePageTransformer.addTransformer(new MarginPageTransformer(40));
+                    compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
+                        @Override
+                        public void transformPage(@NonNull View page, float position) {
+                            float r = 1 - Math.abs(position);
+                            page.setScaleY(0.85f + r * 0.15f);
+                        }
+                    });
+                    myViewPager2.setPageTransformer(compositePageTransformer);
+
+                    myViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                        @Override
+                        public void onPageSelected(int position) {
+                            super.onPageSelected(position);
+                            sliderHandler.removeCallbacks(sliderRunnable);
+                            sliderHandler.postDelayed(sliderRunnable,3000);
+                        }
+                    });
+                }
+                else
+                {
+                    String msg=response.body().getMessage();
+                    Toast.makeText(CategoryMasterActivity.this, msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DashboardMainModel> call, Throwable t) {
+
+            }
+        });
+    }
 
     private void categorydata(String customerid) {
 
         Call<CategoryMainModel> call=apiInterface.getParentCategory(Config.header,customerid);
+        progressDialog = new ProgressDialog(CategoryMasterActivity.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
         call.enqueue(new Callback<CategoryMainModel>() {
             @Override
             public void onResponse(Call<CategoryMainModel> call, Response<CategoryMainModel> response) {
+                progressDialog.dismiss();
+
                 if(response.body().getStatus()==true){
                     String cartCount = String.valueOf(response.body().getCartCount());
                     Config.cart = cartCount;
@@ -168,7 +231,7 @@ public class CategoryMasterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<CategoryMainModel> call, Throwable t) {
-
+                progressDialog.dismiss();
             }
         });
 
@@ -216,7 +279,7 @@ public class CategoryMasterActivity extends AppCompatActivity {
         @Override
         public void run() {
 
-            viewpagerone.setCurrentItem(viewpagerone.getCurrentItem() + 1);
+            myViewPager2.setCurrentItem(myViewPager2.getCurrentItem() + 1);
         }
     };
 }

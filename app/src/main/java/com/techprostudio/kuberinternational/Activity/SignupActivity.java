@@ -5,6 +5,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -34,6 +35,8 @@ public class SignupActivity extends AppCompatActivity {
     String phonenumber,devicetoken,usertype;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +75,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
                 if (TextUtils.isEmpty(usernm))
                 {
-                    Toast.makeText(SignupActivity.this, "Enter your email address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "Enter your username", Toast.LENGTH_SHORT).show();
 
                     focusView = ed_username_signup;
                     cancel = true;
@@ -110,9 +113,13 @@ public class SignupActivity extends AppCompatActivity {
     private void RegisterUser(String usernm, String email_id, String phonenumber, String adress, String devicetoken)
     {
         Call<RegistrationModel> call=apiInterface.UserRegistration(Config.header,usernm,email_id,phonenumber,adress,devicetoken);
+        progressDialog = new ProgressDialog(SignupActivity.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
         call.enqueue(new Callback<RegistrationModel>() {
             @Override
             public void onResponse(Call<RegistrationModel> call, Response<RegistrationModel> response) {
+                progressDialog.dismiss();
                 if(response.body().getStatus() == true)
                 {
                     String otp=response.body().getOtp();
@@ -131,7 +138,7 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegistrationModel> call, Throwable t) {
-
+                progressDialog.dismiss();
             }
         });
 

@@ -1,12 +1,10 @@
-package com.techprostudio.kuberinternational.Model.SingleProductPackage;
+package com.techprostudio.kuberinternational.Model.DashboardModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VariationProductSingle {
-    @SerializedName("is_in_wish")
-    @Expose
-    private boolean isInWish;
+public class VariationProductDashboard {
+
     @SerializedName("variation_product_id")
     @Expose
     private String variationProductId;
@@ -18,14 +16,7 @@ public class VariationProductSingle {
     private String stockStatus;
     @SerializedName("variation_product_data")
     @Expose
-    private VariationProductDataSingle variationProductData;
-    public boolean isIsInWish() {
-        return isInWish;
-    }
-
-    public void setIsInWish(boolean isInWish) {
-        this.isInWish = isInWish;
-    }
+    private VariationProductDataDashboard variationProductData;
 
     public String getVariationProductId() {
         return variationProductId;
@@ -51,12 +42,11 @@ public class VariationProductSingle {
         this.stockStatus = stockStatus;
     }
 
-    public VariationProductDataSingle getVariationProductData() {
+    public VariationProductDataDashboard getVariationProductData() {
         return variationProductData;
     }
 
-    public void setVariationProductData(VariationProductDataSingle variationProductData) {
+    public void setVariationProductData(VariationProductDataDashboard variationProductData) {
         this.variationProductData = variationProductData;
     }
-
 }

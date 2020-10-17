@@ -1,30 +1,29 @@
-package com.techprostudio.kuberinternational.Model.SingleProductPackage;
+package com.techprostudio.kuberinternational.Model.DashboardModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PriceDataSingle {
-
+public class PriceDataDashboard {
     @SerializedName("original_price")
     @Expose
-    private String originalPrice;
+    private double originalPrice;
     @SerializedName("after_discount_price")
     @Expose
-    private String afterDiscountPrice;
+    private double afterDiscountPrice;
 
-    public String getOriginalPrice() {
+    public double getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(String originalPrice) {
+    public void setOriginalPrice(double originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public String getAfterDiscountPrice() {
+    public double getAfterDiscountPrice() {
         return afterDiscountPrice;
     }
 
-    public void setAfterDiscountPrice(String afterDiscountPrice) {
+    public void setAfterDiscountPrice(double afterDiscountPrice) {
         this.afterDiscountPrice = afterDiscountPrice;
     }
 }

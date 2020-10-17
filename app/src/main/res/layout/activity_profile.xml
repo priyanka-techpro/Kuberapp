@@ -36,6 +36,7 @@
                 android:src="@drawable/back" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,6 +46,13 @@
                 android:fontFamily="@font/worksansmedium"
                 android:textColor="@color/white"
                 android:layout_toRightOf="@+id/back"/>
+            <ImageView
+                android:layout_marginLeft="-10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@+id/back"
+                android:src="@drawable/logo" />
+
 
             <ImageView
                 android:id="@+id/img_cart"
@@ -84,6 +92,7 @@
 
         </RelativeLayout>
         <RelativeLayout
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/ll_topbar"
             android:id="@+id/ll_profile"
             android:layout_width="match_parent"

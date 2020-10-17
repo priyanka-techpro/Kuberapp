@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.techprostudio.kuberinternational.Activity.SingledetailsActivity;
-import com.techprostudio.kuberinternational.Activity.SubProductActivity;
-import com.techprostudio.kuberinternational.Model.NewArrivalModel;
+import com.techprostudio.kuberinternational.Model.DashboardModel.NewArrival;
 import com.techprostudio.kuberinternational.R;
 
 import java.util.List;
@@ -19,19 +21,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class NewArrivalAdapter extends RecyclerView.Adapter<NewArrivalAdapter.MyViewHolder>{
     private Context context;
-    private List<NewArrivalModel> modelList;
+    private List<NewArrival> modelList;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         ImageView image_top;
+        TextView product_top,mrp_top,quantity_top,discount;
+        LinearLayout ll_layer;
         public MyViewHolder( View view) {
             super(view);
             image_top=view.findViewById(R.id.image_top);
+            product_top=view.findViewById(R.id.product_top);
+            mrp_top=view.findViewById(R.id.mrp_top);
+            quantity_top=view.findViewById(R.id.quantity_top);
+            discount=view.findViewById(R.id.discount);
+            ll_layer=view.findViewById(R.id.ll_layer);
 
         }
     }
 
-    public NewArrivalAdapter(Context context,List<NewArrivalModel> modelList){
+    public NewArrivalAdapter(Context context,List<NewArrival> modelList){
         this.context = context;
         this.modelList = modelList;
     }
@@ -45,11 +54,27 @@ public class NewArrivalAdapter extends RecyclerView.Adapter<NewArrivalAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull final NewArrivalAdapter.MyViewHolder holder, int position) {
-        holder.image_top.setOnClickListener(new View.OnClickListener() {
+        Picasso.with(context).load(modelList.get(position).getImage()).into(holder.image_top);
+        holder.product_top.setText(modelList.get(position).getName());
+        holder.mrp_top.setText("Rs."+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getGstData().getGstPrice()+"/");
+        holder.quantity_top.setText(modelList.get(position).getVariationProducts().get(0).getVariationProductData().getUnitData().getCompleteUnit());
+        if(modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountAmount().equals("0.00"))
+        {
+            holder.discount.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.discount.setVisibility(View.VISIBLE);
+            holder.discount.setText("("+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountTypeText()+" off)");
+
+        }
+        holder.ll_layer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, SingledetailsActivity.class));
-
+                Intent i=new Intent(context, SingledetailsActivity.class);
+                i.putExtra("productid",modelList.get(position).getProductId());
+                i.putExtra("productname",modelList.get(position).getName());
+                context.startActivity(i);
             }
         });
     }

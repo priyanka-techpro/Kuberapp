@@ -1,5 +1,6 @@
 package com.techprostudio.kuberinternational.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -28,9 +29,10 @@ import com.techprostudio.kuberinternational.Adapter.CategoryAdapter;
 import com.techprostudio.kuberinternational.Adapter.NewArrivalAdapter;
 import com.techprostudio.kuberinternational.Adapter.SliderAdapter;
 import com.techprostudio.kuberinternational.Fragment.SearchFragment;
-import com.techprostudio.kuberinternational.Model.CategoryModel;
-import com.techprostudio.kuberinternational.Model.NewArrivalModel;
-import com.techprostudio.kuberinternational.Model.SliderItem;
+import com.techprostudio.kuberinternational.Model.DashboardModel.BannerList;
+import com.techprostudio.kuberinternational.Model.DashboardModel.DashboardMainModel;
+import com.techprostudio.kuberinternational.Model.DashboardModel.NewArrival;
+import com.techprostudio.kuberinternational.Model.DashboardModel.ParentCategory;
 import com.techprostudio.kuberinternational.Network.ApiClient;
 import com.techprostudio.kuberinternational.Network.ApiInterface;
 import com.techprostudio.kuberinternational.Network.Config;
@@ -75,18 +77,19 @@ public class DashboardActivity extends AppCompatActivity {
     DrawerLayout drawer;
     private Handler sliderHandler = new Handler();
     RecyclerView categorylist,newarrivallist;
-    private List<CategoryModel> categoryModelList;
-    private List<NewArrivalModel> newArrivalModelList;
+    private List<ParentCategory> categoryModelList;
+    private List<NewArrival> newArrivalModelList;
     private CategoryAdapter categoryAdapter;
     private NewArrivalAdapter newArrivalAdapter;
-    CategoryModel categoryModel;
-    NewArrivalModel newArrivalModel;
     public static LinearLayout main;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
     public static EditText search;
     public static  String product;
     String device_token;
+    List<BannerList> sliderItems;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -363,37 +366,14 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        List<SliderItem> sliderItems = new ArrayList<>();
-        sliderItems.add(new SliderItem(R.drawable.bannerone));
-        sliderItems.add(new SliderItem(R.drawable.bannerone));
-        sliderItems.add(new SliderItem(R.drawable.bannerone));
+         sliderItems = new ArrayList<>();
+//        sliderItems.add(new SliderItem(R.drawable.bannerone));
+//        sliderItems.add(new SliderItem(R.drawable.bannerone));
+//        sliderItems.add(new SliderItem(R.drawable.bannerone));
+        getBanner(customerid);
 
 
-        myViewPager2.setAdapter(new SliderAdapter(sliderItems,myViewPager2));
-        myViewPager2.setClipToPadding(false);
-        myViewPager2.setClipChildren(false);
-        myViewPager2.setOffscreenPageLimit(3);
-        myViewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
-        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                float r = 1 - Math.abs(position);
-                page.setScaleY(0.85f + r * 0.15f);
-            }
-        });
-        myViewPager2.setPageTransformer(compositePageTransformer);
-
-        myViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                sliderHandler.removeCallbacks(sliderRunnable);
-                sliderHandler.postDelayed(sliderRunnable,3000);
-            }
-        });
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -405,20 +385,88 @@ public class DashboardActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         categoryModelList=new ArrayList<>();
-        categoryAdapter = new CategoryAdapter(this,categoryModelList);
-        categorydata();
-        LinearLayoutManager horizontaLayoutManagaer = new LinearLayoutManager(DashboardActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        categorylist.setLayoutManager(horizontaLayoutManagaer);
-        categorylist.setAdapter(categoryAdapter);
+
 
         newArrivalModelList=new ArrayList<>();
-        newArrivalAdapter = new NewArrivalAdapter(DashboardActivity.this,newArrivalModelList);
-        newArrivaldata();
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(DashboardActivity.this,2);
-        newarrivallist.setLayoutManager(mLayoutManager);
-        newarrivallist.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(0), true));
-        newarrivallist.setItemAnimator(new DefaultItemAnimator());
-        newarrivallist.setAdapter(newArrivalAdapter);
+
+    }
+
+    private void getBanner(String customerid) {
+        Call<DashboardMainModel> call=apiInterface.getDashboardProduct(Config.header,customerid);
+        progressDialog = new ProgressDialog(DashboardActivity.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+        call.enqueue(new Callback<DashboardMainModel>() {
+            @Override
+            public void onResponse(Call<DashboardMainModel> call, Response<DashboardMainModel> response) {
+                progressDialog.dismiss();
+                if(response.body().isStatus() == true)
+                {
+                    String cartCount = String.valueOf(response.body().getCartCount());
+                    Config.cart = cartCount;
+                    if (cartCount.equals("0")) {
+                        cart_count.setVisibility(View.GONE);
+                        tv_count.setVisibility(View.GONE);
+                    } else {
+                        cart_count.setVisibility(View.VISIBLE);
+                        tv_count.setVisibility(View.VISIBLE);
+                        tv_count.setText(Config.cart);
+                    }
+                    sliderItems=response.body().getBannerList();
+                    myViewPager2.setAdapter(new SliderAdapter(sliderItems,myViewPager2,DashboardActivity.this));
+                    myViewPager2.setClipToPadding(false);
+                    myViewPager2.setClipChildren(false);
+                    myViewPager2.setOffscreenPageLimit(3);
+                    myViewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+                    CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+                    compositePageTransformer.addTransformer(new MarginPageTransformer(40));
+                    compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
+                        @Override
+                        public void transformPage(@NonNull View page, float position) {
+                            float r = 1 - Math.abs(position);
+                            page.setScaleY(0.85f + r * 0.15f);
+                        }
+                    });
+                    myViewPager2.setPageTransformer(compositePageTransformer);
+
+                    myViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                        @Override
+                        public void onPageSelected(int position) {
+                            super.onPageSelected(position);
+                            sliderHandler.removeCallbacks(sliderRunnable);
+                            sliderHandler.postDelayed(sliderRunnable,3000);
+                        }
+                    });
+                    categoryModelList=response.body().getParentCategory();
+                    categoryAdapter = new CategoryAdapter(DashboardActivity.this,categoryModelList);
+                    LinearLayoutManager horizontaLayoutManagaer = new LinearLayoutManager(DashboardActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                    categorylist.setLayoutManager(horizontaLayoutManagaer);
+                    categorylist.setAdapter(categoryAdapter);
+                    categoryAdapter.notifyDataSetChanged();
+
+                    newArrivalModelList=response.body().getNewArrivals();
+                    newArrivalAdapter = new NewArrivalAdapter(DashboardActivity.this,newArrivalModelList);
+                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(DashboardActivity.this,2);
+                    newarrivallist.setLayoutManager(mLayoutManager);
+                    newarrivallist.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(0), true));
+                    newarrivallist.setItemAnimator(new DefaultItemAnimator());
+                    newarrivallist.setAdapter(newArrivalAdapter);
+                    newArrivalAdapter.notifyDataSetChanged();
+
+                }
+                else
+                {
+                    String msg=response.body().getMessage();
+                    Toast.makeText(DashboardActivity.this, msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DashboardMainModel> call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
     }
 
     private void funLogout(String customerid)
@@ -470,31 +518,9 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
-    private void newArrivaldata() {
-        for(int i=0;i<12;i++){
 
-            newArrivalModel=new NewArrivalModel();
-            newArrivalModel.setProductname("");
-            newArrivalModel.setPrice("");
-            newArrivalModel.setDiscount("");
-            newArrivalModelList.add(newArrivalModel);
-        }
 
-        newArrivalAdapter.notifyDataSetChanged();
-    }
 
-    private void categorydata() {
-        for(int i=0;i<11;i++){
-
-            categoryModel=new CategoryModel();
-            categoryModel.setProductname("");
-            categoryModel.setPrice("");
-            categoryModel.setDiscount("");
-            categoryModelList.add(categoryModel);
-        }
-
-        categoryAdapter.notifyDataSetChanged();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
