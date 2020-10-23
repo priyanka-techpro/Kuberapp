@@ -16,7 +16,7 @@
         android:textSize="18dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/worksansmedium"
-        android:text="Hi Priyanka"/>
+        android:text=""/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,6 +27,6 @@
         android:layout_marginTop="5dp"
         android:layout_below="@+id/proname"
         android:fontFamily="@font/worksansmedium"
-        android:text="Welcome to kuber international"/>
+        android:text="Welcome to Kuber International"/>
 
 </RelativeLayout>

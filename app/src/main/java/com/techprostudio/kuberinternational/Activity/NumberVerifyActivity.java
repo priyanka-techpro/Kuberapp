@@ -63,6 +63,7 @@ public class NumberVerifyActivity extends AppCompatActivity {
                     if (InternetAccess.isConnected(NumberVerifyActivity.this)) {
 
                         numberrVerify(phone);
+                        Config.phno=phone;
                     } else {
                         mSnackbar = Snackbar
                                 .make(ll_main, "No Internet Connection", Snackbar.LENGTH_INDEFINITE).

@@ -167,12 +167,12 @@ public class DashboardActivity extends AppCompatActivity {
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     transaction.addToBackStack("top");
-                    transaction.add(R.id.nav_host_fragment, new SearchFragment()).commit();
+                    transaction.replace(R.id.nav_host_fragment, new SearchFragment()).commit();
 
                 }
                 else
                 {
-                    titlebar.setVisibility(View.VISIBLE);
+                    //titlebar.setVisibility(View.VISIBLE);
                     mainlayout.setVisibility(View.VISIBLE);
                     ll_dashboard.setBackgroundColor(getResources().getColor(R.color.lightgrey));
                     ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
@@ -396,6 +396,7 @@ public class DashboardActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(DashboardActivity.this);
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
         call.enqueue(new Callback<DashboardMainModel>() {
             @Override
             public void onResponse(Call<DashboardMainModel> call, Response<DashboardMainModel> response) {
@@ -614,6 +615,15 @@ public class DashboardActivity extends AppCompatActivity {
         else if (fm.getBackStackEntryCount() == 1) {
             fm.popBackStack();
             closeDrawer();
+            mainlayout.setVisibility(View.VISIBLE);
+            ll_dashboard.setBackgroundColor(getResources().getColor(R.color.lightgrey));
+            ll_profile.setBackgroundColor(getResources().getColor(R.color.transparent));
+            ll_product.setBackgroundColor(getResources().getColor(R.color.transparent));
+            ll_offer.setBackgroundColor(getResources().getColor(R.color.transparent));
+            ll_cart.setBackgroundColor(getResources().getColor(R.color.transparent));
+            ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
+            ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
+            logout.setBackgroundColor(getResources().getColor(R.color.transparent));
 
 
         }

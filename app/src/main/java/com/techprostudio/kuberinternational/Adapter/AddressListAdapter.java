@@ -103,6 +103,7 @@ public class AddressListAdapter  extends RecyclerView.Adapter<AddressListAdapter
 
                 String addressid=modelList.get(position).getAddressId();
                 deletecurrentaddress(customerid,addressid);
+
             }
         });
         holder.edit_address.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +150,11 @@ public class AddressListAdapter  extends RecyclerView.Adapter<AddressListAdapter
                                     modelList = response.body().getAddressList();
                                     notifyDataSetChanged();
                                 }
+
+                            }
+                            else {
+                                AddressId="0";
+                                Toast.makeText(context, "No addresslist found.", Toast.LENGTH_SHORT).show();
 
                             }
                         }

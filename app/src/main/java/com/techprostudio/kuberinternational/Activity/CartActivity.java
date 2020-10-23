@@ -89,12 +89,12 @@ public class CartActivity extends AppCompatActivity {
                 finish();
             }
         });
-        img_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CartActivity.this, CartActivity.class));
-            }
-        });
+//        img_cart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(CartActivity.this, CartActivity.class));
+//            }
+//        });
         img_notify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

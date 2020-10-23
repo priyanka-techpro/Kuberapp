@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
@@ -151,6 +152,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 if(response.body().getStatus()==true){
                     order_id_delete=response.body().getOrderHistory().getOrderId();
+                    Log.e("jhgvbjhb",response.body().getOrderHistory().getOrderId());
                     String Orderno=response.body().getOrderHistory().getOrderNumber();
                     order_no.setText("Order "+Orderno);
                     String placed=response.body().getOrderHistory().getOrderedOn();
@@ -159,6 +161,8 @@ public class OrderDetailsActivity extends AppCompatActivity {
                     deliveryon.setText("Delivery on:"+delivered);
                     if(response.body().getOrderHistory().getOrderStatus().equals("Processing"))
                     {
+                        cancel_order.setVisibility(View.VISIBLE);
+
                         mbl.setBackground(getResources().getDrawable(R.drawable.processing));
                         ph_no.setText(response.body().getOrderHistory().getOrderStatus());
                     }
@@ -173,6 +177,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
                     {
                         mbl.setBackground(getResources().getDrawable(R.drawable.delivered));
                         ph_no.setText(response.body().getOrderHistory().getOrderStatus());
+                        cancel_order.setVisibility(View.GONE);
                     }
                     sub_total_amt.setText("Rs."+response.body().getOrderSummary().getOrderAmount());
                    // shippingchrge.setText("Rs."+response.body().getOrderSummary().);

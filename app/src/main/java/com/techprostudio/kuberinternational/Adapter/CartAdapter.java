@@ -190,6 +190,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                         CartActivity.subtotal_ll.setVisibility(View.GONE);
                         CartActivity.proceedtocheckout.setVisibility(View.GONE);
+                        CartActivity.cart_count.setVisibility(View.GONE);
+                        CartActivity.tv_count.setVisibility(View.GONE);
                     }
                     else{
                         CartActivity.subtotal_ll.setVisibility(View.VISIBLE);

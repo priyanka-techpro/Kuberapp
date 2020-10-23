@@ -12,6 +12,7 @@ import com.techprostudio.kuberinternational.Model.FaqMainModel;
 import com.techprostudio.kuberinternational.Model.FaqModelPackage.FaqMainSubModel;
 import com.techprostudio.kuberinternational.Model.FilterSection.FilterMainModel;
 import com.techprostudio.kuberinternational.Model.LoginModel;
+import com.techprostudio.kuberinternational.Model.OfferModelPackage.OfferMainModel;
 import com.techprostudio.kuberinternational.Model.OrderCancelledModel;
 import com.techprostudio.kuberinternational.Model.OrderConfirmPackage.OrderConfirmModel;
 import com.techprostudio.kuberinternational.Model.OrderDetailsPackage.OrderDetailsModel;
@@ -211,7 +212,7 @@ public interface ApiInterface {
     @POST("order/order_cancel")
     Call<OrderCancelledModel> CancelOrder(@Header("X-API-KEY") String header,
                                           @Field("customer_id") String customer_id,
-                                          @Field("search_text") String search_text);
+                                          @Field("order_id") String search_text);
 
     @FormUrlEncoded
     @POST("products/product_search")
@@ -244,4 +245,10 @@ public interface ApiInterface {
     @POST("user/dashboard")
     Call<DashboardMainModel> getDashboardProduct(@Header("X-API-KEY") String header,
                                                  @Field("customer_id") String customer_id);
+
+    @FormUrlEncoded
+    @POST("products/offer_list")
+    Call<OfferMainModel> getoffer(@Header("X-API-KEY") String header,
+                                           @Field("customer_id") String customer_id);
+
 }

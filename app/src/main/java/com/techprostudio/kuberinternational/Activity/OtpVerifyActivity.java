@@ -13,10 +13,12 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
+import com.techprostudio.kuberinternational.Model.LoginModel;
 import com.techprostudio.kuberinternational.Model.OtpSection.OtpModel;
 import com.techprostudio.kuberinternational.Model.OtpSection.UserDetails;
 import com.techprostudio.kuberinternational.Network.ApiClient;
@@ -38,7 +40,8 @@ public class OtpVerifyActivity extends AppCompatActivity {
     EditText ed_one,ed_two,ed_three,ed_four;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
-    ProgressDialog progressDialog;
+    ProgressDialog progressDialog,progressDialog1;
+    TextView resend_txt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,8 @@ public class OtpVerifyActivity extends AppCompatActivity {
         ed_two=findViewById(R.id.ed_two);
         ed_three=findViewById(R.id.ed_three);
         ed_four=findViewById(R.id.ed_four);
+        resend_txt=findViewById(R.id.resend_txt);
+
         customerid=getIntent().getExtras().getString("custid");
         customertype=getIntent().getExtras().getString("customertype");
 
@@ -131,7 +136,13 @@ public class OtpVerifyActivity extends AppCompatActivity {
                 }
             }
         });
+        resend_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                numberrVerify(Config.phno);
 
+            }
+        });
         verifyotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -195,4 +206,43 @@ public class OtpVerifyActivity extends AppCompatActivity {
             }
         });
     }
+    private void numberrVerify(String phone) {
+
+        Call<LoginModel> call = apiInterface.CheckPhone("KUBERINT@321",phone);
+        progressDialog1 = new ProgressDialog(OtpVerifyActivity.this);
+        progressDialog1.setMessage("Please wait...");
+        progressDialog1.show();
+        call.enqueue(new Callback<LoginModel>() {
+            @Override
+            public void onResponse(Call<LoginModel> call, Response<LoginModel> response)
+            {
+                progressDialog1.dismiss();
+                if(response.body().getStatus() == true) {
+                    String usertype = response.body().getCustomerType();
+
+                        String otp=response.body().getOtp();
+                        Toast.makeText(OtpVerifyActivity.this,"Your login otp is "+otp,Toast.LENGTH_SHORT).show();
+                        String customerid = response.body().getCustomerId();
+                        Intent i =new Intent(OtpVerifyActivity.this,OtpVerifyActivity.class);
+                        i.putExtra("custid",customerid);
+                        i.putExtra("customertype",usertype);
+                        startActivity(i);
+
+
+                }
+                else{
+                    String msg=response.body().getMessage();
+                    Toast.makeText(OtpVerifyActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginModel> call, Throwable t) {
+                progressDialog1.dismiss();
+            }
+        });
+
+    }
+
 }

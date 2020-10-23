@@ -61,6 +61,15 @@ public class SubProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_product);
+        Bundle bundle = getIntent().getExtras();
+        if(!bundle.equals(null)){
+
+            categoryid=getIntent().getStringExtra("categoryid");
+            categoryname=getIntent().getStringExtra("categoryname");
+            Log.e("categoryname",""+categoryname);
+            Log.e("categoryid",""+categoryid);
+        }
+//        categoryid=Config.catid;
         filterlist=findViewById(R.id.filterlist);
         img_cart=findViewById(R.id.img_cart);
         back=findViewById(R.id.back);
@@ -69,10 +78,10 @@ public class SubProductActivity extends AppCompatActivity {
         cart_count=findViewById(R.id.cart_count);
         title_single=findViewById(R.id.title_single);
         img_notify=findViewById(R.id.img_notify);
-        categoryid=getIntent().getExtras().getString("categoryid");
-        categoryname=getIntent().getExtras().getString("categoryname");
+
+
         String customerid=new AppPreference(SubProductActivity.this).getUserId();
-        title_single.setText(categoryname);
+        //title_single.setText(categoryname);
         filterModelList=new ArrayList<>();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,5 +254,14 @@ public class SubProductActivity extends AppCompatActivity {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+            startActivity(new Intent(SubProductActivity.this, DashboardActivity.class));
+            finish();
+
     }
 }

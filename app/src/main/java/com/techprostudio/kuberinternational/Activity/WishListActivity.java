@@ -78,13 +78,13 @@ public class WishListActivity extends AppCompatActivity {
                             });
             mSnackbar.show();
         }
-        img_share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(WishListActivity.this, WishListActivity.class));
-
-            }
-        });
+//        img_share.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(WishListActivity.this, WishListActivity.class));
+//
+//            }
+//        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

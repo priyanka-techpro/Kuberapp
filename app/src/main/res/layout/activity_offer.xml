@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="10dp"
+    android:id="@+id/main_ll"
     tools:context=".Activity.OfferActivity">
     <RelativeLayout
         android:id="@+id/rela_head"
@@ -76,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/cart_count_drawable"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_count"

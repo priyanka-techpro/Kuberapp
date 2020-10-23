@@ -38,6 +38,7 @@ public class ChangeAddressActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     ProgressDialog progressDialog,progressDialog1;
     RelativeLayout main_ll,confirmaddress;
+    ImageView back;
     EditText ed_name,ed_phone,ed_pincode,ed_address,ed_loc,ed_land,ed_district,ed_state;
 
     @Override
@@ -54,6 +55,7 @@ public class ChangeAddressActivity extends AppCompatActivity {
         ed_district=findViewById(R.id.ed_district);
         ed_state=findViewById(R.id.ed_state);
         confirmaddress=findViewById(R.id.confirmaddress);
+        back=findViewById(R.id.back);
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         addressid=getIntent().getExtras().getString("addressid");
         String customerid=new AppPreference(ChangeAddressActivity.this).getUserId();
@@ -74,6 +76,12 @@ public class ChangeAddressActivity extends AppCompatActivity {
                             });
             mSnackbar.show();
         }
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         confirmaddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -72,7 +72,8 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
             @Override
             public void onClick(View view) {
 
-                context.startActivity(new Intent(context, SubProductActivity.class));
+              //  context.startActivity(new Intent(context, SubProductActivity.class));
+
                 Intent i=new Intent(context, SubProductActivity.class);
                 i.putExtra("categoryname",mList.getParentCategoryName());
                 i.putExtra("categoryid",mList.getParentCategoryId());
@@ -91,6 +92,6 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
     @Override
     public int getItemCount() {
 
-        return modelList.size();
+        return 11;
     }
 }

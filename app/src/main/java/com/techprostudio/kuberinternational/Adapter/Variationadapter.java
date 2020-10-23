@@ -60,6 +60,7 @@ public class Variationadapter extends RecyclerView.Adapter<Variationadapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull final Variationadapter.MyViewHolder holder, int position) {
         holder.del_place.setText(modelList.get(position).getVariationProductData().getUnitData().getCompleteUnit());
+       holder.choose.setEnabled(false);
         if (row_index == position)
         {
 
