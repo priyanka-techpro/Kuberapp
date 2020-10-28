@@ -123,7 +123,7 @@
                         android:textSize="16dp"
                         android:textColor="@color/ash"
                         android:fontFamily="@font/worksansregular"
-                        android:text="10% off with Credit Card"/>
+                        android:text=""/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -133,6 +133,7 @@
                         android:textColor="@color/ash"
                         android:fontFamily="@font/worksansregular"
                         android:text="@string/tc"
+                        android:visibility="gone"
                         />
                     <TextView
                         android:id="@+id/gotoofferpage"

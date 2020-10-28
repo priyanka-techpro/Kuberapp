@@ -38,7 +38,7 @@ public class PaymentActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     Snackbar mSnackbar;
     ProgressDialog progressDialog,progressDialog1;
-    TextView sub_total_amt,discount_amt,shippingchrge,rndoff,ttl_amnt,tv_count;
+    TextView sub_total_amt,discount_amt,shippingchrge,rndoff,ttl_amnt,tv_count,offer_place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class PaymentActivity extends AppCompatActivity {
         cart_count=findViewById(R.id.cart_count);
         tv_count=findViewById(R.id.tv_count);
         img_notify=findViewById(R.id.img_notify);
+        offer_place=findViewById(R.id.offer_place);
         apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
         String customerid=new AppPreference(PaymentActivity.this).getUserId();
         addressid=AddressId;
@@ -177,6 +178,7 @@ public class PaymentActivity extends AppCompatActivity {
             public void onResponse(Call<OrderConfirmModel> call, Response<OrderConfirmModel> response) {
                 progressDialog.dismiss();
                 if(response.body().getStatus()==true) {
+                    Config.offerid="0";
                     String msges=response.body().getMessage();
                     String orderid=response.body().getOrderHistory().getOrderNumber();
                    // Toast.makeText(PaymentActivity.this, msges, Toast.LENGTH_SHORT).show();
@@ -199,7 +201,7 @@ public class PaymentActivity extends AppCompatActivity {
         });
     }
     private void cartitems(String customerid) {
-        Call<CartListMainModel> call=apiInterface.CartList(Config.header,customerid);
+        Call<CartListMainModel> call=apiInterface.CartList(Config.header,Config.offerid,customerid);
         progressDialog1 = new ProgressDialog(PaymentActivity.this);
         progressDialog1.setMessage("Please wait...");
         progressDialog1.show();
@@ -207,15 +209,26 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CartListMainModel> call, Response<CartListMainModel> response) {
                 progressDialog1.dismiss();
-                if(response.body().getStatus()==true)
+                if(response.body().isStatus()==true)
                 {
-                    if(response.body().getCartCount().equals(0)){
+                    if(response.body().getCartCount()== 0){
                         String msg=response.body().getMessage();
                         Toast.makeText(PaymentActivity.this, msg, Toast.LENGTH_SHORT).show();
                         subtotal_ll.setVisibility(View.GONE);
                     }
                     else {
                         subtotal_ll.setVisibility(View.VISIBLE);
+                        if(Config.offerid == "0")
+                        {
+                            offer_place.setText("No offer has been selected");
+
+                        }
+                        else
+                        {
+                            offer_place.setText(response.body().getOfferTag().getPriceTagText()+" off has been applied.");
+
+                        }
+                    //    offer_place.setText(response.body().getOfferTag().getPriceTagText()+" off");
                         String cartCount = String.valueOf(response.body().getCartCount());
                         Config.cart = cartCount;
                         if (cartCount.equals("0")) {

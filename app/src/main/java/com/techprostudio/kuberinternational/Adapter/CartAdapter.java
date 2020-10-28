@@ -126,7 +126,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             @Override
             public void onResponse(Call<CartListMainModel> call, Response<CartListMainModel> response) {
                 progressDialog1.dismiss();
-                if(response.body().getStatus()==true)
+                if(response.body().isStatus() ==true)
                 {
                     modelList=response.body().getCartList();
                     notifyDataSetChanged();
@@ -180,12 +180,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             @Override
             public void onResponse(Call<CartListMainModel> call, Response<CartListMainModel> response) {
                 progressDialog.dismiss();
-                if(response.body().getStatus()==true)
+                if(response.body().isStatus()==true)
                 {
                     modelList=response.body().getCartList();
                     notifyDataSetChanged();
 
-                    if(response.body().getCartCount().equals(0)){
+                    if(response.body().getCartCount()==0){
                         String msg=response.body().getMessage();
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                         CartActivity.subtotal_ll.setVisibility(View.GONE);

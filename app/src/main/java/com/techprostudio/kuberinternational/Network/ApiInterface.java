@@ -108,8 +108,10 @@ public interface ApiInterface {
                                    @Field("quantity") String quantity
                                    );
 
-    @GET("products/cart_list/{customer_id}")
-    Call<CartListMainModel> CartList(@Header("X-API-KEY") String header,@Path("customer_id") String customer_id);
+    @FormUrlEncoded
+    @POST("products/cart_list")
+    Call<CartListMainModel> CartList(@Header("X-API-KEY") String header,  @Field("offer_id") String offer_id,
+                                     @Field("customer_id") String customer_id);
 
     @FormUrlEncoded
     @POST("products/cart_item_delete")

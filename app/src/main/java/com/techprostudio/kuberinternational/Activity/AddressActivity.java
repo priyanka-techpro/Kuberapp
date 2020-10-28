@@ -195,7 +195,7 @@ public class AddressActivity extends AppCompatActivity {
         });
     }
     private void cartitems(String customerid) {
-        Call<CartListMainModel> call=apiInterface.CartList(Config.header,customerid);
+        Call<CartListMainModel> call=apiInterface.CartList(Config.header,Config.offerid,customerid);
         progressDialog1 = new ProgressDialog(AddressActivity.this);
         progressDialog1.setMessage("Please wait...");
         progressDialog1.show();
@@ -203,9 +203,9 @@ public class AddressActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CartListMainModel> call, Response<CartListMainModel> response) {
                 progressDialog1.dismiss();
-                if(response.body().getStatus()==true)
+                if(response.body().isStatus()==true)
                 {
-                    if(response.body().getCartCount().equals(0)){
+                    if(response.body().getCartCount()== 0){
                         String msg=response.body().getMessage();
                         Toast.makeText(AddressActivity.this, msg, Toast.LENGTH_SHORT).show();
                         subtotal_ll.setVisibility(View.GONE);

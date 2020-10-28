@@ -28,7 +28,7 @@ public class OfferAdapter  extends RecyclerView.Adapter<OfferAdapter.MyViewHolde
     private List<OfferList> modelList;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView offr,offr_valid;
+        TextView offr,offr_valid,off;
         RelativeLayout gotoorderDetails;
         ImageView ofer_image;
         public MyViewHolder( View view) {
@@ -37,6 +37,7 @@ public class OfferAdapter  extends RecyclerView.Adapter<OfferAdapter.MyViewHolde
             offr=view.findViewById(R.id.offr);
             offr_valid=view.findViewById(R.id.offr_valid);
             ofer_image=view.findViewById(R.id.ofer_image);
+            off=view.findViewById(R.id.off);
         }
     }
 
@@ -61,6 +62,8 @@ public class OfferAdapter  extends RecyclerView.Adapter<OfferAdapter.MyViewHolde
 //        String formats1 = formatter5.format(date);
 //
         holder.offr_valid.setText("Offer valid: "+modelList.get(position).getOfferValid());
+       holder.off.setText(modelList.get(position).getPriceTagText()+" off");
+
         holder.gotoorderDetails.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
