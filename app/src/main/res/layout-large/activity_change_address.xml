@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:id="@+id/main_ll"
+    tools:context=".Activity.ChangeAddressActivity">
+    <RelativeLayout
+        android:id="@+id/rela_head"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/dashboardbg">
+
+        <RelativeLayout
+            android:id="@+id/ll_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+
+            <ImageView
+                android:padding="5dp"
+                android:id="@+id/back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/back"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:id="@+id/title_single"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/back"
+                android:fontFamily="@font/worksansmedium"
+                android:gravity="center"
+                android:text="Update Address"
+                android:textColor="@color/white"
+                android:textSize="22dp" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/img_notify"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_toLeftOf="@+id/img_cart"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/heartwhiteicon" />
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/img_cart"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:src="@drawable/carticonwhite" />
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/cart_count"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/cart_count_drawable"
+                >
+
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="1"
+                    android:textColor="@color/black" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@+id/rela_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/med_layer"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/del_place"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="18dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/worksansmedium"
+                        android:text="Contact Details"/>
+                    <RelativeLayout
+                        android:id="@+id/name_ll"
+                        android:layout_below="@+id/toplayer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp">
+                        <TextView
+                            android:id="@+id/name_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:fontFamily="@font/worksansregular"
+                            android:textColor="@color/ash"
+                            android:text="Name" />
+
+                        <EditText
+                            android:layout_below="@+id/name_txt"
+                            android:id="@+id/ed_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:textColorHint="@color/mediumgrey"
+                            android:textColor="@color/ash"
+                            android:fontFamily="@font/worksansregular"
+                            android:hint="Enter your name"/>
+                        <View
+                            android:layout_below="@+id/ed_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/mediumgrey"
+                            />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/phone_ll"
+                        android:layout_below="@+id/name_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+                        <TextView
+                            android:id="@+id/phone_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:fontFamily="@font/worksansregular"
+                            android:textColor="@color/ash"
+                            android:text="Phone number" />
+
+                        <EditText
+                            android:layout_below="@+id/phone_txt"
+                            android:id="@+id/ed_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:textColorHint="@color/mediumgrey"
+                            android:textColor="@color/ash"
+                            android:fontFamily="@font/worksansregular"
+                            android:hint="Enter your phone number"/>
+                        <View
+                            android:layout_below="@+id/ed_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/mediumgrey"
+                            />
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_below="@+id/phone_ll"
+                        android:id="@+id/address_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="18dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/worksansmedium"
+                        android:text="Address"/>
+                    <RelativeLayout
+                        android:id="@+id/pincode_ll"
+                        android:layout_below="@+id/address_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/pincode_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:fontFamily="@font/worksansregular"
+                            android:textColor="@color/ash"
+                            android:text="Pin Code" />
+
+                        <EditText
+                            android:layout_below="@+id/pincode_txt"
+                            android:id="@+id/ed_pincode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:inputType="number"
+                            android:maxLength="6"
+                            android:textColorHint="@color/mediumgrey"
+                            android:textColor="@color/ash"
+                            android:fontFamily="@font/worksansregular"
+                            android:hint="Enter your area pincode"/>
+                        <View
+                            android:layout_below="@+id/ed_pincode"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/mediumgrey"
+                            />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/add_ll"
+                        android:layout_below="@+id/pincode_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+                        <TextView
+                            android:id="@+id/address_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:fontFamily="@font/worksansregular"
+                            android:textColor="@color/ash"
+                            android:text="Address" />
+
+                        <EditText
+                            android:layout_below="@+id/address_txt"
+                            android:id="@+id/ed_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:textColorHint="@color/mediumgrey"
+                            android:textColor="@color/ash"
+                            android:fontFamily="@font/worksansregular"
+                            android:hint="Address(Building,House no.,Street no.)"/>
+                        <View
+                            android:layout_below="@+id/ed_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/mediumgrey"
+                            />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/loc_ll"
+                        android:layout_below="@+id/add_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/location_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:fontFamily="@font/worksansregular"
+                            android:textColor="@color/ash"
+                            android:text="Location / Town" />
+
+                        <EditText
+                            android:layout_below="@+id/location_txt"
+                            android:id="@+id/ed_loc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:inputType="text"
+                            android:textColorHint="@color/mediumgrey"
+                            android:textColor="@color/ash"
+                            android:fontFamily="@font/worksansregular"
+                            android:hint="Enter your area location"/>
+                        <View
+                            android:layout_below="@+id/ed_loc"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/mediumgrey"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/land_ll"
+                        android:layout_below="@+id/loc_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:id="@+id/land_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:fontFamily="@font/worksansregular"
+                            android:textColor="@color/ash"
+                            android:text="Landmark" />
+
+                        <EditText
+                            android:layout_below="@+id/land_txt"
+                            android:id="@+id/ed_land"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18dp"
+                            android:inputType="text"
+                            android:textColorHint="@color/mediumgrey"
+                            android:textColor="@color/ash"
+                            android:fontFamily="@font/worksansregular"
+                            android:hint="Enter your area location"/>
+                        <View
+                            android:layout_below="@+id/ed_land"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/mediumgrey"
+                            />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/main"
+                        android:layout_below="@+id/land_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="15dp"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/tv_first_name"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:text="City / District"
+                            android:textSize="16dp"
+                            android:layout_marginRight="10dp"
+                            android:fontFamily="@font/worksansmedium"
+                            android:textColor="@color/ash"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_last_name"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:text="State"
+                            android:textSize="16dp"
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/worksansmedium"
+                            android:textColor="@color/ash"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/sub"
+                        android:layout_below="@+id/main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:weightSum="1">
+
+                        <LinearLayout
+                            android:id="@+id/ll_first"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="50dp"
+                            android:orientation="vertical"
+                            android:layout_marginRight="10dp">
+
+                            <EditText
+                                android:id="@+id/ed_district"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:layout_marginTop="5dp"
+                                android:textSize="18dp"
+                                android:inputType="text"
+                                android:textColorHint="@color/mediumgrey"
+                                android:textColor="@color/ash"
+                                android:fontFamily="@font/worksansregular"
+                                android:hint="District"/>
+                            <View
+                                android:layout_below="@+id/ed_loc"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/mediumgrey"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:id="@+id/ll_last"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp">
+
+                            <EditText
+                                android:id="@+id/ed_state"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:layout_marginTop="5dp"
+                                android:textSize="18dp"
+                                android:inputType="text"
+                                android:textColorHint="@color/mediumgrey"
+                                android:textColor="@color/ash"
+                                android:fontFamily="@font/worksansregular"
+                                android:hint="State"/>
+                            <View
+                                android:layout_below="@+id/ed_state"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/mediumgrey"
+                                />
+
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:layout_below="@+id/sub"
+                        android:id="@+id/confirmaddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/signinbtn">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Update Address"
+                            android:textSize="18dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/worksansregular"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

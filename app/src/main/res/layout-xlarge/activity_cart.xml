@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:id="@+id/main"
+    tools:context=".Activity.CartActivity">
+    <RelativeLayout
+        android:id="@+id/rela_head"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/dashboardbg">
+
+        <RelativeLayout
+            android:id="@+id/ll_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/back"
+                android:padding="5dp"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/title_single"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/back"
+                android:fontFamily="@font/worksansmedium"
+                android:gravity="center"
+                android:text="Cart"
+                android:textColor="@color/white"
+                android:textSize="22dp" />
+            <ImageView
+                android:layout_marginLeft="-10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@+id/back"
+                android:src="@drawable/logo" />
+
+
+
+            <ImageView
+                android:id="@+id/img_notify"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_toLeftOf="@+id/img_cart"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/heartwhiteicon" />
+            <ImageView
+                android:id="@+id/img_cart"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:src="@drawable/carticonwhite" />
+
+            <RelativeLayout
+                android:id="@+id/cart_count"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/cart_count_drawable"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="1"
+                    android:textColor="@color/black" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@+id/rela_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/med_layer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cartlist"
+                        android:overScrollMode="never"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/subtotal_ll"
+                        android:layout_below="@+id/cartlist"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/otpbox">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Order Summary"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:textSize="16dp"
+                            android:id="@+id/sub"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/worksansmedium"
+                            />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/sub"
+                            android:id="@+id/total"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Total"
+                                android:textSize="16dp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/worksansregular"
+                                />
+
+                            <TextView
+                                android:id="@+id/sub_total_amt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="@font/worksansregular"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="16dp" />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/total"
+                            android:id="@+id/floor"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Item Discount (-)"
+                                android:textSize="16dp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/worksansregular"
+                                />
+
+                            <TextView
+                                android:id="@+id/discount_amt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="@font/worksansregular"
+                                android:text="Rs 0"
+                                android:textColor="@color/black"
+                                android:textSize="16dp" />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/floor"
+                            android:id="@+id/discount"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Shipping Charge (+)"
+                                android:textSize="16dp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/worksansregular"
+                                />
+
+                            <TextView
+                                android:id="@+id/shippingchrge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="@font/worksansregular"
+                                android:text="Rs 50"
+                                android:textColor="@color/black"
+                                android:textSize="16dp" />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/discount"
+                            android:id="@+id/tax"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Gst"
+                                android:textSize="16dp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/worksansregular"
+                                />
+                            <TextView
+                                android:id="@+id/rndoff"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="Rs 0"
+                                android:textSize="16dp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/worksansregular"
+                                />
+                        </RelativeLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/mediumgrey"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_below="@+id/tax"
+                            android:id="@+id/line"
+                            />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/line"
+                            android:id="@+id/Amt"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="15dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="To Pay"
+                                android:textSize="16dp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/worksansmedium"
+                                />
+                            <TextView
+                                android:id="@+id/ttl_amnt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="Rs 495"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/worksansmedium"
+                                />
+                        </RelativeLayout>
+
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/textredeem"
+                        android:layout_below="@+id/subtotal_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="10dp"/>
+
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:layout_below="@+id/textredeem"
+                        android:id="@+id/proceedtocheckout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/signinbtn">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Proceed to Checkout"
+                            android:textSize="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/worksansregular"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

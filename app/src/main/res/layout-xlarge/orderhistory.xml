@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/order_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/location"
+        android:textSize="18dp"
+        android:textColor="@color/blue"
+        android:fontFamily="@font/worksansmedium"
+        android:text="Order #007"/>
+
+    <RelativeLayout
+        android:id="@+id/gotoorderDetails"
+        android:layout_width="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bluebtnorder">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/worksansregular"
+            android:text="View Order"
+            />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/placedon"
+        android:layout_below="@+id/order_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/location"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/ash"
+        android:fontFamily="@font/worksansregular"
+        android:text="Placed on:14 June,2020"/>
+ <TextView
+        android:id="@+id/deliveryon"
+        android:layout_below="@+id/placedon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/location"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/ash"
+        android:fontFamily="@font/worksansregular"
+     android:text="Delivery on:27 June,2020"
+      />
+
+    <ImageView
+        android:id="@+id/mbl"
+        android:layout_below="@+id/deliveryon"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/delivered"
+        android:layout_marginTop="8dp"/>
+    <TextView
+        android:id="@+id/ph_no"
+        android:layout_toRightOf="@+id/mbl"
+        android:layout_below="@+id/deliveryon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textSize="16dp"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/green"
+        android:fontFamily="@font/worksansregular"
+        android:text="Delivered"/>
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/ph_no"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="1dp"
+        android:background="@color/lightgrey"/>
+</RelativeLayout>
+
+</LinearLayout>

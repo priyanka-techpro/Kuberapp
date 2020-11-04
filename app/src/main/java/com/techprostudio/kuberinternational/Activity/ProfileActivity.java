@@ -53,6 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
     public static ImageView profile_image;
     Fragment fragment ;
     TextView userName;
+    String phone_profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -297,7 +298,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProfileUpdateMain> call, Response<ProfileUpdateMain> response) {
                 progressDialog1.dismiss();
-                if (response.body().getStatus() == true)
+                if (response.body().isStatus() == true)
                 {
                     String msg=response.body().getMessage();
                     Toast.makeText(ProfileActivity.this, msg, Toast.LENGTH_SHORT).show();
@@ -306,8 +307,18 @@ public class ProfileActivity extends AppCompatActivity {
                     userName.setText(name_profile);
                     String email_profile=response.body().getUserData().getUserEmail();
                     email.setText(email_profile);
-                    String phone_profile=response.body().getUserData().getUserPhone();
-                    number.setText(phone_profile);
+                    String update_profile=response.body().getUserData().getUserPhone();
+                    if(response.body().isPhUpdate() == true)
+                    {
+                        Toast.makeText(ProfileActivity.this, "Your otp is " + response.body().getOtp(), Toast.LENGTH_SHORT).show();
+                        Intent i=new Intent(ProfileActivity.this,OtpVerifyProfileActivity.class);
+                        i.putExtra("otptype",response.body().getOtpType());
+                        startActivity(i);
+                    }
+                    else
+                        {
+                            number.setText(update_profile);
+                    }
                     Picasso.with(ProfileActivity.this).load(response.body().getUserData().getUserImage()).into(profile_image);
                     new AppPreference(ProfileActivity.this).saveUserName(name_profile);
                     new AppPreference(ProfileActivity.this).saveUserEmail(email_profile);
@@ -344,7 +355,7 @@ public class ProfileActivity extends AppCompatActivity {
                     userName.setText(name_profile);
                     String email_profile=response.body().getProfileData().getUserEmail();
                     email.setText(email_profile);
-                    String phone_profile=response.body().getProfileData().getUserPhone();
+                    phone_profile=response.body().getProfileData().getUserPhone();
                     number.setText(phone_profile);
                     Picasso.with(ProfileActivity.this).load(response.body().getProfileData().getUserImage()).into(profile_image);
 

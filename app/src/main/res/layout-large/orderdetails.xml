@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="110dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/singleproduct"/>
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_toRightOf="@+id/product_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Bed Linen..."
+            android:singleLine="true"
+            android:fontFamily="@font/worksansregular"
+            android:textSize="16dp"
+            android:textColor="@color/ash"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Rs. 156 x 1"
+            android:textColor="@color/blue"
+            android:textSize="16dp"
+            android:fontFamily="@font/worksansregular"
+            android:layout_marginRight="10dp"/>
+        <TextView
+            android:id="@+id/product_size"
+            android:layout_toRightOf="@+id/product_image"
+            android:layout_below="@+id/product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="16dp"
+            android:textColor="@color/ash"
+            android:fontFamily="@font/worksansmedium"
+            android:text="Size 36''x26''"/>
+
+
+    </RelativeLayout>
+</LinearLayout>

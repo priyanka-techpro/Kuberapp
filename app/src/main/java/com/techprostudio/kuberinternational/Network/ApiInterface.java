@@ -17,6 +17,7 @@ import com.techprostudio.kuberinternational.Model.OrderCancelledModel;
 import com.techprostudio.kuberinternational.Model.OrderConfirmPackage.OrderConfirmModel;
 import com.techprostudio.kuberinternational.Model.OrderDetailsPackage.OrderDetailsModel;
 import com.techprostudio.kuberinternational.Model.OrderHistoryPackage.OrderHistoryModel;
+import com.techprostudio.kuberinternational.Model.OtpProfileUpdateMain;
 import com.techprostudio.kuberinternational.Model.OtpSection.OtpModel;
 import com.techprostudio.kuberinternational.Model.ParentCategory.CategoryMainModel;
 import com.techprostudio.kuberinternational.Model.ProfileDetails.ProfileDetailsMain;
@@ -252,5 +253,12 @@ public interface ApiInterface {
     @POST("products/offer_list")
     Call<OfferMainModel> getoffer(@Header("X-API-KEY") String header,
                                            @Field("customer_id") String customer_id);
+
+ @FormUrlEncoded
+    @POST("user/verify_otp_at_phone_update")
+    Call<OtpProfileUpdateMain> checkOtpProfile(@Header("X-API-KEY") String header,
+                                        @Field("customer_id") String customer_id,
+                                        @Field("otp") String otp,
+                                        @Field("otp_type") String otp_type);
 
 }

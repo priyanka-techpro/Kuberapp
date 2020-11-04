@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="75dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:id="@+id/ll_layer_main"
+    android:background="@color/transparent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/main_product_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/furnishing_main"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/bluebox"
+            >
+
+            <ImageView
+                android:id="@+id/image_top"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/bedsheet"
+                />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/product_name_main"
+            android:layout_below="@+id/furnishing_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Furnishing"
+            android:textSize="14dp"
+            android:textAlignment="center"
+            android:layout_marginTop="5dp"
+            android:singleLine="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal" />
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</LinearLayout>

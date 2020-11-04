@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:id="@+id/variationlay"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/whiteboxback">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <RadioButton
+                android:layout_marginTop="5dp"
+                android:id="@+id/choose"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:button="@null"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/radiogroup"
+                />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/del_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/choose"
+                android:textSize="16dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/black"
+                android:fontFamily="@font/worksansregular"
+                android:text="Size: 36'' x 56''"
+                android:layout_marginRight="10dp"/>
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
