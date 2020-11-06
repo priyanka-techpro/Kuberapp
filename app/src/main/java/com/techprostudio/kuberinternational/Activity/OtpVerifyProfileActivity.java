@@ -168,6 +168,7 @@ public class OtpVerifyProfileActivity extends AppCompatActivity {
                  Toast.makeText(OtpVerifyProfileActivity.this, msg, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(OtpVerifyProfileActivity.this,ProfileActivity.class);
                 startActivity(i);
+                finish();
                 }
                 else{
                     String msg=response.body().getMessage();

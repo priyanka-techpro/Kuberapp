@@ -54,8 +54,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.MyViewHolder holder, int position) {
-        Picasso.with(context).load(modelList.get(position).getImage()).into(holder.image_product);
-        holder.product_top.setText(modelList.get(position).getName());
+        if(modelList.get(position).getVariationProducts().size() == 0){
+            Picasso.with(context).load(modelList.get(position).getImage()).into(holder.image_product);
+            holder.product_top.setText(modelList.get(position).getName());
+        }
+        else
+        {
+            Picasso.with(context).load(modelList.get(position).getImage()).into(holder.image_product);
+            holder.product_top.setText(modelList.get(position).getName());
+        }
+
        // holder.mrp_top.setText("Rs."+modelList.get(position).getVariationProductData().getGstData().getFinalPricePlusGst());
        // holder.discount.setText("("+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountTypeText()+" off)");
 //    Log.e("test",""+modelList.get(position).getName());

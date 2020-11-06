@@ -55,20 +55,26 @@ public class SubcategoryAdapter extends RecyclerView.Adapter<SubcategoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final SubcategoryAdapter.MyViewHolder holder, int position) {
-        Picasso.with(context).load(modelList.get(position).getImage()).into(holder.image_top);
-        holder.product_top.setText(modelList.get(position).getName());
-        holder.mrp_top.setText("Rs."+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getGstData().getFinalPricePlusGst()+"/");
-        holder.quantity_top.setText(modelList.get(position).getVariationProducts().get(0).getVariationProductData().getUnitData().getCompleteUnit());
-        if(modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountAmount().equals("0.00"))
-        {
-            holder.discount.setVisibility(View.GONE);
-        }
-        else
-        {
-            holder.discount.setVisibility(View.VISIBLE);
-            holder.discount.setText("("+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountTypeText()+" off)");
+      if(modelList.get(position).getVariationProducts().size() == 0){
 
-        }
+      }
+      else{
+          Picasso.with(context).load(modelList.get(position).getImage()).into(holder.image_top);
+          holder.product_top.setText(modelList.get(position).getName());
+          holder.mrp_top.setText("Rs."+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getGstData().getFinalPricePlusGst()+"/");
+          holder.quantity_top.setText(modelList.get(position).getVariationProducts().get(0).getVariationProductData().getUnitData().getCompleteUnit());
+          if(modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountAmount().equals("0.00"))
+          {
+              holder.discount.setVisibility(View.GONE);
+          }
+          else
+          {
+              holder.discount.setVisibility(View.VISIBLE);
+              holder.discount.setText("("+modelList.get(position).getVariationProducts().get(0).getVariationProductData().getDiscountData().getDiscountTypeText()+" off)");
+
+          }
+      }
+
         holder.ll_layer.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {

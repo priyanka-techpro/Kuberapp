@@ -115,6 +115,7 @@
                 />
         </RelativeLayout>
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/address_ll"
             android:layout_below="@+id/email_ll"
             android:layout_width="match_parent"

@@ -55,7 +55,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String email_id=ed_email_signup.getText().toString();
-                String adress=ed_address_signup.getText().toString();
+                String adress="demo";
                 String usernm=ed_username_signup.getText().toString();
                 boolean cancel = false;
                 View focusView = null;
@@ -66,13 +66,7 @@ public class SignupActivity extends AppCompatActivity {
                     focusView = ed_email_signup;
                     cancel = true;
                 }
-                if (TextUtils.isEmpty(adress))
-                {
-                    Toast.makeText(SignupActivity.this, "Enter your address", Toast.LENGTH_SHORT).show();
 
-                    focusView = ed_address_signup;
-                    cancel = true;
-                }
                 if (TextUtils.isEmpty(usernm))
                 {
                     Toast.makeText(SignupActivity.this, "Enter your username", Toast.LENGTH_SHORT).show();

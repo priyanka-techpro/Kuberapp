@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static com.techprostudio.kuberinternational.Activity.SingledetailsActivity.discount_single;
+import static com.techprostudio.kuberinternational.Activity.SingledetailsActivity.heartsingle;
 import static com.techprostudio.kuberinternational.Activity.SingledetailsActivity.mrp_single;
 import static com.techprostudio.kuberinternational.Activity.SingledetailsActivity.producname;
 import static com.techprostudio.kuberinternational.Activity.SingledetailsActivity.product_name;
@@ -60,10 +61,19 @@ public class Variationadapter extends RecyclerView.Adapter<Variationadapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull final Variationadapter.MyViewHolder holder, int position) {
         holder.del_place.setText(modelList.get(position).getVariationProductData().getUnitData().getCompleteUnit());
-       holder.choose.setEnabled(false);
+        holder.choose.setEnabled(false);
+
+        if(modelList.get(position).isIsInWish() == true)
+        {
+            heartsingle.setBackgroundResource(R.drawable.heartbluefill);
+        }
+        else
+        {
+            heartsingle.setBackgroundResource(R.drawable.heartdashboard);
+        }
+
         if (row_index == position)
         {
-
             variationid =modelList.get(position).getVariationProductId();
             holder.choose.setChecked(true);
             holder.del_place.setText(modelList.get(position).getVariationProductData().getUnitData().getCompleteUnit());
@@ -82,16 +92,7 @@ public class Variationadapter extends RecyclerView.Adapter<Variationadapter.MyVi
                 discount_single.setText(modelList.get(position).getVariationProductData().getDiscountData().getDiscountTypeText()+" off");
 
             }
-            if(modelList.get(position).isIsInWish() == true)
-            {
-                SingledetailsActivity.heartdeep.setVisibility(View.VISIBLE);
-                SingledetailsActivity.heartsingle.setVisibility(View.GONE);
-            }
-            else
-            {
-                SingledetailsActivity.heartdeep.setVisibility(View.GONE);
-                SingledetailsActivity.heartsingle.setVisibility(View.VISIBLE);
-            }
+
         }
         else
         {

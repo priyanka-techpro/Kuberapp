@@ -158,8 +158,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
                 {
                     String msg=response.body().getMessage();
                     Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                    CartActivity.subtotal_ll.setVisibility(View.GONE);
-                    CartActivity.proceedtocheckout.setVisibility(View.GONE);
+                    CartActivity.subtotal_ll.setVisibility(View.VISIBLE);
+                    CartActivity.proceedtocheckout.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -185,6 +185,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
                     modelList=response.body().getCartList();
                     notifyDataSetChanged();
 
+
                     if(response.body().getCartCount()==0){
                         String msg=response.body().getMessage();
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
@@ -192,8 +193,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
                         CartActivity.proceedtocheckout.setVisibility(View.GONE);
                         CartActivity.cart_count.setVisibility(View.GONE);
                         CartActivity.tv_count.setVisibility(View.GONE);
+                        String cartCount1 = String.valueOf(response.body().getCartCount());
+                        Config.cart = cartCount1;
                     }
                     else{
+                        String cartCount1 = String.valueOf(response.body().getCartCount());
+                        Config.cart = cartCount1;
                         CartActivity.subtotal_ll.setVisibility(View.VISIBLE);
                         CartActivity.proceedtocheckout.setVisibility(View.VISIBLE);
                         String cartCount = String.valueOf(response.body().getCartCount());

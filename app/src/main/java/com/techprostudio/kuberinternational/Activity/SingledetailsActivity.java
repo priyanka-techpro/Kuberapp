@@ -60,10 +60,17 @@ public class SingledetailsActivity extends AppCompatActivity {
     int productQty;
     public int count = 0;
     String productidresp;
+    String customerid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singledetails);
+
+        apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
+        customerid=new AppPreference(SingledetailsActivity.this).getUserId();
+        productid=getIntent().getExtras().getString("productid");
+        productname=getIntent().getExtras().getString("productname");
+
         img_cart=findViewById(R.id.img_cart);
         back=findViewById(R.id.back);
         ll_bag=findViewById(R.id.ll_bag);
@@ -88,11 +95,6 @@ public class SingledetailsActivity extends AppCompatActivity {
         img_notify=findViewById(R.id.img_notify);
         heartdeep=findViewById(R.id.heartdeep);
 
-
-        apiInterface = ApiClient.getRetrofitClient().create(ApiInterface.class);
-        String customerid=new AppPreference(SingledetailsActivity.this).getUserId();
-        productid=getIntent().getExtras().getString("productid");
-        productname=getIntent().getExtras().getString("productname");
         title_single.setText(productname);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -387,6 +389,29 @@ public class SingledetailsActivity extends AppCompatActivity {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        qty.setText("1");
+
+        if (Config.cart.equals("0")) {
+            cart_count.setVisibility(View.GONE);
+            tv_count.setVisibility(View.GONE);
+        } else {
+            cart_count.setVisibility(View.VISIBLE);
+            tv_count.setVisibility(View.VISIBLE);
+            tv_count.setText(Config.cart);
+        }
+       // variationdata(productid,customerid);
+
+    }
+
+    @Override
+    protected void onRestart() {
+        this.recreate();
+        super.onRestart();
     }
 
 }

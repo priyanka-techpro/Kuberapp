@@ -598,6 +598,16 @@ public class DashboardActivity extends AppCompatActivity {
         ll_ordrhistory.setBackgroundColor(getResources().getColor(R.color.transparent));
         ll_helpfaq.setBackgroundColor(getResources().getColor(R.color.transparent));
         logout.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+
+        if (Config.cart.equals("0")) {
+            cart_count.setVisibility(View.GONE);
+            tv_count.setVisibility(View.GONE);
+        } else {
+            cart_count.setVisibility(View.VISIBLE);
+            tv_count.setVisibility(View.VISIBLE);
+            tv_count.setText(Config.cart);
+        }
     }
 
     @Override

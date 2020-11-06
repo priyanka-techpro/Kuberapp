@@ -75,7 +75,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
         Picasso.with(context).load(sliderItems.get(position).getBannerImage()).into(holder.imageView);
-        Log.e("jhgjg",""+sliderItems.get(position).getBannerImage());
+       // Log.e("jhgjg",""+sliderItems.get(position).getBannerImage());
         holder.setImage(sliderItems.get(position));
         if(position == sliderItems.size() - 2) {
             viewPager2.post(runnable);
