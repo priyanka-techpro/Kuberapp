@@ -57,17 +57,17 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
         final ParentCategory mList=modelList.get(position);
         holder.product_top.setText(mList.getParentCategoryName());
         Picasso.with(context).load(mList.getParentCategoryIcon()).into(holder.image_top);
-
-        if(selected_position == position){
-            holder.seemore.setVisibility(View.VISIBLE);
-             holder.main_ll.setVisibility(View.GONE);
-
-        }
-        else{
-            holder.seemore.setVisibility(View.GONE);
-            holder.main_ll.setVisibility(View.VISIBLE);
-
-        }
+        holder.main_ll.setVisibility(View.VISIBLE);
+//        if(selected_position == position){
+//            holder.seemore.setVisibility(View.VISIBLE);
+//             holder.main_ll.setVisibility(View.GONE);
+//
+//        }
+//        else{
+//            holder.seemore.setVisibility(View.GONE);
+//            holder.main_ll.setVisibility(View.VISIBLE);
+//
+//        }
         holder.image_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,6 +92,6 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
     @Override
     public int getItemCount() {
 
-        return 11;
+        return modelList.size();
     }
 }

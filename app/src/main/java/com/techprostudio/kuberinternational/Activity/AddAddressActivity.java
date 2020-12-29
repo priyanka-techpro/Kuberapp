@@ -29,8 +29,9 @@ import com.techprostudio.kuberinternational.R;
 import com.techprostudio.kuberinternational.Utils.AppPreference;
 
 public class AddAddressActivity extends AppCompatActivity {
-    RelativeLayout confirmaddress;
     ImageView back,img_cart;
+
+    RelativeLayout confirmaddress;
     Snackbar mSnackbar;
     ApiInterface apiInterface;
     RelativeLayout main_ll;

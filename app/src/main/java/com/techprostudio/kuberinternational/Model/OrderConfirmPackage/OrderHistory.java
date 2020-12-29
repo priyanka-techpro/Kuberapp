@@ -27,9 +27,9 @@ public class OrderHistory {
     @SerializedName("order_type")
     @Expose
     private String orderType;
-    @SerializedName("order_details_data")
-    @Expose
-    private List<OrderDetailsDatum> orderDetailsData = null;
+//    @SerializedName("order_details_data")
+//    @Expose
+//    private List<OrderDetailsDatum> orderDetailsData = null;
 
     public String getOrderId() {
         return orderId;
@@ -86,12 +86,12 @@ public class OrderHistory {
     public void setOrderType(String orderType) {
         this.orderType = orderType;
     }
-
-    public List<OrderDetailsDatum> getOrderDetailsData() {
-        return orderDetailsData;
-    }
-
-    public void setOrderDetailsData(List<OrderDetailsDatum> orderDetailsData) {
-        this.orderDetailsData = orderDetailsData;
-    }
+//
+//    public List<OrderDetailsDatum> getOrderDetailsData() {
+//        return orderDetailsData;
+//    }
+//
+//    public void setOrderDetailsData(List<OrderDetailsDatum> orderDetailsData) {
+//        this.orderDetailsData = orderDetailsData;
+//    }
 }

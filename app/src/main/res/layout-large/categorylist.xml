@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="180dp"
+    android:layout_width="95dp"
     android:layout_marginTop="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="2dp"
     android:id="@+id/ll_layer"
     android:background="@color/transparent"
     android:layout_height="wrap_content">
@@ -11,46 +14,42 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <RelativeLayout
-        android:id="@+id/furnishing"
-        android:layout_width="match_parent"
-        android:layout_height="155dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/bluebox"
-        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/furnishing"
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            app:cardCornerRadius="10dp"
+            >
 
-        <ImageView
-            android:id="@+id/image_top"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            <ImageView
+                android:id="@+id/image_top"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+                android:src="@drawable/bedsheet"
+                android:scaleType="fitXY"
+                />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/product_top"
+            android:layout_below="@+id/furnishing"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/bedsheet"
-            />
+            android:text="Furnishing"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:layout_marginTop="5dp"
 
-
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/product_top"
-        android:layout_below="@+id/furnishing"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Furnishing"
-        android:textSize="22dp"
-        android:textAlignment="center"
-        android:layout_marginTop="5dp"
-
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/worksansregular"
-        android:textColor="@color/black"
-        android:gravity="center_horizontal" />
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/seemore"
@@ -75,6 +74,8 @@
             android:textColor="@color/blue"
             android:fontFamily="@font/worksansregular"/>
     </RelativeLayout>
+
+
 
 
 

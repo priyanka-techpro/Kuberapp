@@ -393,14 +393,10 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void getBanner(String customerid) {
         Call<DashboardMainModel> call=apiInterface.getDashboardProduct(Config.header,customerid);
-        progressDialog = new ProgressDialog(DashboardActivity.this);
-        progressDialog.setMessage("Please wait...");
-        progressDialog.show();
-        progressDialog.setCancelable(false);
+
         call.enqueue(new Callback<DashboardMainModel>() {
             @Override
             public void onResponse(Call<DashboardMainModel> call, Response<DashboardMainModel> response) {
-                progressDialog.dismiss();
                 if(response.body().isStatus() == true)
                 {
                     String cartCount = String.valueOf(response.body().getCartCount());
@@ -465,7 +461,7 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DashboardMainModel> call, Throwable t) {
-                progressDialog.dismiss();
+
             }
         });
     }

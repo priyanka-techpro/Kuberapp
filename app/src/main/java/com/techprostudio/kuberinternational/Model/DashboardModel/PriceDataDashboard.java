@@ -6,24 +6,24 @@ import com.google.gson.annotations.SerializedName;
 public class PriceDataDashboard {
     @SerializedName("original_price")
     @Expose
-    private double originalPrice;
+    private String originalPrice;
     @SerializedName("after_discount_price")
     @Expose
-    private double afterDiscountPrice;
+    private String afterDiscountPrice;
 
-    public double getOriginalPrice() {
+    public String getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(double originalPrice) {
+    public void setOriginalPrice(String originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public double getAfterDiscountPrice() {
+    public String getAfterDiscountPrice() {
         return afterDiscountPrice;
     }
 
-    public void setAfterDiscountPrice(double afterDiscountPrice) {
+    public void setAfterDiscountPrice(String afterDiscountPrice) {
         this.afterDiscountPrice = afterDiscountPrice;
     }
 }

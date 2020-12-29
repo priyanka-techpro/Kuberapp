@@ -27,13 +27,13 @@ public class OrderDetailsDatum {
     private String unitData;
     @SerializedName("original_price")
     @Expose
-    private Double originalPrice;
+    private String originalPrice;
     @SerializedName("total_original_price")
     @Expose
     private Double totalOriginalPrice;
     @SerializedName("total_save")
     @Expose
-    private Integer totalSave;
+    private Double totalSave;
     @SerializedName("total_after_discount_price")
     @Expose
     private Double totalAfterDiscountPrice;
@@ -97,11 +97,11 @@ public class OrderDetailsDatum {
         this.unitData = unitData;
     }
 
-    public Double getOriginalPrice() {
+    public String getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(Double originalPrice) {
+    public void setOriginalPrice(String originalPrice) {
         this.originalPrice = originalPrice;
     }
 
@@ -113,11 +113,11 @@ public class OrderDetailsDatum {
         this.totalOriginalPrice = totalOriginalPrice;
     }
 
-    public Integer getTotalSave() {
+    public Double getTotalSave() {
         return totalSave;
     }
 
-    public void setTotalSave(Integer totalSave) {
+    public void setTotalSave(Double totalSave) {
         this.totalSave = totalSave;
     }
 
